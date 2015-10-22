@@ -7,12 +7,14 @@
 
 namespace Drupal\plugin\PluginDefinition;
 
+use Drupal\Component\Plugin\Definition\PluginDefinitionInterface as ComponentPluginDefinitionInterface;
+
 /**
  * Defines a plugin definition.
  *
  * @ingroup Plugin
  */
-interface PluginDefinitionInterface {
+interface PluginDefinitionInterface extends ComponentPluginDefinitionInterface {
 
   /**
    * Sets the plugin ID.
@@ -31,26 +33,6 @@ interface PluginDefinitionInterface {
    *   The plugin ID.
    */
   public function getId();
-
-  /**
-   * Sets the class.
-   *
-   * @param string $class
-   *   A fully qualified class name.
-   *
-   * @return $this
-   *
-   * @throws \InvalidArgumentException
-   */
-  public function setClass($class);
-
-  /**
-   * Gets the class.
-   *
-   * @return string
-   *   A fully qualified class name.
-   */
-  public function getClass();
 
   /**
    * Sets the plugin provider.
