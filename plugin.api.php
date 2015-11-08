@@ -15,5 +15,5 @@ function hook_plugin_selector_alter(array &$definitions) {
   unset($definitions['foo_plugin_id']);
 
   // Replace a plugin's class with another.
-  $definitions['foo_plugin_id']['class'] = 'Drupal\foo\FooPlugin';
+  $definitions['foo_plugin_id']['class'] = FooPlugin::class;
 }

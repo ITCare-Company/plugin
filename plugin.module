@@ -5,6 +5,8 @@
  * Contains hook implementations.
  */
 
+use Drupal\plugin\Plugin\Field\FieldType\PluginCollectionItemInterface;
+
 function plugin_field_info_alter(array &$field_type_definitions) {
   if (isset($field_type_definitions['plugin:block'])) {
     $field_type_definitions['plugin:block']['default_formatter'] = 'plugin_block_built';
@@ -40,7 +42,7 @@ function _plugin_collection_field_type_ids() {
   /** @var \Drupal\Component\Plugin\PluginManagerInterface $field_formatter_manager */
   $field_formatter_manager = \Drupal::service('plugin.manager.field.field_type');
   foreach ($field_formatter_manager->getDefinitions() as $plugin_id => $plugin_definition) {
-    if (is_subclass_of($plugin_definition['class'], 'Drupal\plugin\Plugin\Field\FieldType\PluginCollectionItemInterface')) {
+    if (is_subclass_of($plugin_definition['class'], PluginCollectionItemInterface::class)) {
       $supported_field_type_ids[] = $plugin_id;
     }
   }

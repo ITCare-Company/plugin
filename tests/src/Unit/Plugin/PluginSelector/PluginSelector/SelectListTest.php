@@ -11,6 +11,7 @@ namespace Drupal\Tests\plugin\Unit\Plugin\PluginSelector\PluginSelector;
 use Drupal\Component\Plugin\PluginInspectionInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\PageCache\ResponsePolicy\KillSwitch;
+use Drupal\plugin\Plugin\Plugin\PluginSelector\AdvancedPluginSelectorBase;
 use Drupal\plugin\Plugin\Plugin\PluginSelector\SelectList;
 use Drupal\plugin\PluginDefinition\PluginDefinitionInterface;
 use Drupal\plugin\PluginDefinition\PluginLabelDefinitionInterface;
@@ -113,7 +114,7 @@ class SelectListTest extends PluginSelectorBaseTestBase {
 
     $expected_build_plugin_id = array(
       '#ajax' => array(
-        'callback' => array('Drupal\plugin\Plugin\Plugin\PluginSelector\SelectList', 'ajaxRebuildForm'),
+        'callback' => array(SelectList::class, 'ajaxRebuildForm'),
         'effect' => 'fade',
         'event' => 'change',
         'trigger_as' => array(
@@ -133,14 +134,14 @@ class SelectListTest extends PluginSelectorBaseTestBase {
     );
     $expected_build_change = array(
       '#ajax' => array(
-        'callback' => array('Drupal\plugin\Plugin\Plugin\PluginSelector\AdvancedPluginSelectorBase', 'ajaxRebuildForm'),
+        'callback' => array(AdvancedPluginSelectorBase::class, 'ajaxRebuildForm'),
       ),
       '#attributes' => array(
         'class' => array('js-hide')
       ),
       '#limit_validation_errors' => array(array('foo', 'bar', 'select', 'plugin_id')),
       '#name' => 'foo[bar][select][container][change]',
-      '#submit' => [['Drupal\plugin\Plugin\Plugin\PluginSelector\AdvancedPluginSelectorBase', 'rebuildForm']],
+      '#submit' => [[AdvancedPluginSelectorBase::class, 'rebuildForm']],
       '#type' => 'submit',
       '#value' => 'Choose',
     );

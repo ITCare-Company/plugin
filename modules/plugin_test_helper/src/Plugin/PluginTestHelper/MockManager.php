@@ -28,14 +28,14 @@ class MockManager extends PluginManagerBase implements TypedDiscoveryInterface {
     $this->discovery->setDefinition($plugin_id, new ArrayPluginDefinitionDecorator([
       'id' => $plugin_id,
       'label' => t('Plugin'),
-      'class' => 'Drupal\plugin_test_helper\Plugin\PluginTestHelper\MockPlugin',
+      'class' => MockPlugin::class,
     ]));
 
     $configurable_plugin_id = 'plugin_test_helper_configurable_plugin';
     $this->discovery->setDefinition($configurable_plugin_id, new ArrayPluginDefinitionDecorator([
       'id' => $configurable_plugin_id,
       'label' => t('Configurable plugin'),
-      'class' => 'Drupal\plugin_test_helper\Plugin\PluginTestHelper\MockConfigurablePlugin',
+      'class' => MockConfigurablePlugin::class ,
     ]));
 
     $this->factory = new DefaultFactory($this->discovery);
