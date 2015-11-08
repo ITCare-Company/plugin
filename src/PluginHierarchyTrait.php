@@ -31,7 +31,12 @@ trait PluginHierarchyTrait {
     $parents = [];
     $children = [];
     $definitions = $plugin_discovery->getDefinitions();
-    uasort($definitions, array($this, 'sortHierarchicalPlugins'));
+    uasort($definitions, function(PluginDefinitionInterface $definition_a, PluginDefinitionInterface $definition_b) {
+      $label_a = $definition_a instanceof PluginLabelDefinitionInterface ? $definition_a->getLabel() : $definition_a->getId();
+      $label_b = $definition_b instanceof PluginLabelDefinitionInterface ? $definition_b->getLabel() : $definition_b->getId();
+
+      return strcmp($label_a, $label_b);
+    });
     foreach ($definitions as $plugin_id => $plugin_definition) {
       if ($plugin_definition instanceof PluginHierarchyDefinitionInterface && $plugin_definition->getParentId()) {
         $children[$plugin_definition->getParentId()][] = $plugin_id;
@@ -65,13 +70,4 @@ trait PluginHierarchyTrait {
     return $hierarchy;
   }
 
-  /**
-   * Implements uasort() callback to sort plugin definitions by label.
-   */
-  protected function sortHierarchicalPlugins(PluginDefinitionInterface $definition_a, PluginDefinitionInterface $definition_b) {
-    $label_a = $definition_a instanceof PluginLabelDefinitionInterface ? $definition_a->getLabel() : $definition_a->getId();
-    $label_b = $definition_b instanceof PluginLabelDefinitionInterface ? $definition_b->getLabel() : $definition_b->getId();
-
-    return strcmp($label_a, $label_b);
-  }
 }

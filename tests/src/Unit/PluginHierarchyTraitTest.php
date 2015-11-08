@@ -40,7 +40,6 @@ class PluginHierarchyTraitTest extends UnitTestCase {
   /**
    * @covers ::buildPluginHierarchy
    * @covers ::buildPluginHierarchyLevel
-   * @covers ::sortHierarchicalPlugins
    */
   public function testBuildPluginHierarchy() {
     $plugin_definition_id_a = $this->randomMachineName();
