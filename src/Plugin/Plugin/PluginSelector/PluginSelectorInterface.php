@@ -140,6 +140,8 @@ interface PluginSelectorInterface extends PluginInspectionInterface, Configurabl
   /**
    * Resets the selected plugin.
    *
+   * This resets any default or explicitly set selected plugin.
+   *
    * @return $this
    */
   public function resetSelectedPlugin();

@@ -52,6 +52,7 @@ class AdvancedPluginSelectorBaseTest extends PluginSelectorBaseTestBase {
         [],
         $this->pluginId,
         $this->pluginDefinition,
+        $this->defaultPluginResolver,
         $this->stringTranslation
       ))
       ->getMockForAbstractClass();
@@ -64,13 +65,10 @@ class AdvancedPluginSelectorBaseTest extends PluginSelectorBaseTestBase {
    */
   function testCreate() {
     $container = $this->getMock(ContainerInterface::class);
-    $map = array(
-      array(
-        'string_translation',
-        ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE,
-        $this->stringTranslation
-      ),
-    );
+    $map = [
+      ['plugin.default_plugin_resolver', ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $this->defaultPluginResolver],
+      ['string_translation', ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $this->stringTranslation ],
+    ];
     $container->expects($this->any())
       ->method('get')
       ->willReturnMap($map);
@@ -587,10 +585,11 @@ class AdvancedPluginSelectorBaseTest extends PluginSelectorBaseTestBase {
         [],
         $this->pluginId,
         $this->pluginDefinition,
+        $this->defaultPluginResolver,
         $this->stringTranslation
       ))
       ->getMockForAbstractClass();
-    $this->sut->setSelectablePluginType($this->selectablePluginType);
+    $plugin_selector->setSelectablePluginType($this->selectablePluginType);
     $plugin_selector->expects($this->once())
       ->method('buildPluginForm')
       ->with($form_state)

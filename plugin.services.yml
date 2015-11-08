@@ -7,3 +7,6 @@ services:
     arguments: ['@container.namespaces', '@cache.discovery', '@module_handler']
     tags:
       - { name: plugin_manager_cache_clear}
+  plugin.default_plugin_resolver:
+    class: Drupal\plugin\DefaultPluginResolver\EventBasedDefaultPluginResolver
+    arguments: ['@event_dispatcher']

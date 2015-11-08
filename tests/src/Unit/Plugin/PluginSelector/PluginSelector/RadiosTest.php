@@ -55,7 +55,7 @@ class RadiosTest extends PluginSelectorBaseTestBase {
 
     $this->stringTranslation = $this->getStringTranslationStub();
 
-    $this->sut = new Radios([], $this->pluginId, $this->pluginDefinition, $this->stringTranslation, $this->responsePolicy);
+    $this->sut = new Radios([], $this->pluginId, $this->pluginDefinition, $this->defaultPluginResolver, $this->stringTranslation, $this->responsePolicy);
     $this->sut->setSelectablePluginType($this->selectablePluginType);
   }
 

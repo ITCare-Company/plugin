@@ -60,7 +60,7 @@ class SelectListTest extends PluginSelectorBaseTestBase {
       ->method('ensureTypedPluginDefinition')
       ->willReturnArgument(0);
 
-    $this->sut = new SelectList([], $this->pluginId, $this->pluginDefinition, $this->stringTranslation, $this->responsePolicy);
+    $this->sut = new SelectList([], $this->pluginId, $this->pluginDefinition, $this->defaultPluginResolver, $this->stringTranslation, $this->responsePolicy);
     $this->sut->setSelectablePluginType($this->selectablePluginType);
   }
 

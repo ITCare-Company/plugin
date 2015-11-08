@@ -15,6 +15,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Plugin\PluginFormInterface;
 use Drupal\Core\StringTranslation\TranslationInterface;
+use Drupal\plugin\DefaultPluginResolver\DefaultPluginResolverInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -30,10 +31,12 @@ abstract class AdvancedPluginSelectorBase extends PluginSelectorBase implements 
    * @param array $configuration
    * @param string $plugin_id
    * @param array $plugin_definition
+   * @param \Drupal\plugin\DefaultPluginResolver\DefaultPluginResolverInterface $default_plugin_resolver
+   *   The default plugin resolver.
    * @param \Drupal\Core\StringTranslation\TranslationInterface $string_translation
    */
-  public function __construct(array $configuration, $plugin_id, array $plugin_definition, TranslationInterface $string_translation) {
-    parent::__construct($configuration, $plugin_id, $plugin_definition);
+  public function __construct(array $configuration, $plugin_id, array $plugin_definition, DefaultPluginResolverInterface $default_plugin_resolver, TranslationInterface $string_translation) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition, $default_plugin_resolver);
     $this->stringTranslation = $string_translation;
   }
 
@@ -41,7 +44,7 @@ abstract class AdvancedPluginSelectorBase extends PluginSelectorBase implements 
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    return new static($configuration, $plugin_id, $plugin_definition, $container->get('string_translation'));
+    return new static($configuration, $plugin_id, $plugin_definition, $container->get('plugin.default_plugin_resolver'), $container->get('string_translation'));
   }
 
   /**

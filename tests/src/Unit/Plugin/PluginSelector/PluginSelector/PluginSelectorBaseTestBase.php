@@ -9,6 +9,7 @@ namespace Drupal\Tests\plugin\Unit\Plugin\PluginSelector\PluginSelector;
 
 use Drupal\Component\Plugin\PluginInspectionInterface;
 use Drupal\Component\Plugin\PluginManagerInterface;
+use Drupal\plugin\DefaultPluginResolver\DefaultPluginResolverInterface;
 use Drupal\plugin\PluginTypeInterface;
 use Drupal\Tests\UnitTestCase;
 
@@ -17,6 +18,13 @@ use Drupal\Tests\UnitTestCase;
  * \Drupal\plugin\Plugin\Plugin\PluginSelector\PluginSelectorBase.
  */
 abstract class PluginSelectorBaseTestBase extends UnitTestCase {
+
+  /**
+   * The default plugin resolver.
+   *
+   * @var \Drupal\plugin\DefaultPluginResolver\DefaultPluginResolverInterface|\PHPUnit_Framework_MockObject_MockObject
+   */
+  protected $defaultPluginResolver;
 
   /**
    * The plugin definition of the class under test.
@@ -65,6 +73,8 @@ abstract class PluginSelectorBaseTestBase extends UnitTestCase {
    *
    */
   public function setUp() {
+    $this->defaultPluginResolver = $this->getMock(DefaultPluginResolverInterface::class);
+
     $this->pluginId = $this->randomMachineName();
 
     $this->selectablePluginManager = $this->getMock(PluginManagerInterface::class);

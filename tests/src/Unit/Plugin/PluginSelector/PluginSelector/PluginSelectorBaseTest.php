@@ -12,6 +12,7 @@ use Drupal\Component\Plugin\Factory\FactoryInterface;
 use Drupal\Component\Plugin\PluginInspectionInterface;
 use Drupal\Core\Form\FormState;
 use Drupal\plugin\Plugin\Plugin\PluginSelector\PluginSelectorBase;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * @coversDefaultClass \Drupal\plugin\Plugin\Plugin\PluginSelector\PluginSelectorBase
@@ -34,18 +35,27 @@ class PluginSelectorBaseTest extends PluginSelectorBaseTestBase {
     parent::setUp();
     $configuration = [];
     $this->sut = $this->getMockBuilder(PluginSelectorBase::class)
-      ->setConstructorArgs(array($configuration, $this->pluginId, $this->pluginDefinition))
+      ->setConstructorArgs([$configuration, $this->pluginId, $this->pluginDefinition, $this->defaultPluginResolver])
       ->getMockForAbstractClass();
   }
 
   /**
+   * @covers ::create
    * @covers ::__construct
    */
-  public function testConstruct() {
-    $configuration = [];
-    $this->sut = $this->getMockBuilder(PluginSelectorBase::class)
-      ->setConstructorArgs(array($configuration, $this->pluginId, $this->pluginDefinition))
-      ->getMockForAbstractClass();
+  function testCreate() {
+    $container = $this->getMock(ContainerInterface::class);
+    $map = [
+      ['plugin.default_plugin_resolver', ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $this->defaultPluginResolver],
+    ];
+    $container->expects($this->any())
+      ->method('get')
+      ->willReturnMap($map);
+
+    /** @var \Drupal\plugin\Plugin\Plugin\PluginSelector\PluginSelectorBase $class */
+    $class = get_class($this->sut);
+    $plugin = $class::create($container, [], $this->pluginId, $this->pluginDefinition);
+    $this->assertInstanceOf(get_class($this->sut), $plugin);
   }
 
   /**
@@ -137,6 +147,7 @@ class PluginSelectorBaseTest extends PluginSelectorBaseTestBase {
    * @covers ::getSelectedPlugin
    */
   public function testGetSelectedPlugin() {
+    $this->sut->setSelectablePluginType($this->selectablePluginType);
     $plugin = $this->getMock(PluginInspectionInterface::class);
     $this->assertSame($this->sut, $this->sut->setSelectedPlugin($plugin));
     $this->assertSame($plugin, $this->sut->getSelectedPlugin());
