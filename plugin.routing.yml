@@ -4,11 +4,11 @@ plugin.plugin_type.list:
     _controller: '\Drupal\plugin\Controller\ListPluginTypes::execute'
     _title: Plugins
   requirements:
-    _permission: 'access administration pages'
+    _permission: 'plugin.overview.view'
 plugin.plugin.list:
   path: '/admin/structure/plugin/{plugin_type_id}'
   defaults:
     _controller: '\Drupal\plugin\Controller\ListPlugins::execute'
     _title_callback: '\Drupal\plugin\Controller\ListPlugins::title'
   requirements:
-    _permission: 'access administration pages'
+    _permission: 'plugin.overview.view'
