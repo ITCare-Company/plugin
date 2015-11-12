@@ -100,13 +100,24 @@ class PluginType implements PluginTypeInterface {
    * @param mixed[] $definition
    */
   public function __construct(array $definition, TranslationInterface $string_translation, ClassResolverInterface $class_resolver, PluginManagerInterface $plugin_manager) {
+    if (!is_string($definition['id']) || !strlen($definition['id'])) {
+      throw new \InvalidArgumentException(sprintf('The plugin type definition ID must be a non-empty string, but %s was given.', gettype($definition['id'])));
+    }
     $this->id = $definition['id'];
     $this->label = $definition['label'] = new TranslatableMarkup($definition['label'], [], [], $string_translation);
     $this->description = $definition['description'] = isset($definition['description']) ? new TranslatableMarkup($definition['description'], [], [], $string_translation) : NULL;
     if (array_key_exists('field_type', $definition)) {
+      if (!is_bool($definition['field_type'])) {
+        throw new \InvalidArgumentException(sprintf('The plugin type definition "field_type" item must be a boolean, but %s was given.', gettype($definition['field_type'])));
+      }
       $this->fieldType = $definition['field_type'];
     }
     if (array_key_exists('plugin_definition_decorator_class', $definition)) {
+      $class = $definition['plugin_definition_decorator_class'];
+      if (!class_exists($class)) {
+        $type = is_scalar($class) ? $class : gettype($class);
+        throw new \InvalidArgumentException(sprintf('The plugin type definition "plugin_definition_decorator_class" item must valid class name, but "%s" was given and it does not exist.', $type));
+      }
       $this->pluginDefinitionDecoratorClass = $definition['plugin_definition_decorator_class'];
     }
     $operations_provider_class = array_key_exists('operations_provider_class', $definition) ? $definition['operations_provider_class'] : DefaultPluginTypeOperationsProvider::class;

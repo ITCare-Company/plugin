@@ -297,4 +297,4 @@ views_wizard:
   label: Views wizard
   provider: views
   plugin_manager_service_id: plugin.manager.views.wizard
-  plugin_definition_decorator_class: \Drupal\plugin\PluginDefinition\ArrayPluginDefinitionDecoratorx§§
+  plugin_definition_decorator_class: \Drupal\plugin\PluginDefinition\ArrayPluginDefinitionDecorator
