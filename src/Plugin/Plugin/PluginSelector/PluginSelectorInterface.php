@@ -11,7 +11,7 @@ use Drupal\Component\Plugin\Discovery\DiscoveryInterface;
 use Drupal\Component\Plugin\Factory\FactoryInterface;
 use Drupal\Component\Plugin\PluginInspectionInterface;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\plugin\PluginTypeInterface;
+use Drupal\plugin\PluginType\PluginTypeInterface;
 
 /**
  * Defines a plugin to select and configure another plugin.
@@ -149,7 +149,7 @@ interface PluginSelectorInterface extends PluginInspectionInterface, Configurabl
   /**
    * Sets the selectable plugin type.
    *
-   * @param \Drupal\plugin\PluginTypeInterface $plugin_type
+   * @param \Drupal\plugin\PluginType\PluginTypeInterface $plugin_type
    *   The type of which to select plugins.
    *
    * @return $this

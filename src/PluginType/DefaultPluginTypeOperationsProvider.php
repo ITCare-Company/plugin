@@ -2,10 +2,10 @@
 
 /**
  * @file
- * Contains \Drupal\plugin\DefaultPluginTypeOperationsProvider.
+ * Contains \Drupal\plugin\PluginType\DefaultPluginTypeOperationsProvider.
  */
 
-namespace Drupal\plugin;
+namespace Drupal\plugin\PluginType;
 
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\DependencyInjection\DependencySerializationTrait;

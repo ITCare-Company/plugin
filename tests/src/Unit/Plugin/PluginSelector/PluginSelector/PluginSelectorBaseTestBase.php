@@ -10,7 +10,7 @@ namespace Drupal\Tests\plugin\Unit\Plugin\PluginSelector\PluginSelector;
 use Drupal\Component\Plugin\PluginInspectionInterface;
 use Drupal\Component\Plugin\PluginManagerInterface;
 use Drupal\plugin\DefaultPluginResolver\DefaultPluginResolverInterface;
-use Drupal\plugin\PluginTypeInterface;
+use Drupal\plugin\PluginType\PluginTypeInterface;
 use Drupal\Tests\UnitTestCase;
 
 /**
@@ -50,7 +50,7 @@ abstract class PluginSelectorBaseTestBase extends UnitTestCase {
   /**
    * The plugin type of which to select plugins.
    *
-   * @var \Drupal\plugin\PluginTypeInterface|\PHPUnit_Framework_MockObject_MockObject
+   * @var \Drupal\plugin\PluginType\PluginTypeInterface|\PHPUnit_Framework_MockObject_MockObject
    */
   protected $selectablePluginType;
 

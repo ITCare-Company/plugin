@@ -14,7 +14,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\plugin\Plugin\Plugin\PluginSelector\PluginSelectorManagerInterface;
 use Drupal\plugin\PluginDiscovery\LimitedPluginDiscoveryDecorator;
 use Drupal\plugin\PluginManager\PluginManagerDecorator;
-use Drupal\plugin\PluginTypeInterface;
+use Drupal\plugin\PluginType\PluginTypeInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -34,7 +34,7 @@ class AdvancedPluginSelectorBasePluginSelectorForm implements ContainerInjection
   /**
    * A selectable plugin type.
    *
-   * @var \Drupal\plugin\PluginTypeInterface
+   * @var \Drupal\plugin\PluginType\PluginTypeInterface
    */
   protected $selectablePluginType;
 
@@ -50,7 +50,7 @@ class AdvancedPluginSelectorBasePluginSelectorForm implements ContainerInjection
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    /** @var \Drupal\plugin\PluginTypeManagerInterface $plugin_type_manager */
+    /** @var \Drupal\plugin\PluginType\PluginTypeManagerInterface $plugin_type_manager */
     $plugin_type_manager = $container->get('plugin.plugin_type_manager');
 
     return new static($plugin_type_manager->getPluginType('plugin_test_helper_mock'), $container->get('plugin.manager.plugin.plugin_selector'));

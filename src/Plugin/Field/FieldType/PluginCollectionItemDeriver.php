@@ -9,7 +9,7 @@ namespace Drupal\plugin\Plugin\Field\FieldType;
 
 use Drupal\Component\Plugin\Derivative\DeriverBase;
 use Drupal\Core\Plugin\Discovery\ContainerDeriverInterface;
-use Drupal\plugin\PluginTypeManagerInterface;
+use Drupal\plugin\PluginType\PluginTypeManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -20,7 +20,7 @@ class PluginCollectionItemDeriver extends DeriverBase implements ContainerDerive
   /**
    * The plugin type manager.
    *
-   * @var \Drupal\plugin\PluginTypeManagerInterface
+   * @var \Drupal\plugin\PluginType\PluginTypeManagerInterface
    */
   protected $pluginTypeManager;
 

@@ -2,17 +2,17 @@
 
 /**
  * @file
- * Contains \Drupal\Tests\plugin\Unit\PluginTypeManagerTest.
+ * Contains \Drupal\Tests\plugin\Unit\PluginType\PluginTypeManagerTest.
  */
 
-namespace Drupal\Tests\plugin\Unit;
+namespace Drupal\Tests\plugin\Unit\PluginType;
 
 use Drupal\Component\FileCache\FileCacheFactory;
 use Drupal\Component\Plugin\PluginManagerInterface;
 use Drupal\Core\DependencyInjection\ClassResolverInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
-use Drupal\plugin\PluginTypeInterface;
-use Drupal\plugin\PluginTypeManager;
+use Drupal\plugin\PluginType\PluginTypeInterface;
+use Drupal\plugin\PluginType\PluginTypeManager;
 use Drupal\Tests\UnitTestCase;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
@@ -20,7 +20,7 @@ use org\bovigo\vfs\vfsStreamWrapper;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * @coversDefaultClass \Drupal\plugin\PluginTypeManager
+ * @coversDefaultClass \Drupal\plugin\PluginType\PluginTypeManager
  *
  * @group Plugin
  */
@@ -58,7 +58,7 @@ class PluginTypeManagerTest extends UnitTestCase {
   /**
    * The class under test.
    *
-   * @var \Drupal\plugin\PluginTypeManager
+   * @var \Drupal\plugin\PluginType\PluginTypeManager
    */
   protected $sut;
 

@@ -2,10 +2,10 @@
 
 /**
  * @file
- * Contains \Drupal\plugin\PluginTypeManagerInterface.
+ * Contains \Drupal\plugin\PluginType\PluginTypeManagerInterface.
  */
 
-namespace Drupal\plugin;
+namespace Drupal\plugin\PluginType;
 
 /**
  * Defines a plugin type manager.
@@ -28,7 +28,7 @@ interface PluginTypeManagerInterface {
    * @param string $id
    *   The plugin type's ID.
    *
-   * @return \Drupal\plugin\PluginTypeInterface
+   * @return \Drupal\plugin\PluginType\PluginTypeInterface
    *
    * @throws \InvalidArgumentException
    *   Thrown if the pplugin type is unknown.
@@ -38,7 +38,7 @@ interface PluginTypeManagerInterface {
   /**
    * Gets the known plugin types.
    *
-   * @return \Drupal\plugin\PluginTypeInterface[]
+   * @return \Drupal\plugin\PluginType\PluginTypeInterface[]
    */
   public function getPluginTypes();
 

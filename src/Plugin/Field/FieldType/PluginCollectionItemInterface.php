@@ -18,7 +18,7 @@ interface PluginCollectionItemInterface extends FieldItemInterface {
   /**
    * Returns the type of the plugins contained by this item.
    *
-   * @return \Drupal\plugin\PluginTypeInterface
+   * @return \Drupal\plugin\PluginType\PluginTypeInterface
    */
   public function getPluginType();
 

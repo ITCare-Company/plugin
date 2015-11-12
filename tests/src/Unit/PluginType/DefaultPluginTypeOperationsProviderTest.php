@@ -2,17 +2,18 @@
 
 /**
  * @file
- * Contains \Drupal\Tests\plugin\Unit\DefaultPluginTypeOperationsProviderTest.
+ * Contains \Drupal\Tests\plugin\Unit\PluginType\DefaultPluginTypeOperationsProviderTest.
  */
 
-namespace Drupal\Tests\plugin\Unit;
+namespace Drupal\Tests\plugin\Unit\PluginType;
 
-use Drupal\plugin\DefaultPluginTypeOperationsProvider;
+use Drupal\plugin\PluginType\DefaultPluginTypeOperationsProvider;
+use Drupal\Tests\plugin\Unit\OperationsProviderTestTrait;
 use Drupal\Tests\UnitTestCase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * @coversDefaultClass \Drupal\plugin\DefaultPluginTypeOperationsProvider
+ * @coversDefaultClass \Drupal\plugin\PluginType\DefaultPluginTypeOperationsProvider
  *
  * @group Plugin
  */
@@ -38,7 +39,7 @@ class DefaultPluginTypeOperationsProviderTest extends UnitTestCase {
   /**
    * The class under test.
    *
-   * @var \Drupal\plugin\DefaultPluginTypeOperationsProvider
+   * @var \Drupal\plugin\PluginType\DefaultPluginTypeOperationsProvider
    */
   protected $sut;
 
@@ -66,7 +67,7 @@ class DefaultPluginTypeOperationsProviderTest extends UnitTestCase {
       ->method('get')
       ->willReturnMap($map);
 
-    /** @var \Drupal\plugin\DefaultPluginTypeOperationsProvider $sut_class */
+    /** @var \Drupal\plugin\PluginType\DefaultPluginTypeOperationsProvider $sut_class */
     $sut_class = get_class($this->sut);
     $sut = $sut_class::create($container);
     $this->assertInstanceOf($sut_class, $sut);

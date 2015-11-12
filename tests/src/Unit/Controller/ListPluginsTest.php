@@ -13,9 +13,9 @@ use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\plugin\Controller\ListPlugins;
 use Drupal\plugin\PluginDefinition\PluginDescriptionDefinitionInterface;
 use Drupal\plugin\PluginDefinition\PluginLabelDefinitionInterface;
-use Drupal\plugin\PluginType;
-use Drupal\plugin\PluginTypeInterface;
-use Drupal\plugin\PluginTypeManagerInterface;
+use Drupal\plugin\PluginType\PluginType;
+use Drupal\plugin\PluginType\PluginTypeInterface;
+use Drupal\plugin\PluginType\PluginTypeManagerInterface;
 use Drupal\Tests\UnitTestCase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -50,7 +50,7 @@ class ListPluginsTest extends UnitTestCase {
   /**
    * The plugin type manager.
    *
-   * @var \Drupal\plugin\PluginTypeManagerInterface|\PHPUnit_Framework_MockObject_MockObject
+   * @var \Drupal\plugin\PluginType\PluginTypeManagerInterface|\PHPUnit_Framework_MockObject_MockObject
    */
   protected $pluginTypeManager;
 

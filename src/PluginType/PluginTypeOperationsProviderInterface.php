@@ -2,10 +2,10 @@
 
 /**
  * @file
- * Contains \Drupal\plugin\PluginTypeOperationsProviderInterface.
+ * Contains \Drupal\plugin\PluginType\PluginTypeOperationsProviderInterface.
  */
 
-namespace Drupal\plugin;
+namespace Drupal\plugin\PluginType;
 
 /**
  * Defines a plugin type operations provider.

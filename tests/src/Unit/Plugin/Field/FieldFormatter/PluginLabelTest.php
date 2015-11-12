@@ -15,7 +15,7 @@ use Drupal\plugin\Plugin\Field\FieldType\PluginCollectionItemInterface;
 use Drupal\plugin\Plugin\Field\FieldType\PluginCollectionItemList;
 use Drupal\plugin\PluginDefinition\PluginDefinitionInterface;
 use Drupal\plugin\PluginDefinition\PluginLabelDefinitionInterface;
-use Drupal\plugin\PluginTypeInterface;
+use Drupal\plugin\PluginType\PluginTypeInterface;
 use Drupal\Tests\UnitTestCase;
 
 /**

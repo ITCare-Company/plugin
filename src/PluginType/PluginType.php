@@ -2,16 +2,17 @@
 
 /**
  * @file
- * Contains \Drupal\plugin\PluginType.
+ * Contains \Drupal\plugin\PluginType\PluginType.
  */
 
-namespace Drupal\plugin;
+namespace Drupal\plugin\PluginType;
 
 use Drupal\Component\Plugin\PluginManagerInterface;
 use Drupal\Core\DependencyInjection\ClassResolverInterface;
 use Drupal\Core\DependencyInjection\DependencySerializationTrait;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\StringTranslation\TranslationInterface;
+use Drupal\plugin\PluginType\DefaultPluginTypeOperationsProvider;
 use Drupal\plugin\PluginDefinition\PluginDefinitionInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -53,7 +54,7 @@ class PluginType implements PluginTypeInterface {
   /**
    * The operations provider..
    *
-   * @var \Drupal\plugin\PluginTypeOperationsProviderInterface
+   * @var \Drupal\plugin\PluginType\PluginTypeOperationsProviderInterface
    */
   protected $operationsProvider;
 

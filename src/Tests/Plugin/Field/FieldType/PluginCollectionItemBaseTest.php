@@ -74,7 +74,7 @@ class PluginCollectionItemBaseTest extends KernelTestBase {
     $this->fieldItem->setContainedPluginConfiguration($plugin_configuration);
     $this->assertEqual($this->fieldItem->getContainedPluginConfiguration(), $plugin_configuration);
     $this->assertEqual($this->fieldItem->getContainedPluginInstance()->getPluginId(), $plugin_id_configurable);
-    /** @var \Drupal\plugin_test_helper\Plugin\PluginTest\MockConfigurablePlugin $plugin_instance_a */
+    /** @var \Drupal\plugin_test_helper\Plugin\PluginTestHelper\MockConfigurablePlugin $plugin_instance_a */
     $plugin_instance_a = $this->fieldItem->getContainedPluginInstance();
     $this->assertTrue($plugin_instance_a instanceof MockConfigurablePlugin);
     $this->assertEqual($plugin_instance_a->getConfiguration(), $plugin_configuration);
@@ -97,7 +97,7 @@ class PluginCollectionItemBaseTest extends KernelTestBase {
     $this->assertEqual($this->fieldItem->getContainedPluginId(), $plugin_id_configurable);
     $this->fieldItem->setContainedPluginConfiguration($plugin_configuration);
     $this->assertEqual($this->fieldItem->getContainedPluginConfiguration(), $plugin_configuration);
-    /** @var \Drupal\plugin_test_helper\Plugin\PluginTest\MockConfigurablePlugin $plugin_instance_b */
+    /** @var \Drupal\plugin_test_helper\Plugin\PluginTestHelper\MockConfigurablePlugin $plugin_instance_b */
     $plugin_instance_b = $this->fieldItem->getContainedPluginInstance();
     $this->assertTrue($plugin_instance_b instanceof MockConfigurablePlugin);
     $this->assertEqual($plugin_instance_b->getConfiguration(), $plugin_configuration);
@@ -120,7 +120,7 @@ class PluginCollectionItemBaseTest extends KernelTestBase {
 
     // Test feedback from the plugin back to the field item.
     $plugin_manager = new MockManager();
-    /** @var \Drupal\plugin_test_helper\Plugin\PluginTest\MockConfigurablePlugin $plugin_instance_c */
+    /** @var \Drupal\plugin_test_helper\Plugin\PluginTestHelper\MockConfigurablePlugin $plugin_instance_c */
     $plugin_configuration_c = $plugin_configuration + [
         'qux' => $this->randomMachineName(),
       ];
@@ -135,7 +135,7 @@ class PluginCollectionItemBaseTest extends KernelTestBase {
     $this->assertEqual($this->fieldItem->getContainedPluginConfiguration(), $altered_plugin_configuration_c);
 
     // Test setting the main property.
-    /** @var \Drupal\plugin_test_helper\Plugin\PluginTest\MockConfigurablePlugin $plugin_instance_d */
+    /** @var \Drupal\plugin_test_helper\Plugin\PluginTestHelper\MockConfigurablePlugin $plugin_instance_d */
     $plugin_instance_d = $plugin_manager->createInstance($plugin_id_configurable);
     $plugin_instance_d->setConfiguration([
       'oman' => '42',

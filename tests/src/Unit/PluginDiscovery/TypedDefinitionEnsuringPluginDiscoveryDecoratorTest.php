@@ -10,7 +10,7 @@ namespace Drupal\Tests\plugin\Unit\PluginDiscovery;
 use Drupal\Component\Plugin\PluginManagerInterface;
 use Drupal\plugin\PluginDefinition\PluginDefinitionInterface;
 use Drupal\plugin\PluginDiscovery\TypedDefinitionEnsuringPluginDiscoveryDecorator;
-use Drupal\plugin\PluginTypeInterface;
+use Drupal\plugin\PluginType\PluginTypeInterface;
 use Drupal\Tests\UnitTestCase;
 
 /**
@@ -30,7 +30,7 @@ class TypedDefinitionEnsuringPluginDiscoveryDecoratorTest extends UnitTestCase {
   /**
    * The type of the plugin definitions to decorate.
    *
-   * @var \Drupal\plugin\PluginTypeInterface|\PHPUnit_Framework_MockObject_MockObject
+   * @var \Drupal\plugin\PluginType\PluginTypeInterface|\PHPUnit_Framework_MockObject_MockObject
    */
   protected $pluginType;
 

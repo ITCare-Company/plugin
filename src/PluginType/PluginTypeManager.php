@@ -2,10 +2,10 @@
 
 /**
  * @file
- * Contains \Drupal\plugin\PluginTypeManager.
+ * Contains \Drupal\plugin\PluginType\PluginTypeManager.
  */
 
-namespace Drupal\plugin;
+namespace Drupal\plugin\PluginType;
 
 use Drupal\Component\Discovery\YamlDiscovery;
 use Drupal\Core\Extension\ModuleHandlerInterface;
@@ -33,7 +33,7 @@ class PluginTypeManager implements PluginTypeManagerInterface {
   /**
    * The known plugin types.
    *
-   * @var \Drupal\plugin\PluginTypeInterface[]|null
+   * @var \Drupal\plugin\PluginType\PluginTypeInterface[]|null
    *   An array of plugin types or NULL if plugin type discovery has not been
    *   executed yet.
    */
@@ -92,7 +92,7 @@ class PluginTypeManager implements PluginTypeManagerInterface {
           $plugin_type_definition += $plugin_type_definition_defaults;
           if ($plugin_type_definition['provider'] == 'core' || $this->moduleHandler->moduleExists($plugin_type_definition['provider'])) {
             $plugin_type_definition['id'] = $plugin_type_id;
-            /** @var \Drupal\plugin\PluginTypeInterface $class */
+            /** @var \Drupal\plugin\PluginType\PluginTypeInterface $class */
             $class = isset($plugin_type_definition['class']) ? $plugin_type_definition['class'] : PluginType::class;
             $plugin_type = $class::createFromDefinition($this->container, $plugin_type_definition);
             $this->pluginTypes[$plugin_type_id] = $plugin_type;

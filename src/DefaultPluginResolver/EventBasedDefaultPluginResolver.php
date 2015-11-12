@@ -9,7 +9,7 @@ namespace Drupal\plugin\DefaultPluginResolver;
 
 use Drupal\plugin\Event\PluginEvents;
 use Drupal\plugin\Event\ResolveDefaultPlugin;
-use Drupal\plugin\PluginTypeInterface;
+use Drupal\plugin\PluginType\PluginTypeInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**

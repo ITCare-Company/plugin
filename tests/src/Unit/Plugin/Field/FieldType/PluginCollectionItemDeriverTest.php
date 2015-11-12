@@ -10,8 +10,8 @@ namespace Drupal\Tests\plugin\Unit\Plugin\Field\FieldType;
 use Drupal\Component\Plugin\PluginManagerInterface;
 use Drupal\Core\DependencyInjection\ClassResolverInterface;
 use Drupal\plugin\Plugin\Field\FieldType\PluginCollectionItemDeriver;
-use Drupal\plugin\PluginType;
-use Drupal\plugin\PluginTypeManagerInterface;
+use Drupal\plugin\PluginType\PluginType;
+use Drupal\plugin\PluginType\PluginTypeManagerInterface;
 use Drupal\Tests\UnitTestCase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -25,7 +25,7 @@ class PluginCollectionItemDeriverTest extends UnitTestCase {
   /**
    * The plugin type manager.
    *
-   * @var \Drupal\plugin\PluginTypeManagerInterface|\PHPUnit_Framework_MockObject_MockObject
+   * @var \Drupal\plugin\PluginType\PluginTypeManagerInterface|\PHPUnit_Framework_MockObject_MockObject
    */
   protected $pluginTypeManager;
 

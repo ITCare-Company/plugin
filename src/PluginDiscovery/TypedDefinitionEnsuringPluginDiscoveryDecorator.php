@@ -7,7 +7,7 @@
 namespace Drupal\plugin\PluginDiscovery;
 
 use Drupal\Component\Plugin\Discovery\DiscoveryInterface;
-use Drupal\plugin\PluginTypeInterface;
+use Drupal\plugin\PluginType\PluginTypeInterface;
 
 /**
  * Provides plugin discovery that ensures all definitions implement
@@ -18,14 +18,14 @@ class TypedDefinitionEnsuringPluginDiscoveryDecorator extends PluginDiscoveryDec
   /**
    * The type of the plugin definitions to decorate.
    *
-   * @var \Drupal\plugin\PluginTypeInterface
+   * @var \Drupal\plugin\PluginType\PluginTypeInterface
    */
   protected $pluginType;
 
   /**
    * Constructs a new instance.
    *
-   * @param \Drupal\plugin\PluginTypeInterface $plugin_type
+   * @param \Drupal\plugin\PluginType\PluginTypeInterface $plugin_type
    *   The plugin type of which to decorate definitions.
    * @param \Drupal\Component\Plugin\Discovery\DiscoveryInterface|NULL $decorated_discovery
    *   The decorated discovery, or NULL to use the plugin type's default

@@ -8,7 +8,7 @@
 namespace Drupal\plugin\Event;
 
 use Drupal\Component\Plugin\PluginInspectionInterface;
-use Drupal\plugin\PluginTypeInterface;
+use Drupal\plugin\PluginType\PluginTypeInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
@@ -22,7 +22,7 @@ class ResolveDefaultPlugin extends Event {
   /**
    * The plugin type.
    *
-   * @var \Drupal\plugin\PluginTypeInterface
+   * @var \Drupal\plugin\PluginType\PluginTypeInterface
    */
   protected $pluginType;
 
@@ -37,7 +37,7 @@ class ResolveDefaultPlugin extends Event {
   /**-
    * Constructs a new instance.
    *
-   * @param \Drupal\plugin\PluginTypeInterface $plugin_type
+   * @param \Drupal\plugin\PluginType\PluginTypeInterface $plugin_type
    */
   public function __construct(PluginTypeInterface $plugin_type) {
     $this->pluginType = $plugin_type;
@@ -46,7 +46,7 @@ class ResolveDefaultPlugin extends Event {
   /**
    * Gets the plugin type for which a default plugin instance is resolved.
    *
-   * @return \Drupal\plugin\PluginTypeInterface
+   * @return \Drupal\plugin\PluginType\PluginTypeInterface
    */
   public function getPluginType() {
     return $this->pluginType;

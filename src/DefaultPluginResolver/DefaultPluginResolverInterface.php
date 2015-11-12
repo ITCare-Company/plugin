@@ -7,7 +7,7 @@
 
 namespace Drupal\plugin\DefaultPluginResolver;
 
-use Drupal\plugin\PluginTypeInterface;
+use Drupal\plugin\PluginType\PluginTypeInterface;
 
 /**
  * Defines a default plugin resolver.

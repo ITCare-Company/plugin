@@ -7,7 +7,7 @@
 
 namespace Drupal\plugin\Controller;
 
-use Drupal\plugin\PluginTypeInterface;
+use Drupal\plugin\PluginType\PluginTypeInterface;
 
 /**
  * Handles the "list plugin types" route.

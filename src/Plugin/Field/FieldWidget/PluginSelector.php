@@ -31,7 +31,7 @@ class PluginSelector extends WidgetBase {
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
     /** @var \Drupal\plugin\Plugin\Field\FieldType\PluginCollectionItemInterface $item */
     $item = $items[$delta];
-    /** @var \Drupal\plugin\PluginTypeInterface $plugin_type */
+    /** @var \Drupal\plugin\PluginType\PluginTypeInterface $plugin_type */
     $plugin_type = $item->getPluginType();
 
     $element = [
@@ -105,7 +105,7 @@ class PluginSelector extends WidgetBase {
       $plugin_selector = $form_state->get($form_state_key);
     }
     else {
-      /** @var \Drupal\plugin\PluginTypeManagerInterface $plugin_type_manager */
+      /** @var \Drupal\plugin\PluginType\PluginTypeManagerInterface $plugin_type_manager */
       $plugin_type_manager = \Drupal::service('plugin.plugin_type_manager');
 
       /** @var \Drupal\plugin\Plugin\Plugin\PluginSelector\PluginSelectorManagerInterface $plugin_selector_manager */

@@ -2,10 +2,10 @@
 
 /**
  * @file
- * Contains \Drupal\plugin\PluginTypeInterface.
+ * Contains \Drupal\plugin\PluginType\PluginTypeInterface.
  */
 
-namespace Drupal\plugin;
+namespace Drupal\plugin\PluginType;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -78,7 +78,7 @@ interface PluginTypeInterface {
   /**
    * Gets the operations provider.
    *
-   * @return \Drupal\plugin\PluginTypeOperationsProviderInterface
+   * @return \Drupal\plugin\PluginType\PluginTypeOperationsProviderInterface
    */
   public function getOperationsProvider();
 

@@ -11,7 +11,7 @@ use Drupal\Component\Plugin\PluginInspectionInterface;
 use Drupal\plugin\DefaultPluginResolver\EventBasedDefaultPluginResolver;
 use Drupal\plugin\Event\PluginEvents;
 use Drupal\plugin\Event\ResolveDefaultPlugin;
-use Drupal\plugin\PluginTypeInterface;
+use Drupal\plugin\PluginType\PluginTypeInterface;
 use Drupal\Tests\UnitTestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 

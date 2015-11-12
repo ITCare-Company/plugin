@@ -26,7 +26,7 @@ class PluginCollectionItem extends PluginCollectionItemBase {
    * {@inheritdoc}
    */
   public function getPluginType() {
-    /** @var \Drupal\plugin\PluginTypeManagerInterface $plugin_type_manager */
+    /** @var \Drupal\plugin\PluginType\PluginTypeManagerInterface $plugin_type_manager */
     $plugin_type_manager = \Drupal::service('plugin.plugin_type_manager');
 
     return $plugin_type_manager->getPluginType($this->getPluginDefinition()['plugin_type_id']);

@@ -2,22 +2,22 @@
 
 /**
  * @file
- * Contains \Drupal\Tests\plugin\Unit\PluginTypeTest.
+ * Contains \Drupal\Tests\plugin\Unit\PluginType\PluginTypeTest.
  */
 
-namespace Drupal\Tests\plugin\Unit;
+namespace Drupal\Tests\plugin\Unit\PluginType;
 
 use Drupal\Component\Plugin\PluginManagerInterface;
 use Drupal\Core\DependencyInjection\ClassResolverInterface;
 use Drupal\plugin\PluginDefinition\ArrayPluginDefinitionDecorator;
 use Drupal\plugin\PluginDefinition\PluginDefinitionDecoratorInterface;
 use Drupal\plugin\PluginDefinition\PluginDefinitionInterface;
-use Drupal\plugin\PluginType;
+use Drupal\plugin\PluginType\PluginType;
 use Drupal\Tests\UnitTestCase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * @coversDefaultClass \Drupal\plugin\PluginType
+ * @coversDefaultClass \Drupal\plugin\PluginType\PluginType
  *
  * @group Plugin
  */
@@ -47,7 +47,7 @@ class PluginTypeTest extends UnitTestCase {
   /**
    * The class under test.
    *
-   * @var \Drupal\plugin\PluginType
+   * @var \Drupal\plugin\PluginType\PluginType
    */
   protected $sut;
 

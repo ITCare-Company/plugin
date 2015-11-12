@@ -11,7 +11,7 @@ use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\StringTranslation\TranslationInterface;
-use Drupal\plugin\PluginTypeManagerInterface;
+use Drupal\plugin\PluginType\PluginTypeManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -31,7 +31,7 @@ abstract class ListBase implements ContainerInjectionInterface {
   /**
    * The plugin type manager.
    *
-   * @var \Drupal\plugin\PluginTypeManagerInterface
+   * @var \Drupal\plugin\PluginType\PluginTypeManagerInterface
    */
   protected $pluginTypeManager;
 
@@ -42,7 +42,7 @@ abstract class ListBase implements ContainerInjectionInterface {
    *   The string translator.
    * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
    *   The module handler.
-   * @param \Drupal\plugin\PluginTypeManagerInterface $plugin_type_manager
+   * @param \Drupal\plugin\PluginType\PluginTypeManagerInterface $plugin_type_manager
    *   The plugin type manager.
    */
   public function __construct(TranslationInterface $string_translation, ModuleHandlerInterface $module_handler, PluginTypeManagerInterface $plugin_type_manager) {

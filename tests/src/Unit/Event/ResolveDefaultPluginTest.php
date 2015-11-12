@@ -9,7 +9,7 @@ namespace Drupal\Tests\plugin\Unit\Event;
 
 use Drupal\Component\Plugin\PluginInspectionInterface;
 use Drupal\plugin\Event\ResolveDefaultPlugin;
-use Drupal\plugin\PluginTypeInterface;
+use Drupal\plugin\PluginType\PluginTypeInterface;
 use Drupal\Tests\UnitTestCase;
 
 /**
@@ -22,7 +22,7 @@ class ResolveDefaultPluginTest extends UnitTestCase {
   /**
    * The plugin type.
    *
-   * @var \Drupal\plugin\PluginTypeInterface|\PHPUnit_Framework_MockObject_MockObject
+   * @var \Drupal\plugin\PluginType\PluginTypeInterface|\PHPUnit_Framework_MockObject_MockObject
    */
   protected $pluginType;
 
