@@ -68,7 +68,7 @@ class PluginTypeManager implements PluginTypeManagerInterface {
       return $plugin_types[$id];
     }
     else {
-      throw new \InvalidArgumentException(sprintf('Plugin type %s is unknown.', $id));
+      throw new \InvalidArgumentException(sprintf('Plugin type "%s" is unknown.', $id));
     }
   }
 
