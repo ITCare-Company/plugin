@@ -7,6 +7,7 @@
 
 namespace Drupal\plugin\Plugin\DataType;
 
+use Drupal\Core\DependencyInjection\DependencySerializationTrait;
 use Drupal\Core\TypedData\Plugin\DataType\StringData;
 
 /**
@@ -18,6 +19,9 @@ use Drupal\Core\TypedData\Plugin\DataType\StringData;
  * )
  */
 class PluginId extends StringData {
+
+  // @todo Stop using this once https://www.drupal.org/node/2615790 is fixed.
+  use DependencySerializationTrait;
 
   /**
    * {@inheritdoc}

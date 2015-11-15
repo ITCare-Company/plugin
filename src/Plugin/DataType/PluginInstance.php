@@ -8,6 +8,7 @@
 namespace Drupal\plugin\Plugin\DataType;
 
 use Drupal\Component\Plugin\PluginInspectionInterface;
+use Drupal\Core\DependencyInjection\DependencySerializationTrait;
 use Drupal\Core\TypedData\TypedData;
 
 /**
@@ -19,6 +20,9 @@ use Drupal\Core\TypedData\TypedData;
  * )
  */
 class PluginInstance extends TypedData {
+
+  // @todo Stop using this once https://www.drupal.org/node/2615790 is fixed.
+  use DependencySerializationTrait;
 
   /**
    * The plugin instance.
