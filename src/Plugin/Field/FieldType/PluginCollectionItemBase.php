@@ -127,7 +127,8 @@ abstract class PluginCollectionItemBase extends FieldItemBase implements PluginC
     $properties['plugin_configuration'] = MapDataDefinition::create('plugin_configuration')
       ->setLabel(t('Plugin configuration'));
     $properties['plugin_instance'] = MapDataDefinition::create('plugin_instance')
-      ->setLabel(t('Plugin instance'));
+      ->setLabel(t('Plugin instance'))
+      ->setComputed(TRUE);
 
     return $properties;
   }
