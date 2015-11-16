@@ -197,7 +197,7 @@ abstract class PluginCollectionItemBase extends FieldItemBase implements PluginC
     // applyDefaultValue(), so we can't throw an exception on that.
     elseif (!is_null($values)) {
       $type = is_object($values) ? get_class($values) : gettype($values);
-      throw new \InvalidArgumentException(sprintf('The value must implement \Drupal\Component\Plugin\PluginInspectionInterface or be an associative array, but %s was given', $type));
+      throw new \InvalidArgumentException(sprintf('The value must implement %s or be an associative array, but %s was given', PluginInspectionInterface::class, $type));
     }
   }
 
