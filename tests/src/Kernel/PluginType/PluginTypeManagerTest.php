@@ -8,7 +8,7 @@
 namespace Drupal\Tests\plugin\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
-use Drupal\plugin\PluginTypeInterface;
+use Drupal\plugin\PluginType\PluginTypeInterface;
 
 /**
  * \Drupal\plugin\PluginType\PluginTypeManager integration test.
@@ -54,7 +54,7 @@ class PluginTypeManagerTest extends KernelTestBase {
    * @covers ::getPluginTypes
    */
   public function testGetPluginTypes() {
-    /** @var \Drupal\plugin\PluginTypeManager $plugin_type_manager */
+    /** @var \Drupal\plugin\PluginType\PluginTypeManager $plugin_type_manager */
     $plugin_type_manager = $this->container->get('plugin.plugin_type_manager');
     $plugin_types = $plugin_type_manager->getPluginTypes();
     $this->assertNotEmpty($plugin_types);
