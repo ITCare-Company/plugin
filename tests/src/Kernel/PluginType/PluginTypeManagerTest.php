@@ -5,7 +5,7 @@
  * Contains \Drupal\Tests\plugin\Kernel\PluginType\PluginTypeManagerTest.
  */
 
-namespace Drupal\Tests\plugin\Kernel;
+namespace Drupal\Tests\plugin\Kernel\PluginType;
 
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\plugin\PluginType\PluginTypeInterface;
