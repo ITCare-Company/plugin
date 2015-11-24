@@ -176,6 +176,21 @@ abstract class PluginCollectionItemBase extends FieldItemBase implements PluginC
   /**
    * {@inheritdoc}
    */
+  public function getValue() {
+    // The "plugin_instance" property is the canonical value of this field item,
+    // but we can only represent this item's value using the plugin instance's
+    // ID and configuration. parent::getValue() skips computed properties, so we
+    // must return them here.
+    return [
+      'plugin_id' => $this->get('plugin_id')->getValue(),
+      'plugin_configuration' => $this->get('plugin_configuration')->getValue(),
+    ];
+  }
+
+
+  /**
+   * {@inheritdoc}
+   */
   public function setValue($values, $notify = TRUE) {
     if ($values instanceof PluginInspectionInterface) {
       $this->setContainedPluginInstance($values);
