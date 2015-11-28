@@ -7,6 +7,7 @@
 
 namespace Drupal\plugin\Plugin\Field\FieldType;
 
+use Drupal\Component\Plugin\Exception\PluginNotFoundException;
 use Drupal\Component\Plugin\PluginInspectionInterface;
 use Drupal\Core\Field\FieldItemBase;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
@@ -50,7 +51,7 @@ abstract class PluginCollectionItemBase extends FieldItemBase implements PluginC
   public function validatePluginInstance(PluginInspectionInterface $plugin_instance) {
     $plugin_manager = $this->getPluginType()->getPluginManager();
     if (!$plugin_manager->hasDefinition($plugin_instance->getPluginId())) {
-      throw new \Exception(sprintf('Plugin manager %s does not have a definition for plugin %s.', get_class($plugin_manager), $plugin_instance->getPluginId()));
+      throw new PluginNotFoundException($plugin_instance->getPluginId(), sprintf('Plugin manager %s does not have a definition for plugin %s.', get_class($plugin_manager), $plugin_instance->getPluginId()));
     }
   }
 
@@ -78,6 +79,15 @@ abstract class PluginCollectionItemBase extends FieldItemBase implements PluginC
    */
   public function setContainedPluginInstance(PluginInspectionInterface $plugin_instance) {
     $this->get('plugin_instance')->setValue($plugin_instance);
+
+    return $this;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function resetContainedPluginInstance() {
+    $this->get('plugin_instance')->applyDefaultValue();
 
     return $this;
   }

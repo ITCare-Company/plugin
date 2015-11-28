@@ -28,6 +28,10 @@ interface PluginCollectionItemInterface extends FieldItemInterface {
    * @param \Drupal\Component\Plugin\PluginInspectionInterface $plugin_instance
    *
    * @throws \Exception
+   *
+   * @deprecated Deprecated as of 8.x-2.0 and scheduled for removal before
+   *   8.x-3.0. Use static::getPluginType()->getPluginManager()->hasDefinition()
+   *   instead.
    */
   public function validatePluginInstance(PluginInspectionInterface $plugin_instance);
 
@@ -39,6 +43,10 @@ interface PluginCollectionItemInterface extends FieldItemInterface {
    *
    * @return \Drupal\Component\Plugin\PluginInspectionInterface|null
    *   A plugin instance or NULL if there was no plugin ID.
+   *
+   * @deprecated Deprecated as of 8.x-2.0 and scheduled for removal before
+   *   8.x-3.0. Use
+   *   static::getPluginType()->getPluginManager()->createInstance() instead.
    */
   public function createContainedPluginInstance($plugin_id, array $plugin_configuration = []);
 
@@ -56,13 +64,27 @@ interface PluginCollectionItemInterface extends FieldItemInterface {
    * @param \Drupal\Component\Plugin\PluginInspectionInterface $plugin_instance
    *
    * @return $this
+   *
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   *   Thrown if the given plugin instance does not exist for the type of plugin
+   *   this container contains.
    */
   public function setContainedPluginInstance(PluginInspectionInterface $plugin_instance);
+
+  /**
+   * Resets the instantiated plugin.
+   *
+   * @return $this
+   */
+  public function resetContainedPluginInstance();
 
   /**
    * Gets the plugin ID.
    *
    * @return string
+   *
+   * @deprecated Deprecated as of 8.x-2.0 and scheduled for removal before
+   *   8.x-3.0. Use static::getContainedPluginInstance()->getPluginId() instead.
    */
   public function getContainedPluginId();
 
@@ -72,6 +94,9 @@ interface PluginCollectionItemInterface extends FieldItemInterface {
    * @param string $plugin_id
    *
    * @return $this
+   *
+   * @deprecated Deprecated as of 8.x-2.0 and scheduled for removal before
+   *   8.x-3.0. Use static::setContainedPluginInstance().
    */
   public function setContainedPluginId($plugin_id);
 
@@ -79,6 +104,10 @@ interface PluginCollectionItemInterface extends FieldItemInterface {
    * Sets the plugin configuration.
    *
    * @return mixed[]
+   *
+   * @deprecated Deprecated as of 8.x-2.0 and scheduled for removal before
+   *   8.x-3.0. Use static::getContainedPluginInstance()->getConfiguration()
+   *   instead.
    */
   public function getContainedPluginConfiguration();
 
@@ -88,6 +117,10 @@ interface PluginCollectionItemInterface extends FieldItemInterface {
    * @param mixed[] $plugin_configuration
    *
    * @return $this
+   *
+   * @deprecated Deprecated as of 8.x-2.0 and scheduled for removal before
+   *   8.x-3.0. Use static::getContainedPluginInstance()->setConfiguration()
+   *   instead.
    */
   public function setContainedPluginConfiguration(array $plugin_configuration);
 
