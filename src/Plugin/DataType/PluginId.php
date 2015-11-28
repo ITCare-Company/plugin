@@ -24,7 +24,27 @@ class PluginId extends StringData {
 
   // @todo Stop using this once https://www.drupal.org/node/2615790 is fixed.
   use DependencySerializationTrait;
-  use PluginCollectionItemPropertyTrait;
+
+  /**
+   * The parent typed data object.
+   *
+   * @var \Drupal\plugin\Plugin\Field\FieldType\PluginCollectionItemInterface
+   */
+  protected $parent;
+
+  /**
+   * Constructs a new instance.
+   *
+   * @param \Drupal\Core\TypedData\DataDefinitionInterface $definition
+   *   The data definition.
+   * @param string $name
+   *   The name of the created property.
+   * @param \Drupal\plugin\Plugin\Field\FieldType\PluginCollectionItemInterface $parent
+   *   The parent object of the data property.
+   */
+  public function __construct(DataDefinitionInterface $definition, $name, PluginCollectionItemInterface $parent) {
+    parent::__construct($definition, $name, $parent);
+  }
 
   /**
    * {@inheritdoc}
