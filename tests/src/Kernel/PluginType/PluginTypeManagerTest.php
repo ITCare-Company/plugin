@@ -11,7 +11,7 @@ use Drupal\KernelTests\KernelTestBase;
 use Drupal\plugin\PluginType\PluginTypeInterface;
 
 /**
- * \Drupal\plugin\PluginType\PluginTypeManager integration test.
+ * @coversDefaultClass \Drupal\plugin\PluginType\PluginTypeManager
  *
  * @group Plugin
  */
