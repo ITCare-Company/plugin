@@ -41,7 +41,7 @@ class PluginSelector extends WidgetBase {
       '#plugin_type_id' => $plugin_type->getId(),
       '#plugin_selector_id' => $this->pluginDefinition['plugin_selector_id'],
       '#process' => [[get_class(), 'processFormElement']],
-      '#selected_plugin' => $items->isEmpty() ? NULL : $items->get($delta)->getValue()['plugin_instance'],
+      '#selected_plugin' => $items->isEmpty() ? NULL : $items->get($delta)->getContainedPluginInstance(),
     ];
     $element['plugin_selector'] = static::getPluginSelector($form_state, $element)->buildSelectorForm([], $form_state);
 

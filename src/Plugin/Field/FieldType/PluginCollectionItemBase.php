@@ -192,6 +192,7 @@ abstract class PluginCollectionItemBase extends FieldItemBase implements PluginC
     // ID and configuration. parent::getValue() skips computed properties, so we
     // must return them here.
     return [
+      'plugin_type_id' => $this->get('plugin_type_id')->getValue(),
       'plugin_id' => $this->get('plugin_id')->getValue(),
       'plugin_configuration' => $this->get('plugin_configuration')->getValue(),
     ];
