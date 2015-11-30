@@ -3,9 +3,9 @@ their root folders, where `$module` is the name of the module itself.
 The files' contents are objects. Top-level keys are plugin type IDs (strings), 
 and the values are objects. The only required object property is `class`, which
 must be the fully qualified name of a class that implements 
-`\Drupal\plugin\PluginTypeInterface`, or be left empty so it defaults to
-`\Drupal\plugin\PluginType`. All other properties depend on the class, but the 
-default class takes the following:
+`\Drupal\plugin\PluginType\PluginTypeInterface`, or be left empty so it 
+defaults to `\Drupal\plugin\PluginType\PluginType`. All other properties depend 
+on the class, but the default class takes the following:
 
 - label (required): the human-readable US English plugin type label.
 - description (optional): the human-readable US English plugin description.
@@ -17,8 +17,8 @@ default class takes the following:
   original plugin definitions do not implement 
   `\Drupal\plugin\PluginDefinition\PluginDefinitionInterface`.
 - operations_provider_class (optional): the fully qualified name of a class that
-  implements `\Drupal\plugin\PluginTypeOperationsProviderInterface`. Defaults to
-  `\Drupal\plugin\DefaultPluginTypeOperationsProvider`.
+  implements `\Drupal\plugin\PluginType\PluginTypeOperationsProviderInterface`. 
+  Defaults to `\Drupal\plugin\PluginType\DefaultPluginTypeOperationsProvider`.
 
 A configuration schema MAY be provided for all configurable plugin types. If a 
 schema is provided, its name MUST be like
