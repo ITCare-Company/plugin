@@ -34,14 +34,14 @@ interface PluginTypeInterface {
   /**
    * Gets the human-readable label.
    *
-   * @return \Drupal\Core\StringTranslation\TranslatableString|string
+   * @return \Drupal\Core\StringTranslation\TranslatableMarkup|string
    */
   public function getLabel();
 
   /**
    * Gets the human-readable description.
    *
-   * @return \Drupal\Core\StringTranslation\TranslatableString|string
+   * @return \Drupal\Core\StringTranslation\TranslatableMarkup|string
    */
   public function getDescription();
 
