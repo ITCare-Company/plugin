@@ -31,7 +31,7 @@ interface PluginTypeManagerInterface {
    * @return \Drupal\plugin\PluginType\PluginTypeInterface
    *
    * @throws \InvalidArgumentException
-   *   Thrown if the pplugin type is unknown.
+   *   Thrown if the plugin type is unknown.
    */
   public function getPluginType($id);
 
