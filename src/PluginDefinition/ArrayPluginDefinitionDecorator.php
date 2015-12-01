@@ -15,7 +15,7 @@ use Drupal\Component\Utility\NestedArray;
  *
  * @ingroup Plugin
  */
-class ArrayPluginDefinitionDecorator implements ArrayPluginDefinitionInterface, PluginContextDefinitionInterface, PluginDeriverDefinitionInterface, PluginLabelDefinitionInterface, PluginCategoryDefinitionInterface, PluginConfigDependenciesDefinitionInterface, PluginDefinitionDecoratorInterface, PluginHierarchyDefinitionInterface {
+class ArrayPluginDefinitionDecorator implements ArrayPluginDefinitionInterface, PluginContextDefinitionInterface, PluginDeriverDefinitionInterface, PluginLabelDefinitionInterface, PluginCategoryDefinitionInterface, PluginConfigDependenciesDefinitionInterface, PluginDefinitionDecoratorInterface, PluginHierarchyDefinitionInterface, PluginOperationsProviderDefinitionInterface {
 
   use MergeablePluginDefinitionTrait;
 
@@ -335,6 +335,22 @@ class ArrayPluginDefinitionDecorator implements ArrayPluginDefinitionInterface, 
    */
   public function getParentId() {
     return isset($this->arrayDefinition['parent_id']) ? $this->arrayDefinition['parent_id'] : NULL;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setOperationsProviderClass($class) {
+    $this->arrayDefinition['operations_provider'] = $class;
+
+    return $this;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getOperationsProviderClass() {
+    return isset($this->arrayDefinition['operations_provider']) ? $this->arrayDefinition['operations_provider'] : NULL;
   }
 
 }

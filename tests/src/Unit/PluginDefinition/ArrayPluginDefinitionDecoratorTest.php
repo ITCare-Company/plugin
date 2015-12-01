@@ -11,6 +11,7 @@ use Drupal\Component\Plugin\Derivative\DeriverInterface;
 use Drupal\Core\Plugin\Context\ContextDefinitionInterface;
 use Drupal\plugin\PluginDefinition\ArrayPluginDefinitionDecorator;
 use Drupal\plugin\PluginDefinition\PluginDefinitionInterface;
+use Drupal\plugin\PluginOperationsProviderInterface;
 use Drupal\Tests\UnitTestCase;
 
 /**
@@ -47,6 +48,7 @@ class ArrayPluginDefinitionDecoratorTest extends UnitTestCase {
       'category' => $this->randomMachineName(),
       'provider' => $this->randomMachineName(),
       'deriver' => $this->getMockClass(DeriverInterface::class),
+      'operations_provider' => $this->getMockClass(PluginOperationsProviderInterface::class),
       'context' => [
         $this->randomMachineName() => $this->getMock(ContextDefinitionInterface::class),
       ],
@@ -588,6 +590,41 @@ class ArrayPluginDefinitionDecoratorTest extends UnitTestCase {
       [new \stdClass()],
       [new ArrayPluginDefinitionDecorator()],
     ];
+  }
+
+  /**
+   * @covers ::setOperationsProviderClass
+   * @covers ::getOperationsProviderClass
+   * @covers ::offsetExists
+   * @covers ::offsetSet
+   * @covers ::offsetGet
+   * @covers ::offsetUnset
+   */
+  public function testGetOperationsProviderClass() {
+    // Test the injected value.
+    $this->assertSame($this->arrayDefinition['operations_provider'], $this->sut->getOperationsProviderClass());
+    $this->assertSame($this->arrayDefinition['operations_provider'], $this->sut->getArrayDefinition()['operations_provider']);
+    $this->assertSame($this->arrayDefinition['operations_provider'], $this->sut['operations_provider']);
+
+    // Test changing the value through the setter.
+    $value = $this->getMockClass(PluginOperationsProviderInterface::class);
+    $this->assertSame($this->sut, $this->sut->setOperationsProviderClass($value));
+    $this->assertSame($value, $this->sut->getOperationsProviderClass());
+    $this->assertSame($value, $this->sut->getArrayDefinition()['operations_provider']);
+    $this->assertSame($value, $this->sut['operations_provider']);
+
+    // Test changing the value through array access.
+    $value = $this->getMockClass(PluginOperationsProviderInterface::class);
+    $this->sut['operations_provider'] = $value;
+    $this->assertSame($value, $this->sut->getOperationsProviderClass());
+    $this->assertSame($value, $this->sut->getArrayDefinition()['operations_provider']);
+    $this->assertSame($value, $this->sut['operations_provider']);
+
+    // Test unsetting the value.
+    unset($this->sut['operations_provider']);
+    $this->assertFalse(isset($this->sut['operations_provider']));
+    $this->assertNull($this->sut->getOperationsProviderClass());
+    $this->assertFalse(isset($this->sut->getArrayDefinition()['operations_provider']));
   }
 
 }

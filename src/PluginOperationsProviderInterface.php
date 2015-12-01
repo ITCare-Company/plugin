@@ -11,7 +11,9 @@ namespace Drupal\plugin;
  * Defines a plugin operations provider.
  *
  * Classes may also implement any of the following interfaces:
- * - \Drupal\Core\DependencyInjection\ContainerInjectionInterface
+ * - \Drupal\Core\DependencyInjection\ContainerInjectionInterface: implementing
+ *   this interface requires classes to be instantiated through
+ *   \Drupal\Core\DependencyInjection\ClassResolverInterface::getInstanceFromDefinition().
  */
 interface PluginOperationsProviderInterface {
 
