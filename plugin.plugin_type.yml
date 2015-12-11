@@ -34,7 +34,7 @@ archiver:
   label: Archiver
   provider: core
   plugin_manager_service_id: plugin.manager.archiver
-  plugin_definition_decorator_class: \Drupal\plugin\PluginDefinition\ArrayPluginDefinitionDecorator
+  plugin_definition_decorator_class: \Drupal\plugin\PluginDefinition\ArchiverPluginDefinitionDecorator
 action:
   label: Action
   provider: core
@@ -44,27 +44,27 @@ menu_link:
   label: Menu link
   provider: core
   plugin_manager_service_id: plugin.manager.menu.link
-  plugin_definition_decorator_class: \Drupal\plugin\PluginDefinition\ArrayPluginDefinitionDecorator
+  plugin_definition_decorator_class: \Drupal\plugin\PluginDefinition\LinkPluginDefinitionDecorator
 menu_local_action:
   label: Local action
   provider: core
   plugin_manager_service_id: plugin.manager.menu.local_action
-  plugin_definition_decorator_class: \Drupal\plugin\PluginDefinition\ArrayPluginDefinitionDecorator
+  plugin_definition_decorator_class: \Drupal\plugin\PluginDefinition\LinkPluginDefinitionDecorator
 menu_local_task:
   label: Local task
   provider: core
   plugin_manager_service_id: plugin.manager.menu.local_task
-  plugin_definition_decorator_class: \Drupal\plugin\PluginDefinition\ArrayPluginDefinitionDecorator
+  plugin_definition_decorator_class: \Drupal\plugin\PluginDefinition\LinkPluginDefinitionDecorator
 menu_lcontextual_link:
   label: Contextual link
   provider: core
   plugin_manager_service_id: plugin.manager.menu.contextual_link
-  plugin_definition_decorator_class: \Drupal\plugin\PluginDefinition\ArrayPluginDefinitionDecorator
+  plugin_definition_decorator_class: \Drupal\plugin\PluginDefinition\LinkPluginDefinitionDecorator
 display_variant:
   label: Display variant
   provider: core
   plugin_manager_service_id: plugin.manager.display_variant
-  plugin_definition_decorator_class: \Drupal\plugin\PluginDefinition\ArrayPluginDefinitionDecorator
+  plugin_definition_decorator_class: \Drupal\plugin\PluginDefinition\DisplayVariantPluginDefinitionDecorator
 queue_worker:
   label: Queue worker
   provider: core
@@ -129,7 +129,7 @@ filter:
   label: Filter
   provider: filter
   plugin_manager_service_id: plugin.manager.filter
-  plugin_definition_decorator_class: \Drupal\plugin\PluginDefinition\ArrayPluginDefinitionDecorator
+  plugin_definition_decorator_class: \Drupal\plugin\PluginDefinition\FilterPluginDefinitionDecorator
 
 # Image's plugin types.
 image_effect:
@@ -193,14 +193,14 @@ search:
   label: Search method
   provider: search
   plugin_manager_service_id: plugin.manager.search
-  plugin_definition_decorator_class: \Drupal\plugin\PluginDefinition\ArrayPluginDefinitionDecorator
+  plugin_definition_decorator_class: \Drupal\plugin\PluginDefinition\SearchPluginDefinitionDecorator
 
 # Tour's plugin types.
 tour_tip:
   label: Tour tip
   provider: tour
   plugin_manager_service_id: plugin.manager.tour.tip
-  plugin_definition_decorator_class: \Drupal\plugin\PluginDefinition\ArrayPluginDefinitionDecorator
+  plugin_definition_decorator_class: \Drupal\plugin\PluginDefinition\TourTipPluginDefinitionDecorator
 
 # Views's plugin types.
 views_access:
