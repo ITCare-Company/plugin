@@ -175,9 +175,11 @@ class ListPluginsTest extends UnitTestCase {
 
     $build = $this->sut->execute($plugin_type_id);
 
+    $this->assertSame($plugin_definition_id_a, $build[$plugin_definition_id_a]['id']['#markup']);
     $this->assertSame($plugin_definition_label_a, (string) $build[$plugin_definition_id_a]['label']['#markup']);
     $this->assertNull($build[$plugin_definition_id_a]['description']['#markup']);
-    $this->assertSame($plugin_definition_id_b, (string) $build[$plugin_definition_id_b]['label']['#markup']);
+    $this->assertSame($plugin_definition_id_b, $build[$plugin_definition_id_b]['id']['#markup']);
+    $this->assertEmpty($build[$plugin_definition_id_b]['label']['#markup']);
     $this->assertSame($plugin_definition_description_b, (string) $build[$plugin_definition_id_b]['description']['#markup']);
   }
 

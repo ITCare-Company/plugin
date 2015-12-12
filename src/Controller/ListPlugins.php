@@ -49,21 +49,22 @@ class ListPlugins extends ListBase {
 
     $build = [
       '#empty' => $this->t('There are no available plugins.'),
-      '#header' => [$this->t('Type'), $this->t('Description'), $this->t('Provider')],
+      '#header' => [$this->t('Plugin'), $this->t('ID'), $this->t('Description'), $this->t('Provider')],
       '#type' => 'table',
     ];
     $plugin_discovery = new TypedDefinitionEnsuringPluginDiscoveryDecorator($plugin_type);
     /** @var \Drupal\plugin\PluginDefinition\PluginDefinitionInterface[] $plugin_definitions */
-    $plugin_definitions = [];
-    foreach ($plugin_discovery->getDefinitions() as $plugin_definition) {
-      $label = $plugin_definition instanceof PluginLabelDefinitionInterface ? (string) $plugin_definition->getLabel() : $plugin_definition->getId();
-      $plugin_definitions[$label] = $plugin_definition;
-    }
-    uksort($plugin_definitions, 'strnatcasecmp');
-    foreach ($plugin_definitions as $label => $plugin_definition) {
+    $plugin_definitions = $plugin_discovery->getDefinitions();
+    ksort($plugin_definitions);
+    foreach ($plugin_definitions as $plugin_definition) {
       $build[$plugin_definition->getId()] = [
         'label' => [
-          '#markup' => $label,
+          '#markup' => $plugin_definition instanceof PluginLabelDefinitionInterface ? (string) $plugin_definition->getLabel() : NULL,
+        ],
+        'id' => [
+          '#markup' => $plugin_definition->getId(),
+          '#prefix' => '<code>',
+          '#suffix' => '</code>',
         ],
         'description' => [
           '#markup' => $plugin_definition instanceof PluginDescriptionDefinitionInterface ? (string) $plugin_definition->getDescription() : NULL,
