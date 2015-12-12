@@ -14,8 +14,5 @@
   },
   "require" : {
     "php": "~5.5|~7.0"
-  },
-  "require-dev" : {
-    "satooshi/php-coveralls": "dev-master"
   }
 }
