@@ -8,6 +8,7 @@
 namespace Drupal\plugin\PluginType;
 
 use Drupal\Component\Plugin\PluginManagerInterface;
+use Drupal\Core\Config\TypedConfigManagerInterface;
 use Drupal\Core\DependencyInjection\ClassResolverInterface;
 use Drupal\Core\DependencyInjection\DependencySerializationTrait;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
@@ -19,9 +20,21 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Provides a plugin type.
  */
-class PluginType implements PluginTypeInterface {
+class PluginType implements ConfigurablePluginTypeInterface {
 
   use DependencySerializationTrait;
+
+  /**
+   * The ID of the configuration schema of plugins of this type.
+   *
+   * @var string
+   *   A configuration schema ID. It may contain the tokens "[plugin_type_id|
+   *   and "[plugin_id]", which will be replaced by the plugin type ID and
+   *   plugin ID respectively.
+   *
+   * @see self::getPluginConfigurationSchemaId()
+   */
+  protected $configurationSchemaId = 'plugin.plugin_configuration.[plugin_type_id].[plugin_id]';
 
   /**
    * The ID.
@@ -97,10 +110,12 @@ class PluginType implements PluginTypeInterface {
    *   The class resolver.
    * @param \Drupal\Component\Plugin\PluginManagerInterface $plugin_manager
    *   The plugin type's plugin manager.
+   * @param \Drupal\Core\Config\TypedConfigManagerInterface $typed_config_manager
+   *   The typed configuration manager.
    *
    * @param mixed[] $definition
    */
-  public function __construct(array $definition, TranslationInterface $string_translation, ClassResolverInterface $class_resolver, PluginManagerInterface $plugin_manager) {
+  public function __construct(array $definition, TranslationInterface $string_translation, ClassResolverInterface $class_resolver, PluginManagerInterface $plugin_manager, TypedConfigManagerInterface $typed_config_manager) {
     if (!is_string($definition['id']) || !strlen($definition['id'])) {
       throw new \InvalidArgumentException(sprintf('The plugin type definition ID must be a non-empty string, but %s was given.', gettype($definition['id'])));
     }
@@ -121,6 +136,16 @@ class PluginType implements PluginTypeInterface {
       }
       $this->pluginDefinitionDecoratorClass = $definition['plugin_definition_decorator_class'];
     }
+    if (isset($definition['plugin_configuration_schema_id'])) {
+      if (!is_string($definition['plugin_configuration_schema_id'])) {
+        throw new \InvalidArgumentException(sprintf('The plugin type definition "plugin_configuration_schema_id" item must be a string, but %s was given.', gettype($definition['field_type'])));
+      }
+      $this->configurationSchemaId = $definition['plugin_configuration_schema_id'];
+    }
+    $plugin_configuration_schema_id = $this->getPluginConfigurationSchemaId('*');
+    if (!$typed_config_manager->hasConfigSchema($plugin_configuration_schema_id)) {
+      throw new \InvalidArgumentException(sprintf('The plugin type definition "plugin_configuration_schema_id" item references the configuration schema "%s" ("%s"), which does not exist.', $plugin_configuration_schema_id, $this->configurationSchemaId));
+    }
     $operations_provider_class = array_key_exists('operations_provider_class', $definition) ? $definition['operations_provider_class'] : DefaultPluginTypeOperationsProvider::class;
     $this->operationsProvider = $class_resolver->getInstanceFromDefinition($operations_provider_class);
     $this->pluginManager = $plugin_manager;
@@ -131,7 +156,7 @@ class PluginType implements PluginTypeInterface {
    * {@inheritdoc}
    */
   public static function createFromDefinition(ContainerInterface $container, array $definition) {
-    return new static($definition, $container->get('string_translation'), $container->get('class_resolver'), $container->get($definition['plugin_manager_service_id']));
+    return new static($definition, $container->get('string_translation'), $container->get('class_resolver'), $container->get($definition['plugin_manager_service_id']), $container->get('config.typed'));
   }
 
   /**
@@ -197,6 +222,13 @@ class PluginType implements PluginTypeInterface {
    */
   public function isFieldType() {
     return $this->fieldType;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getPluginConfigurationSchemaId($plugin_id) {
+    return str_replace(['[plugin_type_id]', '[plugin_id]'], [$this->id, $plugin_id], $this->configurationSchemaId);
   }
 
 }

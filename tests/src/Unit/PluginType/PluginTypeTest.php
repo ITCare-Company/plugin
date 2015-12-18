@@ -8,6 +8,7 @@
 namespace Drupal\Tests\plugin\Unit\PluginType;
 
 use Drupal\Component\Plugin\PluginManagerInterface;
+use Drupal\Core\Config\TypedConfigManagerInterface;
 use Drupal\Core\DependencyInjection\ClassResolverInterface;
 use Drupal\plugin\PluginDefinition\ArrayPluginDefinitionDecorator;
 use Drupal\plugin\PluginDefinition\PluginDefinitionDecoratorInterface;
@@ -63,11 +64,17 @@ class PluginTypeTest extends UnitTestCase {
 
     $class_resolver = $this->getMock(ClassResolverInterface::class);
 
+    $typed_config_manager = $this->getMock(TypedConfigManagerInterface::class);
+    $typed_config_manager->expects($this->atLeastOnce())
+      ->method('hasConfigSchema')
+      ->willReturn(TRUE);
+
     $this->pluginManager = $this->getMock(PluginManagerInterface::class);
 
     $this->container = $this->getMock(ContainerInterface::class);
     $map = [
       ['class_resolver', ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $class_resolver],
+      ['config.typed', ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $typed_config_manager],
       ['string_translation', ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $this->getStringTranslationStub()],
       [$this->pluginTypeDefinition['plugin_manager_service_id'], ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $this->pluginManager],
     ];
@@ -126,6 +133,27 @@ class PluginTypeTest extends UnitTestCase {
    */
   public function testGetFieldType() {
     $this->assertSame($this->pluginTypeDefinition['field_type'], $this->sut->isFieldType());
+  }
+
+  /**
+   * @covers ::getPluginConfigurationSchemaId
+   */
+  public function testGetPluginConfigurationSchemaIdWithDefaultId() {
+    $plugin_id = 'FooBarQux';
+    $expected_schema_id = sprintf('plugin.plugin_configuration.%s.%s', $this->pluginTypeDefinition['id'], $plugin_id);
+    $this->assertSame($expected_schema_id, $this->sut->getPluginConfigurationSchemaId($plugin_id));
+  }
+
+  /**
+   * @covers ::getPluginConfigurationSchemaId
+   */
+  public function testGetPluginConfigurationSchemaIdWithDefinedId() {
+    $plugin_id = 'FooBarQux';
+    $schema_id = 'foo_bar.qux.[plugin_id]';
+    $this->pluginTypeDefinition['plugin_configuration_schema_id'] = $schema_id;
+    $this->sut = PluginType::createFromDefinition($this->container, $this->pluginTypeDefinition);
+    $expected_schema_id = 'foo_bar.qux.' . $plugin_id;
+    $this->assertSame($expected_schema_id, $this->sut->getPluginConfigurationSchemaId($plugin_id));
   }
 
   /**

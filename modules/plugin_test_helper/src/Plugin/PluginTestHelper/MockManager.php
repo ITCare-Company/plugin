@@ -15,6 +15,10 @@ use Drupal\plugin\PluginDiscovery\TypedDiscoveryInterface;
 
 /**
  * Provides a plugin manager for testing plugin-related functionality.
+ *
+ * Configuration schemas for this manager's plugins are named
+ * "plugin_test_helper.plugin_configuration.plugin_test_helper_mock.[plugin_id]",
+ * where "[plugin_id]" is the ID of the plugin the schema is for.
  */
 class MockManager extends PluginManagerBase implements TypedDiscoveryInterface {
 

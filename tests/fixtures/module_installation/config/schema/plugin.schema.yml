@@ -31,13 +31,13 @@ plugin.plugin_configuration.*:
 "field.value.plugin:*":
   label: Plugin collection field value
   mapping:
+    plugin_type_id:
+      label: Plugin type ID
+      type: string
     plugin_id:
       label: Plugin ID
       type: string
     plugin_configuration:
       label: Plugin configuration
-      type: "[%parent.plugin_configuration_schema_id]"
-    plugin_configuration_schema_id:
-      label: Plugin configuration
-      type: string
+      type: plugin.plugin_configuration.[%parent.plugin_type_id].[%parent.plugin_id]:
   type: config_object

@@ -54,7 +54,6 @@ class PluginSelectorTest extends WebTestBase {
     /** @var \Drupal\field\FieldConfigInterface $field */
     $field = FieldConfig::load($field_id);
     $this->assertNotNull($field);
-    $this->assertEqual($field->getDefaultValueLiteral()[0]['plugin_type_id'], $selectable_plugin_type_id);
     $this->assertEqual($field->getDefaultValueLiteral()[0]['plugin_id'], $default_selected_plugin_id);
     $this->assertTrue(is_array($field->getDefaultValueLiteral()[0]['plugin_configuration']));
 
@@ -68,7 +67,6 @@ class PluginSelectorTest extends WebTestBase {
     // Test whether the widget displays field values.
     /** @var \Drupal\Core\Entity\ContentEntityInterface $user */
     $user = entity_load_unchanged('user', $user->id());
-    $this->assertEqual($user->get('field_' . $field_name)->get(0)->get('plugin_type_id')->getValue(), $selectable_plugin_type_id);
     $this->assertEqual($user->get('field_' . $field_name)->get(0)->get('plugin_id')->getValue(), $entity_selected_plugin_id);
   }
 }

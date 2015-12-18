@@ -4,16 +4,12 @@ plugin_selector:
   plugin_definition_decorator_class: \Drupal\plugin\PluginDefinition\ArrayPluginDefinitionDecorator
 
 # Drupal core's plugin types.
-block:
-  label: Block
-  provider: block
-  plugin_manager_service_id: plugin.manager.block
-  plugin_definition_decorator_class: \Drupal\plugin\PluginDefinition\BlockPluginDefinitionDecorator
 entity_reference_selector:
   label: Entity reference selector
   provider: core
   plugin_manager_service_id: plugin.manager.entity_reference_selection
   plugin_definition_decorator_class: \Drupal\plugin\PluginDefinition\ArrayPluginDefinitionDecorator
+  plugin_configuration_schema_id: entity_reference_selection.[plugin_id]
 field_type:
   label: Field type/item
   provider: core
@@ -103,6 +99,14 @@ aggregator_processor:
   plugin_manager_service_id: plugin.manager.aggregator.processor
   plugin_definition_decorator_class: \Drupal\plugin\PluginDefinition\ArrayPluginDefinitionDecorator
 
+# Block's plugin types.
+block:
+  label: Block
+  provider: block
+  plugin_manager_service_id: plugin.manager.block
+  plugin_definition_decorator_class: \Drupal\plugin\PluginDefinition\BlockPluginDefinitionDecorator
+  plugin_configuration_schema_id: block.settings.[plugin_id]
+
 # CKEditor's plugin types.
 ckeditor_plugin:
   label: CKEditor plugin
@@ -151,6 +155,7 @@ migrate_source:
   provider: migrate
   plugin_manager_service_id: plugin.manager.migrate.source
   plugin_definition_decorator_class: \Drupal\plugin\PluginDefinition\ArrayPluginDefinitionDecorator
+  plugin_configuration_schema_id: migrate.source.[plugin_id]
 migrate_process:
   label: Migration process
   provider: migrate
@@ -161,6 +166,7 @@ migrate_destination:
   provider: migrate
   plugin_manager_service_id: plugin.manager.migrate.destination
   plugin_definition_decorator_class: \Drupal\plugin\PluginDefinition\ArrayPluginDefinitionDecorator
+  plugin_configuration_schema_id: migrate.destination.[plugin_id]
 migrate_id_map:
   label: Migration ID map
   provider: migrate
@@ -213,11 +219,13 @@ views_area:
   provider: views
   plugin_manager_service_id: plugin.manager.views.area
   plugin_definition_decorator_class: \Drupal\plugin\PluginDefinition\ArrayPluginDefinitionDecorator
+  plugin_configuration_schema_id: views.area.[plugin_id]
 views_argument:
   label: Views argument
   provider: views
   plugin_manager_service_id: plugin.manager.views.argument
   plugin_definition_decorator_class: \Drupal\plugin\PluginDefinition\ArrayPluginDefinitionDecorator
+  plugin_configuration_schema_id: views.argument.[plugin_id]
 views_argument_default:
   label: Views argument default
   provider: views
@@ -253,11 +261,13 @@ views_field:
   provider: views
   plugin_manager_service_id: plugin.manager.views.field
   plugin_definition_decorator_class: \Drupal\plugin\PluginDefinition\ArrayPluginDefinitionDecorator
+  plugin_configuration_schema_id: views.field.[plugin_id]
 views_filter:
   label: Views filter
   provider: views
   plugin_manager_service_id: plugin.manager.views.filter
   plugin_definition_decorator_class: \Drupal\plugin\PluginDefinition\ArrayPluginDefinitionDecorator
+  plugin_configuration_schema_id: views.filter.[plugin_id]
 views_join:
   label: Views join
   provider: views
@@ -278,6 +288,7 @@ views_relationship:
   provider: views
   plugin_manager_service_id: plugin.manager.views.relationship
   plugin_definition_decorator_class: \Drupal\plugin\PluginDefinition\ArrayPluginDefinitionDecorator
+  plugin_configuration_schema_id: views.relationship.[plugin_id]
 views_row:
   label: Views row
   provider: views
@@ -288,6 +299,7 @@ views_sort:
   provider: views
   plugin_manager_service_id: plugin.manager.views.sort
   plugin_definition_decorator_class: \Drupal\plugin\PluginDefinition\ArrayPluginDefinitionDecorator
+  plugin_configuration_schema_id: views.sort.[plugin_id]
 views_style:
   label: Views style
   provider: views

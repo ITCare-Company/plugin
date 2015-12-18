@@ -12,22 +12,13 @@ use Drupal\Component\Plugin\PluginInspectionInterface;
 use Drupal\Core\Field\FieldItemBase;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\Core\TypedData\DataDefinition;
-use Drupal\Core\TypedData\DataDefinitionInterface;
 use Drupal\Core\TypedData\MapDataDefinition;
-use Drupal\Core\TypedData\TypedDataInterface;
+use Drupal\plugin\PluginType\ConfigurablePluginTypeInterface;
 
 /**
  * Provides a base for plugin collection field items.
  */
 abstract class PluginCollectionItemBase extends FieldItemBase implements PluginCollectionItemInterface {
-
-  /**
-   * {@inheritdoc}
-   */
-  public function __construct(DataDefinitionInterface $definition, $name = NULL, TypedDataInterface $parent = NULL) {
-    parent::__construct($definition, $name, $parent);
-    $this->get('plugin_type_id')->setValue($this->getPluginType()->getId());
-  }
 
   /**
    * {@inheritdoc}
@@ -129,9 +120,6 @@ abstract class PluginCollectionItemBase extends FieldItemBase implements PluginC
    * {@inheritdoc}
    */
   public static function propertyDefinitions(FieldStorageDefinitionInterface $field_definition) {
-    $properties['plugin_type_id'] = DataDefinition::create('string')
-      ->setLabel(t('Plugin type ID'))
-      ->setReadOnly(TRUE);
     $properties['plugin_id'] = DataDefinition::create('plugin_id')
       ->setLabel(t('Plugin ID'));
     $properties['plugin_configuration'] = MapDataDefinition::create('plugin_configuration')
@@ -191,10 +179,11 @@ abstract class PluginCollectionItemBase extends FieldItemBase implements PluginC
     // but we can only represent this item's value using the plugin instance's
     // ID and configuration. parent::getValue() skips computed properties, so we
     // must return them here.
+    $plugin_type = $this->getPluginType();
     return [
-      'plugin_type_id' => $this->get('plugin_type_id')->getValue(),
       'plugin_id' => $this->get('plugin_id')->getValue(),
       'plugin_configuration' => $this->get('plugin_configuration')->getValue(),
+      'plugin_configuration_schema_id' => $plugin_type instanceof ConfigurablePluginTypeInterface ? $plugin_type->getPluginConfigurationSchemaId($this->get('plugin_id')->getValue()) : 'plugin.plugin_configuration.*.*',
     ];
   }
 

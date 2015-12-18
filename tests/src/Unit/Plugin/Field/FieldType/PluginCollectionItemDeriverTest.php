@@ -8,6 +8,7 @@
 namespace Drupal\Tests\plugin\Unit\Plugin\Field\FieldType;
 
 use Drupal\Component\Plugin\PluginManagerInterface;
+use Drupal\Core\Config\TypedConfigManagerInterface;
 use Drupal\Core\DependencyInjection\ClassResolverInterface;
 use Drupal\plugin\Plugin\Field\FieldType\PluginCollectionItemDeriver;
 use Drupal\plugin\PluginType\PluginType;
@@ -71,6 +72,11 @@ class PluginCollectionItemDeriverTest extends UnitTestCase {
 
     $plugin_manager = $this->getMock(PluginManagerInterface::class);
 
+    $typed_config_manager = $this->getMock(TypedConfigManagerInterface::class);
+    $typed_config_manager->expects($this->atLeastOnce())
+      ->method('hasConfigSchema')
+      ->willReturn(TRUE);
+
     $provider = $this->randomMachineName();
 
     $plugin_type_id_a = $this->randomMachineName();
@@ -82,7 +88,7 @@ class PluginCollectionItemDeriverTest extends UnitTestCase {
       'description' => $plugin_type_description_a,
       'provider' => $this->randomMachineName(),
     ];
-    $plugin_type_a = new PluginType($plugin_type_definition_a, $string_translation, $class_resolver, $plugin_manager);
+    $plugin_type_a = new PluginType($plugin_type_definition_a, $string_translation, $class_resolver, $plugin_manager, $typed_config_manager);
     $plugin_type_id_b = $this->randomMachineName();
     $plugin_type_label_b = $this->randomMachineName();
     $plugin_type_description_b = '';
@@ -92,7 +98,7 @@ class PluginCollectionItemDeriverTest extends UnitTestCase {
       'description' => $plugin_type_description_b,
       'provider' => $this->randomMachineName(),
     ];
-    $plugin_type_b = new PluginType($plugin_type_definition_b, $string_translation, $class_resolver, $plugin_manager);
+    $plugin_type_b = new PluginType($plugin_type_definition_b, $string_translation, $class_resolver, $plugin_manager, $typed_config_manager);
 
     $plugin_types = [$plugin_type_a, $plugin_type_b];
 

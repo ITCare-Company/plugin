@@ -8,6 +8,7 @@
 namespace Drupal\Tests\plugin\Unit\Controller;
 
 use Drupal\Component\Plugin\PluginManagerInterface;
+use Drupal\Core\Config\TypedConfigManagerInterface;
 use Drupal\Core\DependencyInjection\ClassResolverInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\plugin\Controller\ListPluginTypes;
@@ -99,6 +100,11 @@ class ListPluginTypesTest extends UnitTestCase {
 
     $plugin_manager = $this->getMock(PluginManagerInterface::class);
 
+    $typed_config_manager = $this->getMock(TypedConfigManagerInterface::class);
+    $typed_config_manager->expects($this->atLeastOnce())
+      ->method('hasConfigSchema')
+      ->willReturn(TRUE);
+
     $plugin_type_id_a = $this->randomMachineName();
     $plugin_type_label_a = $this->randomMachineName();
     $plugin_type_description_a = $this->randomMachineName();
@@ -108,7 +114,7 @@ class ListPluginTypesTest extends UnitTestCase {
       'description' => $plugin_type_description_a,
       'provider' => $this->randomMachineName(),
     ];
-    $plugin_type_a = new PluginType($plugin_type_definition_a, $this->stringTranslation, $class_resolver, $plugin_manager);
+    $plugin_type_a = new PluginType($plugin_type_definition_a, $this->stringTranslation, $class_resolver, $plugin_manager, $typed_config_manager);
     $plugin_type_id_b = $this->randomMachineName();
     $plugin_type_label_b = $this->randomMachineName();
     $plugin_type_description_b = '';
@@ -118,7 +124,7 @@ class ListPluginTypesTest extends UnitTestCase {
       'description' => $plugin_type_description_b,
       'provider' => $this->randomMachineName(),
     ];
-    $plugin_type_b = new PluginType($plugin_type_definition_b, $this->stringTranslation, $class_resolver, $plugin_manager);
+    $plugin_type_b = new PluginType($plugin_type_definition_b, $this->stringTranslation, $class_resolver, $plugin_manager, $typed_config_manager);
 
     $plugin_types = [
       $plugin_type_id_a => $plugin_type_a,
