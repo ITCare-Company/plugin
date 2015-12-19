@@ -17,7 +17,7 @@ interface PluginDescriptionDefinitionInterface extends PluginDefinitionInterface
   /**
    * Sets the human-readable plugin description.
    *
-   * @param \Drupal\Core\StringTranslation\TranslatableString|string $description
+   * @param \Drupal\Core\StringTranslation\TranslatableMarkup|string $description
    *   The description.
    *
    * @return $this
@@ -27,7 +27,7 @@ interface PluginDescriptionDefinitionInterface extends PluginDefinitionInterface
   /**
    * Gets the human-readable plugin description.
    *
-   * @return \Drupal\Core\StringTranslation\TranslatableString|string|null
+   * @return \Drupal\Core\StringTranslation\TranslatableMarkup|string|null
    *   The description or NULL if there is none.
    */
   public function getDescription();

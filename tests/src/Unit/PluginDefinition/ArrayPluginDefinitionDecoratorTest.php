@@ -44,6 +44,7 @@ class ArrayPluginDefinitionDecoratorTest extends UnitTestCase {
     $this->arrayDefinition = [
       'id' => $this->randomMachineName(),
       'label' => $this->randomMachineName(),
+      'description' => $this->randomMachineName(),
       'class' => $this->getMockClass(DeriverInterface::class),
       'category' => $this->randomMachineName(),
       'provider' => $this->randomMachineName(),
@@ -143,6 +144,41 @@ class ArrayPluginDefinitionDecoratorTest extends UnitTestCase {
     $this->assertFalse(isset($this->sut['label']));
     $this->assertNull($this->sut->getLabel());
     $this->assertFalse(isset($this->sut->getArrayDefinition()['label']));
+  }
+
+  /**
+   * @covers ::setDescription
+   * @covers ::getDescription
+   * @covers ::offsetExists
+   * @covers ::offsetSet
+   * @covers ::offsetGet
+   * @covers ::offsetUnset
+   */
+  public function testGetDescription() {
+    // Test the injected value.
+    $this->assertSame($this->arrayDefinition['description'], $this->sut->getDescription());
+    $this->assertSame($this->arrayDefinition['description'], $this->sut->getArrayDefinition()['description']);
+    $this->assertSame($this->arrayDefinition['description'], $this->sut['description']);
+
+    // Test changing the value through the setter.
+    $value = $this->randomMachineName();
+    $this->assertSame($this->sut, $this->sut->setDescription($value));
+    $this->assertSame($value, $this->sut->getDescription());
+    $this->assertSame($value, $this->sut->getArrayDefinition()['description']);
+    $this->assertSame($value, $this->sut['description']);
+
+    // Test changing the value through array access.
+    $value = $this->randomMachineName();
+    $this->sut['description'] = $value;
+    $this->assertSame($value, $this->sut->getDescription());
+    $this->assertSame($value, $this->sut->getArrayDefinition()['description']);
+    $this->assertSame($value, $this->sut['description']);
+
+    // Test unsetting the value.
+    unset($this->sut['description']);
+    $this->assertFalse(isset($this->sut['description']));
+    $this->assertNull($this->sut->getDescription());
+    $this->assertFalse(isset($this->sut->getArrayDefinition()['description']));
   }
 
   /**

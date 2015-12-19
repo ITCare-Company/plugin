@@ -15,7 +15,7 @@ use Drupal\Component\Utility\NestedArray;
  *
  * @ingroup Plugin
  */
-class ArrayPluginDefinitionDecorator implements ArrayPluginDefinitionInterface, PluginContextDefinitionInterface, PluginDeriverDefinitionInterface, PluginLabelDefinitionInterface, PluginCategoryDefinitionInterface, PluginConfigDependenciesDefinitionInterface, PluginDefinitionDecoratorInterface, PluginHierarchyDefinitionInterface, PluginOperationsProviderDefinitionInterface {
+class ArrayPluginDefinitionDecorator implements ArrayPluginDefinitionInterface, PluginContextDefinitionInterface, PluginDeriverDefinitionInterface, PluginLabelDefinitionInterface, PluginDescriptionDefinitionInterface, PluginCategoryDefinitionInterface, PluginConfigDependenciesDefinitionInterface, PluginDefinitionDecoratorInterface, PluginHierarchyDefinitionInterface, PluginOperationsProviderDefinitionInterface {
 
   use MergeablePluginDefinitionTrait;
 
@@ -130,6 +130,22 @@ class ArrayPluginDefinitionDecorator implements ArrayPluginDefinitionInterface, 
    */
   public function getLabel() {
     return isset($this->arrayDefinition['label']) ? $this->arrayDefinition['label'] : NULL;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setDescription($description) {
+    $this->arrayDefinition['description'] = $description;
+
+    return $this;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getDescription() {
+    return isset($this->arrayDefinition['description']) ? $this->arrayDefinition['description'] : NULL;
   }
 
   /**
