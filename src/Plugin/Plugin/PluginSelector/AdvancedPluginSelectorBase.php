@@ -6,6 +6,7 @@
 
 namespace Drupal\plugin\Plugin\Plugin\PluginSelector;
 
+use Drupal\Component\Plugin\PluginInspectionInterface;
 use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Ajax\AjaxResponse;
@@ -57,8 +58,10 @@ abstract class AdvancedPluginSelectorBase extends PluginSelectorBase implements 
     $cacheability_metadata = CacheableMetadata::createFromRenderArray($form);
     foreach (array_keys($this->selectablePluginDiscovery->getDefinitions()) as $plugin_id) {
       $available_plugin = $this->selectablePluginFactory->createInstance($plugin_id);
-      $available_plugins[] = $available_plugin;
-      $cacheability_metadata = $cacheability_metadata->merge(CacheableMetadata::createFromObject($available_plugin));
+      if ($available_plugin instanceof PluginInspectionInterface) {
+        $available_plugins[] = $available_plugin;
+        $cacheability_metadata = $cacheability_metadata->merge(CacheableMetadata::createFromObject($available_plugin));
+      }
     }
     $cacheability_metadata->applyTo($form);
 
