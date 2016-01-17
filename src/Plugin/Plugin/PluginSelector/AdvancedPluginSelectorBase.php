@@ -301,7 +301,12 @@ abstract class AdvancedPluginSelectorBase extends PluginSelectorBase implements 
       '#markup' => 'This element must be overridden to provide the plugin ID.',
     );
     $root_element_parents = $root_element['#parents'];
-    $change_button_name = array_shift($root_element_parents) . ($root_element_parents ? '[' . implode('][', $root_element_parents) . ']' : NULL) . '[select][container][change]';
+    // Compute the button's name based on its position in the form, but we
+    // cannot use "][" to indicate nesting as we would usually do, because then
+    // \Drupal\Core\Form\FormBuilder::buttonWasClicked() cannot recognize the
+    // button when it is clicked.
+    $change_button_name_parts = array_merge($root_element_parents, ['select', 'container', 'change']);
+    $change_button_name = implode('__', $change_button_name_parts);
     $build['container']['change'] = array(
       '#ajax' => array(
         'callback' => array(get_class(), 'ajaxRebuildForm'),

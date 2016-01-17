@@ -665,7 +665,7 @@ class AdvancedPluginSelectorBaseTest extends PluginSelectorBaseTestBase {
           'plugin_id'
         )
       ),
-      '#name' => 'foo[bar][select][container][change]',
+      '#name' => 'foo__bar__select__container__change',
       '#submit' => [[AdvancedPluginSelectorBase::class, 'rebuildForm']],
       '#type' => 'submit',
       '#value' => 'Choose',

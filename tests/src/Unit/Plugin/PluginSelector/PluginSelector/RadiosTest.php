@@ -124,7 +124,7 @@ class RadiosTest extends PluginSelectorBaseTestBase {
         'event' => 'change',
         'progress' => 'none',
         'trigger_as' => array(
-          'name' => 'foo[bar][select][container][change]',
+          'name' => 'foo__bar__select__container__change',
         ),
       ),
       '#attached' => [
@@ -148,7 +148,7 @@ class RadiosTest extends PluginSelectorBaseTestBase {
         'class' => array('js-hide')
       ),
       '#limit_validation_errors' => array(array('foo', 'bar', 'select', 'plugin_id')),
-      '#name' => 'foo[bar][select][container][change]',
+      '#name' => 'foo__bar__select__container__change',
       '#submit' => [[AdvancedPluginSelectorBase::class, 'rebuildForm']],
       '#type' => 'submit',
       '#value' => 'Choose',

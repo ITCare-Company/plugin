@@ -41,26 +41,27 @@ class SelectListWebTest extends WebTestBase {
    */
   protected function doTestElement($tree) {
     $name_prefix = $tree ? 'tree[plugin][container]' : 'container';
+    $change_button_name = $tree ? 'tree__plugin__container__select__container__change' : 'container__select__container__change';
 
     // Test the presence of default elements without available plugins.
     $path = $this->buildFormPath(['none'], $tree);
     $this->drupalGet($path);
     $this->assertNoFieldByName($name_prefix . '[select][container][container][plugin_id]');
-    $this->assertNoFieldByName($name_prefix . '[select][container][change]', t('Choose'));
+    $this->assertNoFieldByName($change_button_name, t('Choose'));
     $this->assertText(t('There are no available options.'));
 
     // Test the presence of default elements with one available plugin.
     $path = $this->buildFormPath(['plugin_test_helper_configurable_plugin'], $tree);
     $this->drupalGet($path);
     $this->assertNoFieldByName($name_prefix . '[select][container][plugin_id]');
-    $this->assertNoFieldByName($name_prefix . '[select][container][change]', t('Choose'));
+    $this->assertNoFieldByName($change_button_name, t('Choose'));
     $this->assertNoText(t('There are no available options.'));
 
     // Test the presence of default elements with multiple available plugins.
     $path = $this->buildFormPath(['plugin_test_helper_plugin', 'plugin_test_helper_configurable_plugin'], $tree);
     $this->drupalGet($path);
     $this->assertFieldByName($name_prefix . '[select][container][plugin_id]');
-    $this->assertFieldByName($name_prefix . '[select][container][change]', t('Choose'));
+    $this->assertFieldByName($change_button_name, t('Choose'));
     $this->assertNoText(t('There are no available options.'));
 
     // Choose a plugin.
@@ -68,14 +69,14 @@ class SelectListWebTest extends WebTestBase {
       $name_prefix . '[select][container][plugin_id]' => 'plugin_test_helper_plugin',
     ), t('Choose'));
     $this->assertFieldByName($name_prefix . '[select][container][plugin_id]');
-    $this->assertFieldByName($name_prefix . '[select][container][change]', t('Choose'));
+    $this->assertFieldByName($change_button_name, t('Choose'));
 
     // Change the plugin.
     $this->drupalPostForm(NULL, array(
       $name_prefix . '[select][container][plugin_id]' => 'plugin_test_helper_configurable_plugin',
     ), t('Choose'));
     $this->assertFieldByName($name_prefix . '[select][container][plugin_id]');
-    $this->assertFieldByName($name_prefix . '[select][container][change]', t('Choose'));
+    $this->assertFieldByName($change_button_name, t('Choose'));
 
     // Submit the form.
     $foo = $this->randomString();
