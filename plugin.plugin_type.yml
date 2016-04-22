@@ -149,37 +149,6 @@ language_negotiation_method:
   plugin_manager_service_id: plugin.manager.language_negotiation_method
   plugin_definition_decorator_class: \Drupal\plugin\PluginDefinition\ArrayPluginDefinitionDecorator
 
-# Migrate's plugin types.
-migrate_source:
-  label: Migration source
-  provider: migrate
-  plugin_manager_service_id: plugin.manager.migrate.source
-  plugin_definition_decorator_class: \Drupal\plugin\PluginDefinition\ArrayPluginDefinitionDecorator
-  plugin_configuration_schema_id: migrate.source.[plugin_id]
-migrate_process:
-  label: Migration process
-  provider: migrate
-  plugin_manager_service_id: plugin.manager.migrate.process
-  plugin_definition_decorator_class: \Drupal\plugin\PluginDefinition\ArrayPluginDefinitionDecorator
-migrate_destination:
-  label: Migration destination
-  provider: migrate
-  plugin_manager_service_id: plugin.manager.migrate.destination
-  plugin_definition_decorator_class: \Drupal\plugin\PluginDefinition\ArrayPluginDefinitionDecorator
-  plugin_configuration_schema_id: migrate.destination.[plugin_id]
-migrate_id_map:
-  label: Migration ID map
-  provider: migrate
-  plugin_manager_service_id: plugin.manager.migrate.id_map
-  plugin_definition_decorator_class: \Drupal\plugin\PluginDefinition\ArrayPluginDefinitionDecorator
-
-# Migrate Drupal's plugin types.
-migrate_drupal_cckfield:
-  label: Migration CCK source
-  provider: migrate_drupal
-  plugin_manager_service_id: plugin.manager.migrate.cckfield
-  plugin_definition_decorator_class: \Drupal\plugin\PluginDefinition\ArrayPluginDefinitionDecorator
-
 # Quick Edit's plugin types.
 quickedit_editor:
   label: Quick Edit editor
