@@ -8,7 +8,6 @@
 namespace Drupal\plugin\Plugin\DataType;
 
 use Drupal\Component\Plugin\ConfigurablePluginInterface;
-use Drupal\Core\DependencyInjection\DependencySerializationTrait;
 use Drupal\Core\TypedData\DataDefinitionInterface;
 use Drupal\Core\TypedData\TypedData;
 use Drupal\plugin\Plugin\Field\FieldType\PluginCollectionItemInterface;
@@ -22,9 +21,6 @@ use Drupal\plugin\Plugin\Field\FieldType\PluginCollectionItemInterface;
  * )
  */
 class PluginConfiguration extends TypedData {
-
-  // @todo Stop using this once https://www.drupal.org/node/2615790 is fixed.
-  use DependencySerializationTrait;
 
   /**
    * The parent typed data object.
