@@ -50,7 +50,7 @@ class HookUpdateNTest extends UpdatePathTestBase {
   public function testPluginUpdate8001() {
     $this->runUpdates();
 
-    // Test the ingegrity of the plugin selector fields.
+    // Test the integrity of the plugin selector fields.
     /** @var string[] $fields Keys are config names, and values are matching plugin configuration schema IDs */
     $fields = [
       'field.field.user.user.field_plugin_selector' => 'plugin.plugin_configuration.plugin_selector.plugin_select_list',
