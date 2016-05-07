@@ -6,7 +6,6 @@
  */
 
 use Drupal\Core\Database\Database;
-use Symfony\Component\Yaml\Yaml;
 
 $connection = Database::getConnection();
 

@@ -11,7 +11,6 @@ use Drupal\Component\Plugin\PluginManagerInterface;
 use Drupal\Core\Config\TypedConfigManagerInterface;
 use Drupal\Core\DependencyInjection\ClassResolverInterface;
 use Drupal\plugin\PluginDefinition\ArrayPluginDefinitionDecorator;
-use Drupal\plugin\PluginDefinition\PluginDefinitionDecoratorInterface;
 use Drupal\plugin\PluginDefinition\PluginDefinitionInterface;
 use Drupal\plugin\PluginType\PluginType;
 use Drupal\Tests\UnitTestCase;

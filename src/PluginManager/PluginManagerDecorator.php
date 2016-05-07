@@ -9,7 +9,6 @@ namespace Drupal\plugin\PluginManager;
 use Drupal\Component\Plugin\Discovery\DiscoveryInterface;
 use Drupal\Component\Plugin\Exception\PluginNotFoundException;
 use Drupal\Component\Plugin\PluginManagerInterface;
-use Drupal\Core\DependencyInjection\DependencySerializationTrait;
 use Drupal\plugin\PluginDiscovery\PluginDiscoveryDecorator;
 
 /**

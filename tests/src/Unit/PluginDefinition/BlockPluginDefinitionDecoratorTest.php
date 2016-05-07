@@ -7,11 +7,7 @@
 
 namespace Drupal\Tests\plugin\Unit\PluginDefinition;
 
-use Drupal\Component\Plugin\Derivative\DeriverInterface;
-use Drupal\Core\Plugin\Context\ContextDefinitionInterface;
-use Drupal\plugin\PluginDefinition\ArrayPluginDefinitionDecorator;
 use Drupal\plugin\PluginDefinition\BlockPluginDefinitionDecorator;
-use Drupal\plugin\PluginDefinition\PluginDefinitionInterface;
 use Drupal\Tests\UnitTestCase;
 
 /**

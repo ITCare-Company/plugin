@@ -9,9 +9,7 @@ namespace Drupal\plugin\Plugin\DataType;
 
 use Drupal\Component\Plugin\PluginInspectionInterface;
 use Drupal\Core\DependencyInjection\DependencySerializationTrait;
-use Drupal\Core\TypedData\DataDefinitionInterface;
 use Drupal\Core\TypedData\TypedData;
-use Drupal\plugin\Plugin\Field\FieldType\PluginCollectionItemInterface;
 
 /**
  * Provides a plugin instance data type.

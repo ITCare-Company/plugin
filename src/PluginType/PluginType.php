@@ -13,7 +13,6 @@ use Drupal\Core\DependencyInjection\ClassResolverInterface;
 use Drupal\Core\DependencyInjection\DependencySerializationTrait;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\StringTranslation\TranslationInterface;
-use Drupal\plugin\PluginType\DefaultPluginTypeOperationsProvider;
 use Drupal\plugin\PluginDefinition\PluginDefinitionInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 

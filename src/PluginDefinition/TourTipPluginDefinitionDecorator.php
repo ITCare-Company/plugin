@@ -7,9 +7,6 @@
 
 namespace Drupal\plugin\PluginDefinition;
 
-use Drupal\Component\Plugin\Context\ContextDefinitionInterface;
-use Drupal\Component\Utility\NestedArray;
-
 /**
  * Provides a tour tip plugin definition decorator.
  *

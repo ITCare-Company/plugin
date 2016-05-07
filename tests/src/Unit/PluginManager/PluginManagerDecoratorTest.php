@@ -10,7 +10,6 @@ namespace Drupal\Tests\plugin\Unit\PluginDiscovery;
 use Drupal\Component\Plugin\Discovery\DiscoveryInterface;
 use Drupal\Component\Plugin\PluginInspectionInterface;
 use Drupal\Component\Plugin\PluginManagerInterface;
-use Drupal\plugin\PluginDiscovery\PluginDiscoveryDecorator;
 use Drupal\plugin\PluginManager\PluginManagerDecorator;
 use Drupal\Tests\UnitTestCase;
 
