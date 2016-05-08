@@ -39,9 +39,9 @@ function plugin_field_widget_info_alter(array &$field_widget_definitions) {
  */
 function _plugin_collection_field_type_ids() {
   $supported_field_type_ids = [];
-  /** @var \Drupal\Component\Plugin\PluginManagerInterface $field_formatter_manager */
-  $field_formatter_manager = \Drupal::service('plugin.manager.field.field_type');
-  foreach ($field_formatter_manager->getDefinitions() as $plugin_id => $plugin_definition) {
+  /** @var \Drupal\Component\Plugin\PluginManagerInterface $field_type_manager */
+  $field_type_manager = \Drupal::service('plugin.manager.field.field_type');
+  foreach ($field_type_manager->getDefinitions() as $plugin_id => $plugin_definition) {
     if (is_subclass_of($plugin_definition['class'], PluginCollectionItemInterface::class)) {
       $supported_field_type_ids[] = $plugin_id;
     }
