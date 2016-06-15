@@ -186,9 +186,12 @@ interface PluginSelectorInterface extends PluginInspectionInterface, Configurabl
    * Builds the selector form.
    *
    * @param mixed[] $form
+   *   Any suggested form elements to build upon. May be ignored.
    * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   The form state for $form and the return value. This often is not the
+   *   complete (global) form state.
    *
-   * @return array
+   * @return mixed[]
    *   The form structure.
    *
    * @throws \RuntimeException
@@ -201,7 +204,10 @@ interface PluginSelectorInterface extends PluginInspectionInterface, Configurabl
    * Validates the selector form.
    *
    * @param mixed[] $form
+   *   The selector form as built by static::buildSelectorForm().
    * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   The form state for $form. This often is not the complete (global) form
+   *   state.
    */
   public function validateSelectorForm(array &$form, FormStateInterface $form_state);
 
@@ -209,7 +215,10 @@ interface PluginSelectorInterface extends PluginInspectionInterface, Configurabl
    * Submits the selector form.
    *
    * @param mixed[] $form
+   *   The selector form as built by static::buildSelectorForm().
    * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   The form state for $form. This often is not the complete (global) form
+   *   state.
    */
   public function submitSelectorForm(array &$form, FormStateInterface $form_state);
 
