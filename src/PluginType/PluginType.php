@@ -7,7 +7,6 @@
 
 namespace Drupal\plugin\PluginType;
 
-use Drupal\Component\Plugin\PluginManagerInterface;
 use Drupal\Core\Config\TypedConfigManagerInterface;
 use Drupal\Core\DependencyInjection\ClassResolverInterface;
 use Drupal\Core\DependencyInjection\DependencySerializationTrait;
@@ -34,6 +33,15 @@ class PluginType implements ConfigurablePluginTypeInterface {
    * @see self::getPluginConfigurationSchemaId()
    */
   protected $configurationSchemaId = 'plugin.plugin_configuration.[plugin_type_id].[plugin_id]';
+
+  /**
+   * The service container.
+   *
+   * @var \Symfony\Component\DependencyInjection\ContainerInterface
+   *
+   * @todo Make this class a real value object in the next major version.
+   */
+  protected $container;
 
   /**
    * The ID.
@@ -92,29 +100,31 @@ class PluginType implements ConfigurablePluginTypeInterface {
   protected $provider;
 
   /**
-   * The plugin manager.
+   * The plugin manager service ID.
    *
-   * @var \Drupal\Component\Plugin\PluginManagerInterface
+   * @var string
    */
-  protected $pluginManager;
+  protected $pluginManagerServiceId;
 
   /**
    * Constructs a new instance.
    *
    * @param mixed[] $definition
    *   The plugin type definition.
+   * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
+   *   The service container.
    * @param \Drupal\Core\StringTranslation\TranslationInterface $string_translation
    *   The string translator.
    * @param \Drupal\Core\DependencyInjection\ClassResolverInterface $class_resolver
    *   The class resolver.
-   * @param \Drupal\Component\Plugin\PluginManagerInterface $plugin_manager
-   *   The plugin type's plugin manager.
    * @param \Drupal\Core\Config\TypedConfigManagerInterface $typed_config_manager
    *   The typed configuration manager.
    *
    * @param mixed[] $definition
+   *
+   * @internal
    */
-  public function __construct(array $definition, TranslationInterface $string_translation, ClassResolverInterface $class_resolver, PluginManagerInterface $plugin_manager, TypedConfigManagerInterface $typed_config_manager) {
+  public function __construct(array $definition, ContainerInterface $container, TranslationInterface $string_translation, ClassResolverInterface $class_resolver, TypedConfigManagerInterface $typed_config_manager) {
     if (!is_string($definition['id']) || !strlen($definition['id'])) {
       throw new \InvalidArgumentException(sprintf('The plugin type definition ID must be a non-empty string, but %s was given.', gettype($definition['id'])));
     }
@@ -147,15 +157,16 @@ class PluginType implements ConfigurablePluginTypeInterface {
     }
     $operations_provider_class = array_key_exists('operations_provider_class', $definition) ? $definition['operations_provider_class'] : DefaultPluginTypeOperationsProvider::class;
     $this->operationsProvider = $class_resolver->getInstanceFromDefinition($operations_provider_class);
-    $this->pluginManager = $plugin_manager;
+    $this->pluginManagerServiceId = $definition['plugin_manager_service_id'];
     $this->provider = $definition['provider'];
+    $this->container = $container;
   }
 
   /**
    * {@inheritdoc}
    */
   public static function createFromDefinition(ContainerInterface $container, array $definition) {
-    return new static($definition, $container->get('string_translation'), $container->get('class_resolver'), $container->get($definition['plugin_manager_service_id']), $container->get('config.typed'));
+    return new static($definition, $container, $container->get('string_translation'), $container->get('class_resolver'), $container->get('config.typed'));
   }
 
   /**
@@ -190,7 +201,7 @@ class PluginType implements ConfigurablePluginTypeInterface {
    * {@inheritdoc}
    */
   public function getPluginManager() {
-    return $this->pluginManager;
+    return $this->container->get($this->pluginManagerServiceId);
   }
 
   /**

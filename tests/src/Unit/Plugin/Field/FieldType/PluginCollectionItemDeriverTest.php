@@ -24,6 +24,13 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class PluginCollectionItemDeriverTest extends UnitTestCase {
 
   /**
+   * The service container.
+   *
+   * @var \Symfony\Component\DependencyInjection\ContainerInterface|\Prophecy\Prophecy\ObjectProphecy
+   */
+  protected $container;
+
+  /**
    * The plugin type manager.
    *
    * @var \Drupal\plugin\PluginType\PluginTypeManagerInterface|\PHPUnit_Framework_MockObject_MockObject
@@ -39,6 +46,8 @@ class PluginCollectionItemDeriverTest extends UnitTestCase {
 
   public function setUp() {
     parent::setUp();
+
+    $this->container = $this->prophesize(ContainerInterface::class);
 
     $this->pluginTypeManager = $this->getMock(PluginTypeManagerInterface::class);
 
@@ -70,8 +79,6 @@ class PluginCollectionItemDeriverTest extends UnitTestCase {
 
     $class_resolver = $this->getMock(ClassResolverInterface::class);
 
-    $plugin_manager = $this->getMock(PluginManagerInterface::class);
-
     $typed_config_manager = $this->getMock(TypedConfigManagerInterface::class);
     $typed_config_manager->expects($this->atLeastOnce())
       ->method('hasConfigSchema')
@@ -87,8 +94,9 @@ class PluginCollectionItemDeriverTest extends UnitTestCase {
       'label' => $plugin_type_label_a,
       'description' => $plugin_type_description_a,
       'provider' => $this->randomMachineName(),
+      'plugin_manager_service_id' => 'foo.bar',
     ];
-    $plugin_type_a = new PluginType($plugin_type_definition_a, $string_translation, $class_resolver, $plugin_manager, $typed_config_manager);
+    $plugin_type_a = new PluginType($plugin_type_definition_a, $this->container->reveal(), $string_translation, $class_resolver, $typed_config_manager);
     $plugin_type_id_b = $this->randomMachineName();
     $plugin_type_label_b = $this->randomMachineName();
     $plugin_type_description_b = '';
@@ -97,8 +105,9 @@ class PluginCollectionItemDeriverTest extends UnitTestCase {
       'label' => $plugin_type_label_b,
       'description' => $plugin_type_description_b,
       'provider' => $this->randomMachineName(),
+      'plugin_manager_service_id' => 'foo.bar',
     ];
-    $plugin_type_b = new PluginType($plugin_type_definition_b, $string_translation, $class_resolver, $plugin_manager, $typed_config_manager);
+    $plugin_type_b = new PluginType($plugin_type_definition_b, $this->container->reveal(), $string_translation, $class_resolver, $typed_config_manager);
 
     $plugin_types = [$plugin_type_a, $plugin_type_b];
 

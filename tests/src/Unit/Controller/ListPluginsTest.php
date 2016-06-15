@@ -31,6 +31,13 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class ListPluginsTest extends UnitTestCase {
 
   /**
+   * The service container.
+   *
+   * @var \Symfony\Component\DependencyInjection\ContainerInterface|\Prophecy\Prophecy\ObjectProphecy
+   */
+  protected $container;
+
+  /**
    * The class under test.
    *
    * @var \Drupal\plugin\Controller\ListPlugins
@@ -76,6 +83,10 @@ class ListPluginsTest extends UnitTestCase {
    * {@inheritdoc}
    */
   protected function setUp() {
+    parent::setUp();
+
+    $this->container = $this->prophesize(ContainerInterface::class);
+
     $this->classResolver = $this->getMock(ClassResolverInterface::class);
 
     $this->moduleHandler = $this->getMock(ModuleHandlerInterface::class);
@@ -113,8 +124,6 @@ class ListPluginsTest extends UnitTestCase {
   public function testTitle() {
     $class_resolver = $this->getMock(ClassResolverInterface::class);
 
-    $plugin_manager = $this->getMock(PluginManagerInterface::class);
-
     $typed_config_manager = $this->getMock(TypedConfigManagerInterface::class);
     $typed_config_manager->expects($this->atLeastOnce())
       ->method('hasConfigSchema')
@@ -127,8 +136,9 @@ class ListPluginsTest extends UnitTestCase {
       'id' => $plugin_type_id,
       'label' => $plugin_type_label,
       'provider' => $this->randomMachineName(),
+      'plugin_manager_service_id' => 'foo.bar',
     ];
-    $plugin_type = new PluginType($plugin_type_definition, $this->stringTranslation, $class_resolver, $plugin_manager, $typed_config_manager);
+    $plugin_type = new PluginType($plugin_type_definition, $this->container->reveal(), $this->stringTranslation, $class_resolver, $typed_config_manager);
 
     $this->pluginTypeManager->expects($this->atLeastOnce())
       ->method('getPluginType')
