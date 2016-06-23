@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\plugin\DefaultPluginResolverInterface.
- */
-
 namespace Drupal\plugin\DefaultPluginResolver;
 
 use Drupal\plugin\PluginType\PluginTypeInterface;

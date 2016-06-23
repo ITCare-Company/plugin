@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\Component\Plugin\PluginDeriverDefinitionTrait.
- */
-
 namespace Drupal\plugin\PluginDefinition;
 
 /**

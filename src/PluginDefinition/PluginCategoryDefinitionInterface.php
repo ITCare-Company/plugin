@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\Core\Plugin\PluginCategoryDefinitionInterface.
- */
-
 namespace Drupal\plugin\PluginDefinition;
 
 /**

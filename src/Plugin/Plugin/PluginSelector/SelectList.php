@@ -1,9 +1,5 @@
 <?php
 
-/**
- * @file Contains \Drupal\plugin\Plugin\Plugin\PluginSelector\SelectList.
- */
-
 namespace Drupal\plugin\Plugin\Plugin\PluginSelector;
 
 use Drupal\Core\Form\FormStateInterface;

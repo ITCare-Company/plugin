@@ -1,9 +1,5 @@
 <?php
 
-/**
- * Contains \Drupal\plugin\Plugin\OperationsProviderPluginManagerTrait.
- */
-
 namespace Drupal\plugin\Plugin;
 
 /**

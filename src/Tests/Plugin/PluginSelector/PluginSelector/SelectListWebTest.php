@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\plugin\Tests\Plugin\Plugin\Plugin\SelectListWebTest.
- */
-
 namespace Drupal\plugin\Tests\Plugin\PluginSelector\PluginSelector;
 
 use Drupal\simpletest\WebTestBase;

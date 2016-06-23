@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\plugin\EventBasedDefaultPluginResolver.
- */
-
 namespace Drupal\plugin\DefaultPluginResolver;
 
 use Drupal\plugin\Event\PluginEvents;

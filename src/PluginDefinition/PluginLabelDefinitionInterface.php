@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\Core\Plugin\PluginLabelDefinitionInterface.
- */
-
 namespace Drupal\plugin\PluginDefinition;
 
 /**

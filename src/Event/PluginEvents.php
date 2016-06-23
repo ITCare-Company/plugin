@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\plugin\Event\PluginEvents.
- */
-
 namespace Drupal\plugin\Event;
 
 /**

@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\Tests\plugin\Unit\PluginDefinition\SearchPluginDefinitionDecoratorTest.
- */
-
 namespace Drupal\Tests\plugin\Unit\PluginDefinition;
 
 use Drupal\plugin\PluginDefinition\SearchPluginDefinitionDecorator;

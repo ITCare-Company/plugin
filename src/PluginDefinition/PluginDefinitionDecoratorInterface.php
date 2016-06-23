@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\plugin\PluginDefinition\PluginDefinitionDecoratorInterface.
- */
-
 namespace Drupal\plugin\PluginDefinition;
 
 /**

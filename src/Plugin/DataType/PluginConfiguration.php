@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\plugin\Plugin\DataType\PluginConfiguration.
- */
-
 namespace Drupal\plugin\Plugin\DataType;
 
 use Drupal\Component\Plugin\ConfigurablePluginInterface;

@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\plugin\PluginDefinition\TourTipPluginDefinitionDecorator.
- */
-
 namespace Drupal\plugin\PluginDefinition;
 
 /**

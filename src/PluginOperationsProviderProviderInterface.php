@@ -1,9 +1,5 @@
 <?php
 
-/**
- * Contains \Drupal\plugin\PluginOperationsProviderProviderInterface.
- */
-
 namespace Drupal\plugin;
 
 /**

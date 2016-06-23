@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\Core\Plugin\PluginHierarchyDefinitionInterface.
- */
-
 namespace Drupal\plugin\PluginDefinition;
 
 /**

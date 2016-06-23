@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\plugin\Plugin\Plugin\PluginSelector\PluginSelectorManagerInterface.
- */
-
 namespace Drupal\plugin\Plugin\Plugin\PluginSelector;
 
 use Drupal\Component\Plugin\PluginManagerInterface;

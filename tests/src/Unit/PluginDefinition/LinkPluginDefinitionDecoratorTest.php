@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\Tests\plugin\Unit\PluginDefinition\LinkPluginDefinitionDecoratorTest.
- */
-
 namespace Drupal\Tests\plugin\Unit\PluginDefinition;
 
 use Drupal\plugin\PluginDefinition\LinkPluginDefinitionDecorator;

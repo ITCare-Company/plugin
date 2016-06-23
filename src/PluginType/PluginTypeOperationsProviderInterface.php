@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\plugin\PluginType\PluginTypeOperationsProviderInterface.
- */
-
 namespace Drupal\plugin\PluginType;
 
 /**

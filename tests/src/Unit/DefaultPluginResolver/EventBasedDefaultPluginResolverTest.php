@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\Tests\plugin\Unit\DefaultPluginResolver\EventBasedDefaultPluginResolverTest.
- */
-
 namespace Drupal\Tests\plugin\Unit\DefaultPluginResolver;
 
 use Drupal\Component\Plugin\PluginInspectionInterface;

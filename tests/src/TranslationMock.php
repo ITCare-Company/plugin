@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\Tests\plugin\Translation.
- */
-
 namespace Drupal\Tests\plugin;
 
 use Drupal\Component\Utility\SafeMarkup;

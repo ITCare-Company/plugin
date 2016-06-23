@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\Tests\plugin\Unit\PluginDefinition\ArrayPluginDefinitionDecoratorTest.
- */
-
 namespace Drupal\Tests\plugin\Unit\PluginDefinition;
 
 use Drupal\Component\Plugin\Derivative\DeriverInterface;

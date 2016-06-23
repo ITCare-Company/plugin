@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\Tests\plugin\Unit\PluginType\DefaultPluginTypeOperationsProviderTest.
- */
-
 namespace Drupal\Tests\plugin\Unit\PluginType;
 
 use Drupal\plugin\PluginType\DefaultPluginTypeOperationsProvider;

@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\Tests\plugin\Unit\PluginDiscovery\TypedDefinitionEnsuringPluginDiscoveryDecoratorTest.
- */
-
 namespace Drupal\Tests\plugin\Unit\PluginDiscovery;
 
 use Drupal\Component\Plugin\PluginManagerInterface;

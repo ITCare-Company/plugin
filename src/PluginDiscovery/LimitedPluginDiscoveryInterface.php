@@ -1,9 +1,5 @@
 <?php
 
-/**
- * Contains \Drupal\plugin\PluginDiscovery\LimitedPluginDiscoveryInterface.
- */
-
 namespace Drupal\plugin\PluginDiscovery;
 
 /**

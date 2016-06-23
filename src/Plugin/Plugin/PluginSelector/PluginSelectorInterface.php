@@ -1,9 +1,5 @@
 <?php
 
-/**
- * Contains \Drupal\plugin\Plugin\Plugin\PluginSelector\PluginSelectorInterface.
- */
-
 namespace Drupal\plugin\Plugin\Plugin\PluginSelector;
 
 use Drupal\Component\Plugin\ConfigurablePluginInterface;

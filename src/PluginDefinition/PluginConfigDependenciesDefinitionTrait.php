@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\Core\Plugin\PluginConfigDependenciesDefinitionTrait.
- */
-
 namespace Drupal\plugin\PluginDefinition;
 
 /**

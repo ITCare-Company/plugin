@@ -1,9 +1,5 @@
 <?php
 
-/**
- * Contains \Drupal\plugin\PluginDiscovery\TypedDefinitionEnsuringPluginDiscoveryDecorator.
- */
-
 namespace Drupal\plugin\PluginDiscovery;
 
 use Drupal\Component\Plugin\Discovery\DiscoveryInterface;

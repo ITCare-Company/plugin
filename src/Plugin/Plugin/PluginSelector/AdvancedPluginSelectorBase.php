@@ -1,9 +1,5 @@
 <?php
 
-/**
- * @file Contains \Drupal\plugin\Plugin\Plugin\PluginSelector\AdvancedPluginSelectorBase.
- */
-
 namespace Drupal\plugin\Plugin\Plugin\PluginSelector;
 
 use Drupal\Component\Plugin\PluginInspectionInterface;

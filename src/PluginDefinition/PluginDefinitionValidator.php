@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\Component\Plugin\PluginDefinitionValidator.
- */
-
 namespace Drupal\plugin\PluginDefinition;
 
 use Drupal\Component\Plugin\Context\ContextDefinitionInterface;

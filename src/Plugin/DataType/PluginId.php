@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\plugin\Plugin\DataType\PluginId.
- */
-
 namespace Drupal\plugin\Plugin\DataType;
 
 use Drupal\Core\TypedData\DataDefinitionInterface;

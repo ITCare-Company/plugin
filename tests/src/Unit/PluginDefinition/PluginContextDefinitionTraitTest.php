@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\Tests\plugin\Unit\PluginDefinition\PluginContextDefinitionTraitTest.
- */
-
 namespace Drupal\Tests\plugin\Unit\PluginDefinition;
 
 use Drupal\Core\Plugin\Context\ContextDefinitionInterface;

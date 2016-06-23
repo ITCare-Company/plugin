@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\plugin\Plugin\Field\FieldWidget\PluginSelectorDeriver.
- */
-
 namespace Drupal\plugin\Plugin\Field\FieldWidget;
 
 use Drupal\Component\Plugin\Derivative\DeriverBase;

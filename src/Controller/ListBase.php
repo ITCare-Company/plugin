@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\plugin\Controller\ListBase.
- */
-
 namespace Drupal\plugin\Controller;
 
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;

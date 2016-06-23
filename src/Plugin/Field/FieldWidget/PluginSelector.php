@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\plugin\Plugin\Field\FieldWidget\PluginSelector.
- */
-
 namespace Drupal\plugin\Plugin\Field\FieldWidget;
 
 use Drupal\Component\Utility\NestedArray;

@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\plugin_test_helper\Plugin\PluginTestHelper\MockConfigurablePlugin\Configurable.
- */
-
 namespace Drupal\plugin_test_helper\Plugin\PluginTestHelper;
 
 use Drupal\Component\Plugin\ConfigurablePluginInterface;

@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\plugin\PluginDefinition\ArchiverPluginDefinitionDecorator.
- */
-
 namespace Drupal\plugin\PluginDefinition;
 
 /**

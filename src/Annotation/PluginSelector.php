@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\plugin\Annotation\Plugin.
- */
-
 namespace Drupal\plugin\Annotation;
 
 use Drupal\Component\Annotation\Plugin;

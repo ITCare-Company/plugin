@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\plugin\Tests\Plugin\Field\FieldWidget\PluginSelectorTest.
- */
-
 namespace Drupal\plugin\Tests\Plugin\Field\FieldWidget;
 
 use Drupal\field\Entity\FieldConfig;

@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\plugin\Plugin\DataType\PluginInstance.
- */
-
 namespace Drupal\plugin\Plugin\DataType;
 
 use Drupal\Component\Plugin\PluginInspectionInterface;

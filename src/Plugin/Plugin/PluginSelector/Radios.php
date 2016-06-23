@@ -1,9 +1,5 @@
 <?php
 
-/**
- * @file Contains \Drupal\plugin\Plugin\Plugin\PluginSelector\Radios.
- */
-
 namespace Drupal\plugin\Plugin\Plugin\PluginSelector;
 
 use Drupal\Core\Form\FormStateInterface;

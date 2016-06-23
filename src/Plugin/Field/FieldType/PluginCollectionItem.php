@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\plugin\Plugin\Field\FieldType\PluginCollectionItemBase.
- */
-
 namespace Drupal\plugin\Plugin\Field\FieldType;
 
 /**

@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\plugin\Controller\ListPluginTypes.
- */
-
 namespace Drupal\plugin\Controller;
 
 use Drupal\plugin\PluginType\PluginTypeInterface;

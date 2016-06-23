@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\plugin\PluginHierarchyTrait.
- */
-
 namespace Drupal\plugin;
 
 use Drupal\plugin\PluginDefinition\PluginDefinitionInterface;

@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\plugin\PluginDefinition\FilterPluginDefinitionDecorator.
- */
-
 namespace Drupal\plugin\PluginDefinition;
 
 /**

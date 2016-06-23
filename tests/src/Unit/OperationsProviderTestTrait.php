@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\Tests\plugin\OperationsProviderTestTrait.
- */
-
 namespace Drupal\Tests\plugin\Unit;
 use Drupal\Core\Url;
 

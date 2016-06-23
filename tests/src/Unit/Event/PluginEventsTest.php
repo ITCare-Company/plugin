@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\plugin\Event\PluginEventsTest.
- */
-
 namespace Drupal\Tests\plugin\Unit\Event;
 
 use Drupal\plugin\Event\PluginEvents;

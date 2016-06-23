@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\plugin\Plugin\Field\FieldType\PluginCollectionItemDeriver.
- */
-
 namespace Drupal\plugin\Plugin\Field\FieldType;
 
 use Drupal\Component\Plugin\Derivative\DeriverBase;

@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\Tests\plugin\Unit\Plugin\PluginOperationsProviderPluginManagerTraitTest.
- */
-
 namespace Drupal\Tests\plugin\Unit\Plugin;
 
 use Drupal\Core\DependencyInjection\ClassResolverInterface;

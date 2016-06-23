@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\Component\Plugin\MergeablePluginDefinitionTrait.
- */
-
 namespace Drupal\plugin\PluginDefinition;
 
 /**

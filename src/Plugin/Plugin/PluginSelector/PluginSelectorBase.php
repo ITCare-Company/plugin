@@ -1,9 +1,5 @@
 <?php
 
-/**
- * Contains \Drupal\plugin\Plugin\Plugin\PluginSelector\PluginSelectorBase.
- */
-
 namespace Drupal\plugin\Plugin\Plugin\PluginSelector;
 
 use Drupal\Component\Plugin\Discovery\DiscoveryInterface;

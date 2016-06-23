@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\plugin\PluginType\PluginTypeInterface.
- */
-
 namespace Drupal\plugin\PluginType;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;

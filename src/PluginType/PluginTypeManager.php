@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\plugin\PluginType\PluginTypeManager.
- */
-
 namespace Drupal\plugin\PluginType;
 
 use Drupal\Component\Discovery\YamlDiscovery;

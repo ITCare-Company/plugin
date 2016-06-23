@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\Tests\plugin\Kernel\PluginType\PluginTypeManagerTest.
- */
-
 namespace Drupal\Tests\plugin\Kernel\PluginType;
 
 use Drupal\KernelTests\KernelTestBase;

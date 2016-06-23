@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\plugin\Tests\Plugin\Field\FieldType\PluginCollectionItemBaseTest.
- */
-
 namespace Drupal\plugin\Tests\Plugin\Field\FieldType;
 
 use Drupal\Core\Field\BaseFieldDefinition;

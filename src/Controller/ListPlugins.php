@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\plugin\Controller\ListPlugins.
- */
-
 namespace Drupal\plugin\Controller;
 
 use Drupal\Core\DependencyInjection\ClassResolverInterface;

@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\Tests\plugin\Unit\Plugin\Field\FieldType.
- */
-
 namespace Drupal\Tests\plugin\Unit\Plugin\Field\FieldType;
 
 use Drupal\Component\Plugin\PluginManagerInterface;

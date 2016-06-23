@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\plugin\Event\ResolveDefaultPlugin.
- */
-
 namespace Drupal\plugin\Event;
 
 use Drupal\Component\Plugin\PluginInspectionInterface;

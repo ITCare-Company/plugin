@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\plugin\PluginDefinition\ArrayPluginDefinitionDecorator.
- */
-
 namespace Drupal\plugin\PluginDefinition;
 
 use Drupal\Component\Plugin\Context\ContextDefinitionInterface;

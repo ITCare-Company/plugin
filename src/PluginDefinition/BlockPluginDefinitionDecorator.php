@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\plugin\PluginDefinition\BlockPluginDefinitionDecorator.
- */
-
 namespace Drupal\plugin\PluginDefinition;
 
 /**

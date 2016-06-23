@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\Tests\plugin\Unit\PluginType\PluginTypeTest.
- */
-
 namespace Drupal\Tests\plugin\Unit\PluginType;
 
 use Drupal\Component\Plugin\PluginManagerInterface;

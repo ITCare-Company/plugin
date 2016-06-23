@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\plugin\PluginDiscovery\TypedDiscoveryInterface.
- */
-
 namespace Drupal\plugin\PluginDiscovery;
 
 use Drupal\Component\Plugin\Discovery\DiscoveryInterface;

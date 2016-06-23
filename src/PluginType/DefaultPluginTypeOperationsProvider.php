@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\plugin\PluginType\DefaultPluginTypeOperationsProvider.
- */
-
 namespace Drupal\plugin\PluginType;
 
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;

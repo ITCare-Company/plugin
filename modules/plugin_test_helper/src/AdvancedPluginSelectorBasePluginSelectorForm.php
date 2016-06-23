@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\plugin_test_helper\AdvancedPluginSelectorBasePluginSelectorForm.
- */
-
 namespace Drupal\plugin_test_helper;
 
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;

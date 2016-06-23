@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\plugin\Tests\HookUpdateTest.
- */
-
 namespace Drupal\plugin\Tests;
 
 use Drupal\system\Tests\Update\UpdatePathTestBase;

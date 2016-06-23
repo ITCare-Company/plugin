@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains
- * \Drupal\Tests\plugin\Unit\Plugin\Field\FieldFormatter\PluginLabelTest.
- */
-
 namespace Drupal\Tests\plugin\Unit\Plugin\Field\FieldFormatter;
 
 use Drupal\Component\Plugin\PluginInspectionInterface;

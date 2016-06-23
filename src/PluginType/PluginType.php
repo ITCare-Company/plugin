@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\plugin\PluginType\PluginType.
- */
-
 namespace Drupal\plugin\PluginType;
 
 use Drupal\Core\Config\TypedConfigManagerInterface;

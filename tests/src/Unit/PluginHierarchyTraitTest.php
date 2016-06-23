@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains
- * \Drupal\Tests\plugin\Unit\Plugin\Plugin\Plugin\SelectListUnitTest.
- */
-
 namespace Drupal\Tests\plugin\Unit\Plugin\PluginSelector\PluginSelector;
 
 use Drupal\plugin\PluginDefinition\PluginHierarchyDefinitionInterface;

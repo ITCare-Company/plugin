@@ -1,9 +1,5 @@
 <?php
 
-/**
- * Contains \Drupal\plugin\Plugin\FilteredPluginManager.
- */
-
 namespace Drupal\plugin\PluginManager;
 
 use Drupal\Component\Plugin\Discovery\DiscoveryInterface;

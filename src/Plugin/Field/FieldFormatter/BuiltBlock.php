@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\plugin\Plugin\field\formatter\BuiltBlock.
- */
-
 namespace Drupal\plugin\Plugin\Field\FieldFormatter;
 
 use Drupal\Core\Field\FieldItemListInterface;

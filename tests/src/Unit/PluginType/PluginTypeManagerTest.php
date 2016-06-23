@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\Tests\plugin\Unit\PluginType\PluginTypeManagerTest.
- */
-
 namespace Drupal\Tests\plugin\Unit\PluginType;
 
 use Drupal\Component\FileCache\FileCacheFactory;

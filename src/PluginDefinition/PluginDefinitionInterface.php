@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\plugin\PluginDefinition\PluginDefinitionInterface.
- */
-
 namespace Drupal\plugin\PluginDefinition;
 
 use Drupal\Component\Plugin\Definition\PluginDefinitionInterface as ComponentPluginDefinitionInterface;

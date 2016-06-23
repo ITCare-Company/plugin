@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\plugin_test_helper\Plugin\PluginTestHelper\MockManager.
- */
-
 namespace Drupal\plugin_test_helper\Plugin\PluginTestHelper;
 
 use Drupal\Component\Plugin\Factory\DefaultFactory;
