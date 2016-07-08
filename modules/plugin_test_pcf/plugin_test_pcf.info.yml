@@ -1,0 +1,9 @@
+name: Plugin Test (Plugin configurable field)
+core: 8.x
+type: module
+dependencies:
+  - node
+  - plugin
+  - plugin_test_helper
+  - views
+hidden: true

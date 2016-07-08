@@ -5,6 +5,7 @@
  * Contains hook implementations.
  */
 
+use Drupal\field\FieldStorageConfigInterface;
 use Drupal\plugin\Plugin\Field\FieldType\PluginCollectionItemInterface;
 
 function plugin_field_info_alter(array &$field_type_definitions) {
@@ -30,6 +31,24 @@ function plugin_field_widget_info_alter(array &$field_widget_definitions) {
       $field_widget_definitions[$plugin_id]['field_types'] = $field_type_ids;
     }
   }
+}
+
+/**
+ * Implements hook_views_data_alter().
+ */
+function plugin_views_data_alter(array &$data) {
+  /** @var \Drupal\plugin\ViewsData $views_data */
+  $views_data = \Drupal::service('plugin.views_data');
+  $views_data->alterViewsData($data);
+}
+
+/**
+ * Implements hook_field_views_data_alter().
+ */
+function plugin_field_views_data_alter(array &$data, FieldStorageConfigInterface $field_storage) {
+  /** @var \Drupal\plugin\ViewsData $views_data */
+  $views_data = \Drupal::service('plugin.views_data');
+  $views_data->alterFieldViewsData($data, $field_storage);
 }
 
 /**

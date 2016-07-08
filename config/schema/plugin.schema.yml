@@ -41,3 +41,8 @@ plugin.plugin_configuration.*:
       label: Plugin configuration
       type: string
   type: config_object
+
+# The "plugin_id" Views filter plugin configuration schema.
+views.filter.plugin_id:
+  type: views.filter.in_operator
+  label: 'Plugin ID'
