@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\plugin\Unit\Plugin\PluginSelector\PluginSelector;
+namespace Drupal\Tests\plugin\Unit;
 
 use Drupal\plugin\PluginDefinition\PluginHierarchyDefinitionInterface;
 use Drupal\plugin\PluginDefinition\PluginLabelDefinitionInterface;

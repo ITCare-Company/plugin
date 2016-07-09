@@ -1,25 +1,26 @@
 <?php
 
-namespace Drupal\Tests\plugin\Unit\Plugin\PluginSelector\PluginSelector;
+namespace Drupal\Tests\plugin\Unit\Plugin\Plugin\PluginSelector;
 
 use Drupal\Component\Plugin\PluginInspectionInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\PageCache\ResponsePolicy\KillSwitch;
 use Drupal\plugin\Plugin\Plugin\PluginSelector\AdvancedPluginSelectorBase;
-use Drupal\plugin\Plugin\Plugin\PluginSelector\Radios;
+use Drupal\plugin\Plugin\Plugin\PluginSelector\SelectList;
+use Drupal\plugin\PluginDefinition\PluginDefinitionInterface;
 use Drupal\plugin\PluginDefinition\PluginLabelDefinitionInterface;
 
 /**
- * @coversDefaultClass \Drupal\plugin\Plugin\Plugin\PluginSelector\Radios
+ * @coversDefaultClass \Drupal\plugin\Plugin\Plugin\PluginSelector\SelectList
  *
  * @group Plugin
  */
-class RadiosTest extends PluginSelectorBaseTestBase {
+class SelectListTest extends PluginSelectorBaseTestBase {
 
   /**
    * The class under test.
    *
-   * @var \Drupal\plugin\Plugin\Plugin\PluginSelector\Radios
+   * @var \Drupal\plugin\Plugin\Plugin\PluginSelector\SelectList
    */
   protected $sut;
 
@@ -49,28 +50,17 @@ class RadiosTest extends PluginSelectorBaseTestBase {
 
     $this->stringTranslation = $this->getStringTranslationStub();
 
-    $this->sut = new Radios([], $this->pluginId, $this->pluginDefinition, $this->defaultPluginResolver, $this->stringTranslation, $this->responsePolicy);
+    $this->selectablePluginType->expects($this->any())
+      ->method('ensureTypedPluginDefinition')
+      ->willReturnArgument(0);
+
+    $this->sut = new SelectList([], $this->pluginId, $this->pluginDefinition, $this->defaultPluginResolver, $this->stringTranslation, $this->responsePolicy);
     $this->sut->setSelectablePluginType($this->selectablePluginType);
   }
 
   /**
-   * @covers ::buildSelectorForm
-   */
-  public function testBuildSelectorFormWithoutAvailablePlugins() {
-    $form = [];
-    $form_state = $this->getMock(FormStateInterface::class);
-
-    $this->selectablePluginManager->expects($this->any())
-      ->method('getDefinitions')
-      ->willReturn([]);
-
-    $build = $this->sut->buildSelectorForm($form, $form_state);
-
-    $this->assertArrayHasKey('clear', $build);
-  }
-
-  /**
    * @covers ::buildSelector
+   * @covers ::buildOptionsLevel
    */
   public function testBuildSelector() {
     $this->stringTranslation->expects($this->any())
@@ -80,25 +70,24 @@ class RadiosTest extends PluginSelectorBaseTestBase {
     $method = new \ReflectionMethod($this->sut, 'buildSelector');
     $method->setAccessible(TRUE);
 
-    $plugin_id = $this->randomMachineName();
-    $plugin_label = $this->randomMachineName();
-    $plugin_definition = $this->getMock(PluginLabelDefinitionInterface::class);
-    $plugin_definition->expects($this->atLeastOnce())
+    $plugin_id_a = $this->randomMachineName();
+    $plugin_label_a = $this->randomMachineName();
+    $plugin_definition_a = $this->getMock(PluginLabelDefinitionInterface::class);
+    $plugin_definition_a->expects($this->atLeastOnce())
       ->method('getLabel')
-      ->willReturn($plugin_label);
-    $plugin = $this->getMock(PluginInspectionInterface::class);
-    $plugin->expects($this->atLeastOnce())
-      ->method('getPluginDefinition')
-      ->willReturn($plugin_definition);
-    $plugin->expects($this->atLeastOnce())
+      ->willReturn($plugin_label_a);
+    $plugin_a = $this->getMock(PluginInspectionInterface::class);
+    $plugin_a->expects($this->atLeastOnce())
       ->method('getPluginId')
-      ->willReturn($plugin_id);
+      ->willReturn($plugin_id_a);
+    $plugin_id_b = $this->randomMachineName();
+    $plugin_definition_b = $this->getMock(PluginDefinitionInterface::class);
+    $plugin_definition_b->expects($this->atLeastOnce())
+      ->method('getId')
+      ->willReturn($plugin_id_b);
+    $plugin_b = $this->getMock(PluginInspectionInterface::class);
 
-    $this->selectablePluginType->expects($this->atLeastOnce())
-      ->method('ensureTypedPluginDefinition')
-      ->willReturnArgument(0);
-
-    $this->sut->setSelectedPlugin($plugin);
+    $this->sut->setSelectedPlugin($plugin_a);
     $selector_title = $this->randomMachineName();
     $this->sut->setLabel($selector_title);
     $selector_description = $this->randomMachineName();
@@ -106,33 +95,36 @@ class RadiosTest extends PluginSelectorBaseTestBase {
 
     $element = array(
       '#parents' => array('foo', 'bar'),
-      '#title' => $selector_title,
     );
     $form_state = $this->getMock(FormStateInterface::class);
-    $available_plugins = array($plugin);
+    $available_plugins = [$plugin_a, $plugin_b];
+
+    $this->selectablePluginManager->expects($this->atLeastOnce())
+      ->method('getDefinitions')
+      ->willReturn([
+        $plugin_id_a => $plugin_definition_a,
+        $plugin_id_b => $plugin_definition_b,
+      ]);
 
     $expected_build_plugin_id = array(
       '#ajax' => array(
-        'callback' => array(Radios::class, 'ajaxRebuildForm'),
+        'callback' => array(SelectList::class, 'ajaxRebuildForm'),
         'effect' => 'fade',
         'event' => 'change',
-        'progress' => 'none',
         'trigger_as' => array(
           'name' => 'foo__bar__select__container__change',
         ),
       ),
-      '#attached' => [
-        'library' => ['plugin/plugin_selector.plugin_radios'],
-      ],
-      '#default_value' => $plugin_id,
-      '#empty_value' => 'select',
+      '#default_value' => $plugin_id_a,
+      '#empty_value' => '',
       '#options' => array(
-        $plugin_id => $plugin_label,
+        $plugin_id_a => $plugin_label_a,
+        $plugin_id_b => $plugin_id_b,
       ) ,
       '#required' => FALSE,
       '#title' => $selector_title,
       '#description' => $selector_description,
-      '#type' => 'radios',
+      '#type' => 'select',
     );
     $expected_build_change = array(
       '#ajax' => array(

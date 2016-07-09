@@ -10,7 +10,6 @@ use Drupal\Core\Form\FormState;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\PluginFormInterface;
 use Drupal\plugin\Plugin\Plugin\PluginSelector\AdvancedPluginSelectorBase;
-use Drupal\Tests\plugin\Unit\Plugin\PluginSelector\PluginSelector\PluginSelectorBaseTestBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**

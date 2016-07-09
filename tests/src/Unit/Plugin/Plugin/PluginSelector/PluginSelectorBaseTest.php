@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\plugin\Unit\Plugin\PluginSelector\PluginSelector;
+namespace Drupal\Tests\plugin\Unit\Plugin\Plugin\PluginSelector;
 
 use Drupal\Component\Plugin\Discovery\DiscoveryInterface;
 use Drupal\Component\Plugin\Factory\FactoryInterface;

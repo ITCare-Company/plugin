@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\plugin\Unit\PluginDiscovery;
+namespace Drupal\Tests\plugin\Unit\PluginManager;
 
 use Drupal\Component\Plugin\Discovery\DiscoveryInterface;
 use Drupal\Component\Plugin\PluginInspectionInterface;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\plugin\Tests\Unit\Plugin\views\filter;
+namespace Drupal\Tests\plugin\Unit\Plugin\views\filter;
 
 use Drupal\Component\Plugin\PluginManagerInterface;
 use Drupal\Core\Cache\Cache;
@@ -156,6 +156,9 @@ class PluginIdTest extends UnitTestCase {
    * @covers ::getCacheableMetadata
    */
   public function testGetValueOptions() {
+    $plugin_type_label = 'Foo to the bar';
+    $this->pluginType->getLabel()->willReturn($plugin_type_label);
+
     $plugin_label_1 = 'Foo';
     $plugin_id_1 = 'aaa_foo';
     $plugin_id_2 = 'baz';
