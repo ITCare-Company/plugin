@@ -5,6 +5,17 @@ plugin_test_helper.plugin_selector.advanced_plugin_selector_base:
     tree: 0
   requirements:
     _access: 'TRUE'
+plugin_test_helper.paramconverter.plugin_definition:
+  path: '/plugin_test_helper/paramconverter/plugin_definition/{plugin_definition}'
+  defaults:
+    _controller: '\Drupal\plugin_test_helper\Controller\PluginDefinitionParamConverter::execute'
+  requirements:
+    _access: 'TRUE'
+  options:
+    parameters:
+      plugin_definition:
+        plugin.plugin_definition:
+          plugin_type_id: plugin_test_helper_mock
 plugin_test_helper.paramconverter.plugin_instance:
   path: '/plugin_test_helper/paramconverter/plugin_instance/{plugin}'
   defaults:

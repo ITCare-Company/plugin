@@ -13,6 +13,11 @@ services:
   plugin.views_data:
     class: Drupal\plugin\ViewsData
     arguments: ['@entity_type.manager', '@entity_field.manager', '@plugin.plugin_type_manager']
+  plugin.paramconverter.plugin_definition:
+    class: Drupal\plugin\ParamConverter\PluginDefinitionConverter
+    tags:
+      - { name: paramconverter }
+    arguments: ['@plugin.plugin_type_manager']
   plugin.paramconverter.plugin_instance:
     class: Drupal\plugin\ParamConverter\PluginInstanceConverter
     tags:
