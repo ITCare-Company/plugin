@@ -11,7 +11,7 @@ use Drupal\Core\Plugin\PluginFormInterface;
 /**
  * Provides a configurable mock plugin.
  */
-class MockConfigurablePlugin extends PluginBase implements ConfigurablePluginInterface, PluginFormInterface {
+class MockConfigurablePlugin extends PluginBase implements ConfigurablePluginInterface, PluginFormInterface, MockPluginInterface {
 
   /**
    * Constructs a new instance.
