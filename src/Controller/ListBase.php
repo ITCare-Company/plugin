@@ -6,7 +6,6 @@ use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\StringTranslation\TranslationInterface;
-use Drupal\plugin\PluginType\PluginTypeManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -24,25 +23,15 @@ abstract class ListBase implements ContainerInjectionInterface {
   protected $moduleHandler;
 
   /**
-   * The plugin type manager.
-   *
-   * @var \Drupal\plugin\PluginType\PluginTypeManagerInterface
-   */
-  protected $pluginTypeManager;
-
-  /**
    * Constructs a new class instance.
    *
    * @param \Drupal\Core\StringTranslation\TranslationInterface $string_translation
    *   The string translator.
    * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
    *   The module handler.
-   * @param \Drupal\plugin\PluginType\PluginTypeManagerInterface $plugin_type_manager
-   *   The plugin type manager.
    */
-  public function __construct(TranslationInterface $string_translation, ModuleHandlerInterface $module_handler, PluginTypeManagerInterface $plugin_type_manager) {
+  public function __construct(TranslationInterface $string_translation, ModuleHandlerInterface $module_handler) {
     $this->moduleHandler = $module_handler;
-    $this->pluginTypeManager = $plugin_type_manager;
     $this->stringTranslation = $string_translation;
   }
 
@@ -50,7 +39,7 @@ abstract class ListBase implements ContainerInjectionInterface {
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    return new static($container->get('string_translation'), $container->get('module_handler'), $container->get('plugin.plugin_type_manager'));
+    return new static($container->get('string_translation'), $container->get('module_handler'));
   }
 
   /**

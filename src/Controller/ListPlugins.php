@@ -9,9 +9,8 @@ use Drupal\plugin\PluginDefinition\PluginDescriptionDefinitionInterface;
 use Drupal\plugin\PluginDefinition\PluginLabelDefinitionInterface;
 use Drupal\plugin\PluginDefinition\PluginOperationsProviderDefinitionInterface;
 use Drupal\plugin\PluginDiscovery\TypedDefinitionEnsuringPluginDiscoveryDecorator;
-use Drupal\plugin\PluginType\PluginTypeManagerInterface;
+use Drupal\plugin\PluginType\PluginTypeInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Handles the "list plugin" route.
@@ -32,13 +31,11 @@ class ListPlugins extends ListBase {
    *   The string translator.
    * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
    *   The module handler.
-   * @param \Drupal\plugin\PluginType\PluginTypeManagerInterface $plugin_type_manager
-   *   The plugin type manager.
    * @param \Drupal\Core\DependencyInjection\ClassResolverInterface $class_resolver
    *   The class resolver.
    */
-  public function __construct(TranslationInterface $string_translation, ModuleHandlerInterface $module_handler, PluginTypeManagerInterface $plugin_type_manager, ClassResolverInterface $class_resolver) {
-    parent::__construct($string_translation, $module_handler, $plugin_type_manager);
+  public function __construct(TranslationInterface $string_translation, ModuleHandlerInterface $module_handler, ClassResolverInterface $class_resolver) {
+    parent::__construct($string_translation, $module_handler);
     $this->classResolver = $class_resolver;
   }
 
@@ -46,37 +43,33 @@ class ListPlugins extends ListBase {
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    return new static($container->get('string_translation'), $container->get('module_handler'), $container->get('plugin.plugin_type_manager'), $container->get('class_resolver'));
+    return new static($container->get('string_translation'), $container->get('module_handler'), $container->get('class_resolver'));
   }
 
   /**
    * Returns the route's title.
    *
-   * @param string $plugin_type_id
-   *   The plugin type ID.
+   * @param \Drupal\plugin\PluginType\PluginTypeInterface $plugin_type
+   *   The plugin type.
    *
    * @return string
    */
-  public function title($plugin_type_id) {
+  public function title($plugin_type) {
     return $this->t('%label plugins', [
-      '%label' => $this->pluginTypeManager->getPluginType($plugin_type_id)->getLabel(),
+      '%label' => $plugin_type->getLabel(),
     ]);
   }
 
   /**
    * Handles the route.
    *
-   * @param string $plugin_type_id
-   *   The plugin type ID.
+   * @param \Drupal\plugin\PluginType\PluginTypeInterface $plugin_type
+   *   The plugin type.
    *
    * @return mixed[]|\Symfony\Component\HttpFoundation\Response
    *   A render array or a Symfony response.
    */
-  public function execute($plugin_type_id) {
-    if (!$this->pluginTypeManager->hasPluginType($plugin_type_id)) {
-      throw new NotFoundHttpException();
-    }
-    $plugin_type = $this->pluginTypeManager->getPluginType($plugin_type_id);
+  public function execute(PluginTypeInterface $plugin_type) {
 
     $build = [
       '#empty' => $this->t('There are no available plugins.'),

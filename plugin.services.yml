@@ -18,3 +18,8 @@ services:
     tags:
       - { name: paramconverter }
     arguments: ['@plugin.plugin_type_manager']
+  plugin.paramconverter.plugin_type:
+    class: Drupal\plugin\ParamConverter\PluginTypeConverter
+    tags:
+      - { name: paramconverter }
+    arguments: ['@plugin.plugin_type_manager']

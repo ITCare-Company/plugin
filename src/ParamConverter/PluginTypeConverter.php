@@ -8,12 +8,9 @@ use Symfony\Component\Validator\Constraints\Optional;
 use Symfony\Component\Validator\Constraints\Type;
 
 /**
- * Converts plugin IDs in route parameters to plugin instances.
+ * Converts plugin type IDs in route parameters to plugin types.
  *
- * This is useful in case you want to create a plugin in the URI; for example,
- * if you use plugins as entity bundles.
- *
- * To use it, add a `plugin.plugin_instance` key to the route parameter's options.
+ * To use it, add a `plugin.plugin_type` key to the route parameter's options.
  * Its value is as follows:
  * @code
  * example.route:
@@ -21,38 +18,32 @@ use Symfony\Component\Validator\Constraints\Type;
  *   options:
  *     parameters:
  *       bar:
- *         plugin.plugin_instance:
+ *         plugin.plugin_type:
  *           # Whether the conversion is enabled. Boolean. Optional. Defaults
  *           # to TRUE.
  *           enabled: TRUE
- *           # The ID of the instance's plugin type. String. Required.
- *           plugin_type_id: "foo.bar"
  * @endcode
  *
  * To use the default behavior, its value is as follows:
  * @code
  * example.route:
- *   path: foo/{bar}d
+ *   path: foo/{bar}
  *   options:
  *     parameters:
  *       bar:
- *         plugin.plugin_type:
- *           # The ID of the instance's plugin type. String. Required.
- *           plugin_type_id: "foo.bar"
+ *         plugin.plugin_type: {}
  * @endcode
  */
-class PluginInstanceConverter implements ParamConverterInterface {
+class PluginTypeConverter implements ParamConverterInterface {
 
   use PluginTypeBasedConverterTrait;
 
   /**
    * {@inheritdoc}
    */
-  public function doConvert($plugin_id, array $converter_definition) {
-    $plugin_type = $this->pluginTypeManager->getPluginType($converter_definition['plugin_type_id']);
-
-    if ($plugin_type->getPluginManager()->hasDefinition($plugin_id)) {
-      return $plugin_type->getPluginManager()->createInstance($plugin_id);
+  public function doConvert($plugin_type_id, array $converter_definition) {
+    if ($this->pluginTypeManager->hasPluginType($plugin_type_id)) {
+      return $this->pluginTypeManager->getPluginType($plugin_type_id);
     }
     return NULL;
   }
@@ -61,7 +52,7 @@ class PluginInstanceConverter implements ParamConverterInterface {
    * {@inheritdoc}
    */
   protected function getConverterDefinitionKey() {
-    return 'plugin.plugin_instance';
+    return 'plugin.plugin_type';
   }
 
   /**
@@ -70,7 +61,6 @@ class PluginInstanceConverter implements ParamConverterInterface {
   protected function getConverterDefinitionConstraint() {
     return new Collection([
       'enabled' => new Optional(new Type('boolean')),
-      'plugin_type_id' => new Type('string'),
     ]);
   }
 

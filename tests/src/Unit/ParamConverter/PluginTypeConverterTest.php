@@ -2,20 +2,18 @@
 
 namespace Drupal\Tests\plugin\Unit\ParamConverter;
 
-use Drupal\Component\Plugin\Exception\PluginNotFoundException;
-use Drupal\Component\Plugin\PluginManagerInterface;
-use Drupal\plugin\ParamConverter\PluginInstanceConverter;
+use Drupal\plugin\ParamConverter\PluginTypeConverter;
 use Drupal\plugin\PluginType\PluginTypeInterface;
 use Drupal\plugin\PluginType\PluginTypeManagerInterface;
 use Drupal\Tests\UnitTestCase;
 use Symfony\Component\Routing\Route;
 
 /**
- * @coversDefaultClass \Drupal\plugin\ParamConverter\PluginInstanceConverter
+ * @coversDefaultClass \Drupal\plugin\ParamConverter\PluginTypeConverter
  *
  * @group Plugin
  */
-class PluginInstanceConverterTest extends UnitTestCase {
+class PluginTypeConverterTest extends UnitTestCase {
 
   /**
    * The plugin manager.
@@ -27,7 +25,7 @@ class PluginInstanceConverterTest extends UnitTestCase {
   /**
    * The system under test.
    *
-   * @var \Drupal\plugin\ParamConverter\PluginInstanceConverter
+   * @var \Drupal\plugin\ParamConverter\PluginTypeConverter
    */
   protected $sut;
 
@@ -39,7 +37,7 @@ class PluginInstanceConverterTest extends UnitTestCase {
 
     $this->pluginTypeManager = $this->prophesize(PluginTypeManagerInterface::class);
 
-    $this->sut = new PluginInstanceConverter($this->pluginTypeManager->reveal());
+    $this->sut = new PluginTypeConverter($this->pluginTypeManager->reveal());
   }
 
   /**
@@ -67,20 +65,16 @@ class PluginInstanceConverterTest extends UnitTestCase {
     $data = [];
 
     $data['applies-because-implicitly-enabled'] = [TRUE, [
-      'plugin.plugin_instance' => [
-        'plugin_type_id' => 'foo.bar',
-      ],
+      'plugin.plugin_type' => [],
     ]];
     $data['applies-because-explicitly-enabled'] = [TRUE, [
-      'plugin.plugin_instance' => [
+      'plugin.plugin_type' => [
         'enabled' => TRUE,
-        'plugin_type_id' => 'foo.bar',
       ],
     ]];
     $data['applies-not-because-disabled'] = [FALSE, [
-      'plugin.plugin_instance' => [
+      'plugin.plugin_type' => [
         'enabled' => FALSE,
-        'plugin_type_id' => 'foo.bar',
       ],
     ]];
     $data['applies-not-because-non-existent'] = [FALSE, []];
@@ -100,26 +94,18 @@ class PluginInstanceConverterTest extends UnitTestCase {
   public function testConvertWithExceptionReturnsNull() {
     $plugin_type_id = 'foo_bar.baz';
     $definition = [
-      'plugin.plugin_instance' => [
-        'plugin_type_id' => $plugin_type_id,
-      ],
+      'plugin.plugin_type' => [],
     ];
-    $plugin_id = 'foozaar.bazaar';
     $name = 'foo_bar';
     $defaults = [];
 
-    $plugin_manager = $this->prophesize(PluginManagerInterface::class);
-    $plugin_manager->hasDefinition($plugin_id)->willReturn(TRUE);
-    $plugin_manager->createInstance($plugin_id)->willThrow(new PluginNotFoundException($plugin_id));
-
     $plugin_type = $this->prophesize(PluginTypeInterface::class);
-    $plugin_type->getPluginManager()->willReturn($plugin_manager);
 
     $this->pluginTypeManager->getPluginType($plugin_type_id)->willReturn($plugin_type);
 
     $original_error_reporting = error_reporting();
     error_reporting($original_error_reporting & ~E_USER_WARNING);
-    $this->assertNull($this->sut->convert($plugin_id, $definition, $name, $defaults));
+    $this->assertNull($this->sut->convert($plugin_type_id, $definition, $name, $defaults));
     error_reporting($original_error_reporting);
   }
 
@@ -132,29 +118,20 @@ class PluginInstanceConverterTest extends UnitTestCase {
    * @covers ::getConverterDefinitionKey
    * @covers ::__construct
    */
-  public function testConvertWithKnownPlugin() {
+  public function testConvertWithKnownPluginType() {
     $plugin_type_id = 'foo_bar.baz';
     $definition = [
-      'plugin.plugin_instance' => [
-        'plugin_type_id' => $plugin_type_id,
-      ],
+      'plugin.plugin_type' => [],
     ];
-    $plugin_id = 'foozaar.bazaar';
     $name = 'foo_bar';
     $defaults = [];
 
-    $plugin_instance = new \stdClass();
+    $plugin_type = $this->prophesize(PluginTypeInterface::class);;
 
-    $plugin_manager = $this->prophesize(PluginManagerInterface::class);
-    $plugin_manager->hasDefinition($plugin_id)->willReturn(TRUE);
-    $plugin_manager->createInstance($plugin_id)->willReturn($plugin_instance);
+    $this->pluginTypeManager->hasPluginType($plugin_type_id)->willReturn(TRUE);
+    $this->pluginTypeManager->getPluginType($plugin_type_id)->willReturn($plugin_type->reveal());
 
-    $plugin_type = $this->prophesize(PluginTypeInterface::class);
-    $plugin_type->getPluginManager()->willReturn($plugin_manager);
-
-    $this->pluginTypeManager->getPluginType($plugin_type_id)->willReturn($plugin_type);
-
-    $this->assertSame($plugin_instance, $this->sut->convert($plugin_id, $definition, $name, $defaults));
+    $this->assertSame($plugin_type->reveal(), $this->sut->convert($plugin_type_id, $definition, $name, $defaults));
   }
 
   /**
@@ -166,29 +143,17 @@ class PluginInstanceConverterTest extends UnitTestCase {
    * @covers ::getConverterDefinitionKey
    * @covers ::__construct
    */
-  public function testConvertWithUnknownPlugin() {
+  public function testConvertWithUnknownPluginType() {
     $plugin_type_id = 'foo_bar.baz';
     $definition = [
-      'plugin.plugin_instance' => [
-        'plugin_type_id' => $plugin_type_id,
-      ],
+      'plugin.plugin_type' => [],
     ];
-    $plugin_id = 'foozaar.bazaar';
     $name = 'foo_bar';
     $defaults = [];
 
-    $plugin_manager = $this->prophesize(PluginManagerInterface::class);
-    $plugin_manager->hasDefinition($plugin_id)->willReturn(FALSE);
+    $this->pluginTypeManager->hasPluginType($plugin_type_id)->willReturn(FALSE);
 
-    $plugin_type = $this->prophesize(PluginTypeInterface::class);
-    $plugin_type->getPluginManager()->willReturn($plugin_manager);
-
-    $this->pluginTypeManager->getPluginType($plugin_type_id)->willReturn($plugin_type);
-
-    $original_error_reporting = error_reporting();
-    error_reporting($original_error_reporting & ~E_USER_WARNING);
-    $this->assertNull($this->sut->convert($plugin_id, $definition, $name, $defaults));
-    error_reporting($original_error_reporting);
+    $this->assertNull($this->sut->convert($plugin_type_id, $definition, $name, $defaults));
   }
 
   /**
@@ -201,13 +166,13 @@ class PluginInstanceConverterTest extends UnitTestCase {
    * @covers ::__construct
    */
   public function testConvertWithInvalidDefinition() {
-    // Leave out the "plugin.plugin_instance" key.
+    // Leave out the "plugin.plugin_type" key.
     $definition = [];
-    $plugin_id = 'foozaar.bazaar';
+    $plugin_type_id = 'foozaar.bazaar';
     $name = 'foo_bar';
     $defaults = [];
 
-    $this->assertNull($this->sut->convert($plugin_id, $definition, $name, $defaults));
+    $this->assertNull($this->sut->convert($plugin_type_id, $definition, $name, $defaults));
   }
 
 }

@@ -41,7 +41,7 @@ class DefaultPluginTypeOperationsProvider implements PluginTypeOperationsProvide
     $operations['list'] = [
       'title' => $this->t('View'),
       'url' => new Url('plugin.plugin.list', [
-        'plugin_type_id' => $plugin_type_id,
+        'plugin_type' => $plugin_type_id,
       ]),
     ];
 

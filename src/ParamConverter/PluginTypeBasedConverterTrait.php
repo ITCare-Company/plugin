@@ -2,6 +2,7 @@
 
 namespace Drupal\plugin\ParamConverter;
 
+use Drupal\Core\Utility\Error;
 use Drupal\plugin\PluginType\PluginTypeManagerInterface;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Validator\Constraints\Collection;
@@ -9,7 +10,8 @@ use Symfony\Component\Validator\Constraints\Optional;
 use Symfony\Component\Validator\Validation;
 
 /**
- * Provides scaffolding four plugin type-based route parameter converters.
+ * Implements \Drupal\Core\ParamConverter\ParamConverterInterface for plugin
+ * type-based route parameter converters.
  */
 trait PluginTypeBasedConverterTrait {
 
@@ -30,7 +32,46 @@ trait PluginTypeBasedConverterTrait {
   }
 
   /**
-   * {@inheritdoc}
+   * Implements \Drupal\Core\ParamConverter\ParamConverterInterface::convert().
+   */
+  public function convert($value, $definition, $name, array $defaults) {
+    $valid = $this->validateParameterDefinition($definition);
+    if (!$valid) {
+      return FALSE;
+    }
+
+    $converter_definition = $this->getConverterDefinition($definition);
+    if (is_null($converter_definition)) {
+      return NULL;
+    }
+
+    try {
+      return $this->doConvert($value, $converter_definition, $name, $defaults);
+    }
+    catch (\Exception $e) {
+      trigger_error(Error::renderExceptionSafe($e), E_USER_WARNING);
+      // Return NULL in order to conform to the interface.
+      return NULL;
+    }
+  }
+
+  /**
+   * Converts path variables to their corresponding objects.
+   *
+   * @param mixed $value
+   *   The raw value.
+   * @param mixed[] $converter_definition
+   *   The converter definition provided in the route options.
+   *
+   * @return mixed|null
+   *   The converted parameter value.
+   *
+   * @throws \Exception
+   */
+  abstract protected function doConvert($value, array $converter_definition);
+
+  /**
+   * Implements \Drupal\Core\ParamConverter\ParamConverterInterface::applies().
    */
   public function applies($definition, $name, Route $route) {
     $valid = $this->validateParameterDefinition($definition);
@@ -44,10 +85,6 @@ trait PluginTypeBasedConverterTrait {
 
     return TRUE;
   }
-
-  /**
-   * Gets the
-   */
 
   /**
    * Gets the converter-specific parameter definition.

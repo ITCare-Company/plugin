@@ -14,7 +14,6 @@ use Drupal\plugin\PluginDefinition\PluginOperationsProviderDefinitionInterface;
 use Drupal\plugin\PluginOperationsProviderInterface;
 use Drupal\plugin\PluginType\PluginType;
 use Drupal\plugin\PluginType\PluginTypeInterface;
-use Drupal\plugin\PluginType\PluginTypeManagerInterface;
 use Drupal\Tests\UnitTestCase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -56,16 +55,9 @@ class ListPluginsTest extends UnitTestCase {
   /**
    * The module handler.
    *
-   * @var \Drupal\Core\Session\AccountInterface|\PHPUnit_Framework_MockObject_MockObject
+   * @var \Drupal\Core\Extension\ModuleHandlerInterface|\PHPUnit_Framework_MockObject_MockObject
    */
   protected $moduleHandler;
-
-  /**
-   * The plugin type manager.
-   *
-   * @var \Drupal\plugin\PluginType\PluginTypeManagerInterface|\PHPUnit_Framework_MockObject_MockObject
-   */
-  protected $pluginTypeManager;
 
   /**
    * The string translator.
@@ -86,11 +78,9 @@ class ListPluginsTest extends UnitTestCase {
 
     $this->moduleHandler = $this->getMock(ModuleHandlerInterface::class);
 
-    $this->pluginTypeManager = $this->getMock(PluginTypeManagerInterface::class);
-
     $this->stringTranslation = $this->getStringTranslationStub();
 
-    $this->sut = new ListPlugins($this->stringTranslation, $this->moduleHandler, $this->pluginTypeManager, $this->classResolver);
+    $this->sut = new ListPlugins($this->stringTranslation, $this->moduleHandler, $this->classResolver);
   }
 
   /**
@@ -102,7 +92,6 @@ class ListPluginsTest extends UnitTestCase {
     $map = [
       ['class_resolver', ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $this->classResolver],
       ['module_handler', ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $this->moduleHandler],
-      ['plugin.plugin_type_manager', ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $this->pluginTypeManager],
       ['string_translation', ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $this->stringTranslation],
     ];
     $container->expects($this->any())
@@ -135,12 +124,7 @@ class ListPluginsTest extends UnitTestCase {
     ];
     $plugin_type = new PluginType($plugin_type_definition, $this->container->reveal(), $this->stringTranslation, $class_resolver, $typed_config_manager);
 
-    $this->pluginTypeManager->expects($this->atLeastOnce())
-      ->method('getPluginType')
-      ->with($plugin_type_id)
-      ->willReturn($plugin_type);
-
-    $title = $this->sut->title($plugin_type_id);
+    $title = $this->sut->title($plugin_type);
     $this->assertContains($plugin_type_label, (string) $title);
   }
 
@@ -205,8 +189,6 @@ class ListPluginsTest extends UnitTestCase {
       ->method('getDefinitions')
       ->willReturn($plugin_definitions);
 
-    $plugin_type_id = $this->randomMachineName();
-
     $plugin_type = $this->getMock(PluginTypeInterface::class);
     $plugin_type->expects($this->atLeastOnce())
       ->method('ensureTypedPluginDefinition')
@@ -215,16 +197,7 @@ class ListPluginsTest extends UnitTestCase {
       ->method('getPluginManager')
       ->willReturn($plugin_manager);
 
-    $this->pluginTypeManager->expects($this->atLeastOnce())
-      ->method('getPluginType')
-      ->with($plugin_type_id)
-      ->willReturn($plugin_type);
-    $this->pluginTypeManager->expects($this->atLeastOnce())
-      ->method('hasPluginType')
-      ->with($plugin_type_id)
-      ->willReturn(TRUE);
-
-    $build = $this->sut->execute($plugin_type_id);
+    $build = $this->sut->execute($plugin_type);
 
     $this->assertSame($plugin_definition_id_a, $build[$plugin_definition_id_a]['id']['#markup']);
     $this->assertSame($plugin_definition_label_a, (string) $build[$plugin_definition_id_a]['label']['#markup']);
