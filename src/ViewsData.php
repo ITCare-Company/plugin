@@ -143,8 +143,14 @@ class ViewsData {
    * @throws \InvalidArgumentException
    */
   protected function alterPluginFieldData(array &$data, FieldStorageDefinitionInterface $field_storage_definition, $table_name, $plugin_id_column_name, $plugin_configuration_column_name = NULL) {
-    if (strpos($field_storage_definition->getType(), 'plugin:') !== 0 || !isset($data[$table_name][$plugin_id_column_name])) {
+    if (strpos($field_storage_definition->getType(), 'plugin:')) {
       throw new \InvalidArgumentException('The Views data being altered is not for a "plugin" field.');
+    }
+
+    // Do nothing if no Views data exists. This is the case for entity types
+    // without Views data handlers, for instance.
+    if (!isset($data[$table_name][$plugin_id_column_name])) {
+      return;
     }
 
     $plugin_type_id = substr($field_storage_definition->getType(), 7);
