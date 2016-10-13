@@ -4,6 +4,7 @@ namespace Drupal\Tests\plugin\Unit\PluginType;
 
 use Drupal\Component\FileCache\FileCacheFactory;
 use Drupal\Component\Plugin\PluginManagerInterface;
+use Drupal\Core\Config\TypedConfigManagerInterface;
 use Drupal\Core\DependencyInjection\ClassResolverInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\plugin\PluginType\PluginTypeInterface;
@@ -56,6 +57,13 @@ class PluginTypeManagerTest extends UnitTestCase {
    * @var \Drupal\plugin\PluginType\PluginTypeManager
    */
   protected $sut;
+
+  /**
+   * The typed configuration manager.
+   *
+   * @var \Drupal\Core\Config\TypedConfigManagerInterface|\PHPUnit_Framework_MockObject_MockObject
+   */
+  protected $typedConfigurationManager;
 
   /**
    * Builds a plugin type definition file.
@@ -112,9 +120,12 @@ EOT;
 
     $class_resolver = $this->getMock(ClassResolverInterface::class);
 
+    $this->typedConfigurationManager = $this->getMock(TypedConfigManagerInterface::class);
+
     $this->container = $this->getMock(ContainerInterface::class);
     $map = [
       ['class_resolver', ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $class_resolver],
+      ['config.typed', ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $this->typedConfigurationManager],
       ['string_translation', ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $this->getStringTranslationStub()],
       [$this->pluginTypeDefinitions[$plugin_type_id_a]['plugin_manager_service_id'], ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $this->pluginManagers[$plugin_type_id_a]],
       [$this->pluginTypeDefinitions[$plugin_type_id_b]['plugin_manager_service_id'], ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $this->pluginManagers[$plugin_type_id_b]],
@@ -137,6 +148,7 @@ EOT;
    */
   public function testConstruct() {
     $this->sut = new PluginTypeManager($this->container, $this->moduleHandler);
+    $this->assertInstanceOf(PluginTypeManager::class, $this->sut);
   }
 
   /**
@@ -216,6 +228,14 @@ EOT;
    * @covers ::getPluginTypes
    */
   public function testGetPluginTypes() {
+    $this->moduleHandler->expects($this->atLeastOnce())
+      ->method('moduleExists')
+      ->willReturn(TRUE);
+
+    $this->typedConfigurationManager->expects($this->any())
+      ->method('hasConfigSchema')
+      ->willReturn('TRUE');
+
     foreach ($this->sut->getPluginTypes() as $plugin_type) {
       $this->assertPluginTypeIntegrity($plugin_type->getId(), $this->pluginTypeDefinitions[$plugin_type->getId()], $this->pluginManagers[$plugin_type->getId()], $plugin_type);
     }
