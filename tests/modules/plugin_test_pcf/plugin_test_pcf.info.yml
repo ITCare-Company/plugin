@@ -2,8 +2,8 @@ name: Plugin Test (Plugin configurable field)
 core: 8.x
 type: module
 dependencies:
-  - node
-  - plugin
-  - plugin_test_helper
-  - views
+  - drupal:node
+  - plugin:plugin
+  - plugin:plugin_test_helper
+  - drupal:views
 hidden: true
