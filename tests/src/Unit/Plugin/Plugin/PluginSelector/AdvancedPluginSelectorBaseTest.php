@@ -110,8 +110,6 @@ class AdvancedPluginSelectorBaseTest extends PluginSelectorBaseTestBase {
     $form_state = new FormState();
 
     $plugin = $this->getMock(PluginInspectionInterface::class);
-    $plugin->expects($this->never())
-      ->method('buildConfigurationForm');
 
     $method = new \ReflectionMethod($this->sut, 'buildPluginForm');
     $method->setAccessible(TRUE);
@@ -630,9 +628,6 @@ class AdvancedPluginSelectorBaseTest extends PluginSelectorBaseTestBase {
     $plugin->expects($this->any())
       ->method('getPluginId')
       ->willReturn($plugin_id);
-    $plugin->expects($this->any())
-      ->method('getPluginLabel')
-      ->willReturn($plugin_label);
 
     $this->sut->setSelectedPlugin($plugin);
 

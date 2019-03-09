@@ -1,17 +1,17 @@
 <?php
 
-namespace Drupal\plugin\Tests\Plugin\Field\FieldWidget;
+namespace Drupal\Tests\plugin\Functional;
 
 use Drupal\field\Entity\FieldConfig;
 use Drupal\field\Entity\FieldStorageConfig;
-use Drupal\simpletest\WebTestBase;
+use Drupal\Tests\BrowserTestBase;
 
 /**
  * \Drupal\plugin\Plugin\Field\FieldWidget\PluginSelector integration test.
  *
  * @group Plugin
  */
-class PluginSelectorTest extends WebTestBase {
+class PluginSelectorTest extends BrowserTestBase {
 
   /**
    * {@inheritdoc}
@@ -21,7 +21,8 @@ class PluginSelectorTest extends WebTestBase {
   /**
    * Tests the widget.
    */
-  protected function testWidget() {
+  public function testWidget() {
+    $this->rebuildAll();
     $user = $this->drupalCreateUser(['administer user fields']);
     $this->drupalLogin($user);
 

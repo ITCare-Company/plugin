@@ -1,8 +1,8 @@
 <?php
 
-namespace Drupal\plugin\Tests;
+namespace Drupal\Tests\plugin\Functional;
 
-use Drupal\system\Tests\Update\UpdatePathTestBase;
+use Drupal\FunctionalTests\Update\UpdatePathTestBase;
 
 /**
  * Tests hook_update_N() implementations.
@@ -32,8 +32,8 @@ class HookUpdateNTest extends UpdatePathTestBase {
   protected function setDatabaseDumpFiles() {
     $this->databaseDumpFiles = [
       realpath(DRUPAL_ROOT . '/core/modules/system/tests/fixtures/update/drupal-8.bare.standard.php.gz'),
-      realpath(__DIR__ . '/../../tests/fixtures/module_installation/database_dump.php'),
-      realpath(__DIR__ . '/../../tests/fixtures/plugin_update_8001/database_dump.php'),
+      realpath(__DIR__ . '/../../fixtures/module_installation/database_dump.php'),
+      realpath(__DIR__ . '/../../fixtures/plugin_update_8001/database_dump.php'),
     ];
   }
 

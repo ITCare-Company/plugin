@@ -77,8 +77,6 @@ class PluginDiscoveryDecoratorTest extends UnitTestCase {
    * @covers ::clearCachedDefinitions
    */
   public function testClearCachedDefinitionsWithUncachedDecoratedDiscovery() {
-    $this->decoratedDiscovery->expects($this->never())
-      ->method('clearCachedDefinitions');
     $this->decoratedDiscovery->expects($this->exactly(2))
       ->method('getDefinitions')
       ->willReturn([]);
