@@ -38,15 +38,15 @@ class PluginOperationsProviderPluginManagerTraitTest extends UnitTestCase {
    * @covers ::getOperationsProvider
    */
   public function testGetOperationsProvider() {
-    $plugin_definitions = array(
-      'foo' => array(
+    $plugin_definitions = [
+      'foo' => [
         'id' => 'foo',
         'operations_provider' => PluginOperationsProviderPluginManagerTraitUnitTestOperationsProvider::class,
-      ),
-      'bar' => array(
+      ],
+      'bar' => [
         'id' => 'bar',
-      ),
-    );
+      ],
+    ];
 
     $operations_provider = new \stdClass();
 

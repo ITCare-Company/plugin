@@ -14,7 +14,7 @@ class RadiosTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = array('filter', 'plugin_test_helper');
+  public static $modules = ['filter', 'plugin_test_helper'];
 
   /**
    * Tests the element.
@@ -65,26 +65,26 @@ class RadiosTest extends BrowserTestBase {
     $this->assertNoText(t('There are no available options.'));
 
     // Choose a plugin.
-    $this->drupalPostForm(NULL, array(
+    $this->drupalPostForm(NULL, [
       $name_prefix . '[select][container][plugin_id]' => 'plugin_test_helper_plugin',
-    ), t('Choose'));
+    ], t('Choose'));
     $this->assertFieldByName($name_prefix . '[select][container][plugin_id]');
     $this->assertNotEmpty($this->getSession()->getDriver()->find(sprintf('//input[@name="%s"]', $change_button_name)));
 
     // Change the plugin.
-    $this->drupalPostForm(NULL, array(
+    $this->drupalPostForm(NULL, [
       $name_prefix . '[select][container][plugin_id]' => 'plugin_test_helper_configurable_plugin',
-    ), t('Choose'));
+    ], t('Choose'));
     $this->assertFieldByName($name_prefix . '[select][container][plugin_id]');
     $this->assertNotEmpty($this->getSession()->getDriver()->find(sprintf('//input[@name="%s"]', $change_button_name)));
 
     // Submit the form.
     $foo = $this->randomString();
-    $this->drupalPostForm(NULL, array(
+    $this->drupalPostForm(NULL, [
       $name_prefix . '[select][container][plugin_id]' => 'plugin_test_helper_configurable_plugin',
       $name_prefix . '[plugin_form][foo]' => $foo,
 
-    ), t('Submit'));
+    ], t('Submit'));
 
     $state = \Drupal::state();
     /** @var \Drupal\Component\Plugin\PluginInspectionInterface|\Drupal\Component\Plugin\ConfigurablePluginInterface $selected_plugin */

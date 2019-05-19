@@ -106,40 +106,40 @@ class SelectListTest extends PluginSelectorBaseTestBase {
         $plugin_id_b => $plugin_definition_b,
       ]);
 
-    $expected_build_plugin_id = array(
-      '#ajax' => array(
-        'callback' => array(SelectList::class, 'ajaxRebuildForm'),
+    $expected_build_plugin_id = [
+      '#ajax' => [
+        'callback' => [SelectList::class, 'ajaxRebuildForm'],
         'effect' => 'fade',
         'event' => 'change',
-        'trigger_as' => array(
+        'trigger_as' => [
           'name' => 'foo__bar__select__container__change',
-        ),
-      ),
+        ],
+      ],
       '#default_value' => $plugin_id_a,
       '#empty_value' => '',
-      '#options' => array(
+      '#options' => [
         $plugin_id_a => $plugin_label_a,
         $plugin_id_b => $plugin_id_b,
-      ) ,
+      ],
       '#required' => FALSE,
       '#title' => $selector_title,
       '#description' => $selector_description,
       '#type' => 'select',
-    );
-    $expected_build_change = array(
-      '#ajax' => array(
-        'callback' => array(AdvancedPluginSelectorBase::class, 'ajaxRebuildForm'),
-      ),
-      '#attributes' => array(
-        'class' => array('js-hide')
-      ),
-      '#limit_validation_errors' => array(array('foo', 'bar', 'select', 'plugin_id')),
+    ];
+    $expected_build_change = [
+      '#ajax' => [
+        'callback' => [AdvancedPluginSelectorBase::class, 'ajaxRebuildForm'],
+      ],
+      '#attributes' => [
+        'class' => ['js-hide']
+      ],
+      '#limit_validation_errors' => [['foo', 'bar', 'select', 'plugin_id']],
       '#name' => 'foo__bar__select__container__change',
       '#submit' => [[AdvancedPluginSelectorBase::class, 'rebuildForm']],
       '#type' => 'submit',
       '#value' => 'Choose',
-    );
-    $build = $method->invokeArgs($this->sut, array($element, $form_state, $available_plugins));
+    ];
+    $build = $method->invokeArgs($this->sut, [$element, $form_state, $available_plugins]);
     $this->assertEquals($expected_build_plugin_id, $build['container']['plugin_id']);
     $this->assertEquals($expected_build_change, $build['container']['change']);
     $this->assertSame('container', $build['container']['#type']);
