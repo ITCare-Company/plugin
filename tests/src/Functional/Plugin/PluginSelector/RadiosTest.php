@@ -1,15 +1,15 @@
 <?php
 
-namespace Drupal\plugin\Tests\Plugin\PluginSelector\PluginSelector;
+namespace Drupal\Tests\plugin\Functional\Plugin\PluginSelector;
 
 use Drupal\Tests\BrowserTestBase;
 
 /**
- * @coversDefaultClass \Drupal\plugin\Plugin\Plugin\PluginSelector\SelectList
+ * @coversDefaultClass \Drupal\plugin\Plugin\Plugin\PluginSelector\Radios
  *
  * @group Plugin
  */
-class SelectListTest extends BrowserTestBase {
+class RadiosTest extends BrowserTestBase {
 
   /**
    * {@inheritdoc}
@@ -25,7 +25,7 @@ class SelectListTest extends BrowserTestBase {
   }
 
   public function buildFormPath(array $allowed_selectable_plugin_ids, $tree, $always_show_selector = FALSE) {
-    return sprintf('plugin_test_helper-plugin_selector-advanced_plugin_selector_base/%s/plugin_select_list/%d/%d', implode(',', $allowed_selectable_plugin_ids), (int) $tree, (int) $always_show_selector);
+    return sprintf('plugin_test_helper-plugin_selector-advanced_plugin_selector_base/%s/plugin_radios/%d/%d', implode(',', $allowed_selectable_plugin_ids), (int) $tree, (int) $always_show_selector);
   }
 
   /**
@@ -44,6 +44,11 @@ class SelectListTest extends BrowserTestBase {
     $this->assertNoFieldByName($name_prefix . '[select][container][container][plugin_id]');
     $this->assertEmpty($this->getSession()->getDriver()->find(sprintf('//input[@name="%s"]', $change_button_name)));
     $this->assertText(t('There are no available options.'));
+
+    // Test that the selector can be configured to show even if there is but a
+    // single plugin available to choose from.
+    $path = $this->buildFormPath(['plugin_test_helper_configurable_plugin'], $tree, TRUE);
+    $this->drupalGet($path);
 
     // Test the presence of default elements with one available plugin.
     $path = $this->buildFormPath(['plugin_test_helper_configurable_plugin'], $tree);
