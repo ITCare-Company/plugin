@@ -1,6 +1,6 @@
 name: Plugin Test Helper
 description: Supports Plugin tests.
-core: 8.x
+core_version_requirement: ^8.7.7 || ^9
 type: module
 dependencies:
   - plugin:plugin
