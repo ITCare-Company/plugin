@@ -15,14 +15,14 @@ class PluginDefinitionValidator {
   /**
    * Validates a plugin class.
    *
-   * @param string $class
+   * @param string|null $class
    *   A fully qualified class name.
    *
    * @throws \InvalidArgumentException
    *   Thrown when the class is invalid.
    */
   public static function validateClass($class) {
-    if (!class_exists($class)) {
+    if ($class === NULL || !class_exists($class)) {
       throw new \InvalidArgumentException(sprintf('Class %s does not exist.', $class));
     }
   }

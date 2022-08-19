@@ -15,7 +15,7 @@ class PluginTypeManagerTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['system', 'plugin'];
+  protected static $modules = ['system', 'plugin'];
 
   /**
    * {@inheritdoc}

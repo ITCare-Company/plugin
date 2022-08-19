@@ -8,7 +8,6 @@ use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\plugin\Plugin\Plugin\PluginSelector\PluginSelectorManager;
 use Drupal\Tests\UnitTestCase;
-use Zend\Stdlib\ArrayObject;
 
 /**
  * @coversDefaultClass \Drupal\plugin\Plugin\Plugin\PluginSelector\PluginSelectorManager
@@ -20,28 +19,28 @@ class PluginSelectorManagerTest extends UnitTestCase {
   /**
    * The cache backend.
    *
-   * @var \Drupal\Core\Cache\CacheBackendInterface|\PHPUnit_Framework_MockObject_MockObject
+   * @var \Drupal\Core\Cache\CacheBackendInterface|\PHPUnit\Framework\MockObject\MockObject
    */
   public $cache;
 
   /**
    * The plugin discovery.
    *
-   * @var \Drupal\Component\Plugin\Discovery\DiscoveryInterface|\PHPUnit_Framework_MockObject_MockObject
+   * @var \Drupal\Component\Plugin\Discovery\DiscoveryInterface|\PHPUnit\Framework\MockObject\MockObject
    */
   protected $discovery;
 
   /**
    * The plugin factory.
    *
-   * @var \Drupal\Component\Plugin\Factory\FactoryInterface|\PHPUnit_Framework_MockObject_MockObject
+   * @var \Drupal\Component\Plugin\Factory\FactoryInterface|\PHPUnit\Framework\MockObject\MockObject
    */
   protected $factory;
 
   /**
    * The module handler.
    *
-   * @var \Drupal\Core\Extension\ModuleHandlerInterface|\PHPUnit_Framework_MockObject_MockObject
+   * @var \Drupal\Core\Extension\ModuleHandlerInterface|\PHPUnit\Framework\MockObject\MockObject
    */
   protected $moduleHandler;
 
@@ -64,7 +63,7 @@ class PluginSelectorManagerTest extends UnitTestCase {
 
     $this->cache = $this->createMock(CacheBackendInterface::class);
 
-    $namespaces = new ArrayObject();
+    $namespaces = new \ArrayObject();
 
     $this->sut = new PluginSelectorManager($namespaces, $this->cache, $this->moduleHandler);
     $property = new \ReflectionProperty($this->sut, 'discovery');
@@ -79,7 +78,7 @@ class PluginSelectorManagerTest extends UnitTestCase {
    * @covers ::__construct
    */
   public function testConstruct() {
-    $namespaces = new ArrayObject();
+    $namespaces = new \ArrayObject();
     $this->sut = new PluginSelectorManager($namespaces, $this->cache, $this->moduleHandler);
     $this->assertInstanceOf(PluginSelectorManager::class, $this->sut);
   }

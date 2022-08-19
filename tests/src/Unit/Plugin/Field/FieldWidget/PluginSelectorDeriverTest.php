@@ -17,7 +17,7 @@ class PluginSelectorDeriverTest extends UnitTestCase {
   /**
    * The plugin selector manager.
    *
-   * @var \Drupal\plugin\Plugin\Plugin\PluginSelector\PluginSelectorManagerInterface|\PHPUnit_Framework_MockObject_MockObject
+   * @var \Drupal\plugin\Plugin\Plugin\PluginSelector\PluginSelectorManagerInterface|\PHPUnit\Framework\MockObject\MockObject
    */
   protected $pluginSelectorManager;
 

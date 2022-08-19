@@ -20,7 +20,7 @@ class EventBasedDefaultPluginResolverTest extends UnitTestCase {
   /**
    * The event dispatcher.
    *
-   * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface|\PHPUnit_Framework_MockObject_MockObject
+   * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface|\PHPUnit\Framework\MockObject\MockObject
    */
   protected $eventDispatcher;
 
@@ -56,7 +56,7 @@ class EventBasedDefaultPluginResolverTest extends UnitTestCase {
   public function testCreateDefaultPluginInstanceWithoutDefaultPluginInstance() {
     $this->eventDispatcher->expects($this->once())
       ->method('dispatch')
-      ->with(PluginEvents::RESOLVE_DEFAULT_PLUGIN, $this->isInstanceOf(ResolveDefaultPlugin::class));
+      ->with($this->isInstanceOf(ResolveDefaultPlugin::class), PluginEvents::RESOLVE_DEFAULT_PLUGIN);
 
     $plugin_type = $this->createMock(PluginTypeInterface::class);
 
@@ -71,9 +71,10 @@ class EventBasedDefaultPluginResolverTest extends UnitTestCase {
 
     $this->eventDispatcher->expects($this->once())
       ->method('dispatch')
-      ->with(PluginEvents::RESOLVE_DEFAULT_PLUGIN, $this->isInstanceOf(ResolveDefaultPlugin::class))
-      ->willReturnCallback(function($event_name, ResolveDefaultPlugin $event) use($default_plugin_instance) {
+      ->with($this->isInstanceOf(ResolveDefaultPlugin::class), PluginEvents::RESOLVE_DEFAULT_PLUGIN)
+      ->willReturnCallback(function( ResolveDefaultPlugin $event, $event_name) use($default_plugin_instance) {
         $event->setDefaultPluginInstance($default_plugin_instance);
+        return $event;
       });
 
     $plugin_type = $this->createMock(PluginTypeInterface::class);

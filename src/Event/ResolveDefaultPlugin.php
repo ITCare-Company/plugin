@@ -2,9 +2,9 @@
 
 namespace Drupal\plugin\Event;
 
+use Drupal\Component\EventDispatcher\Event;
 use Drupal\Component\Plugin\PluginInspectionInterface;
 use Drupal\plugin\PluginType\PluginTypeInterface;
-use Symfony\Component\EventDispatcher\Event;
 
 /**
  * Provides an event that is dispatched when the a default plugin instance is

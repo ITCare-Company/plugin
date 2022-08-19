@@ -14,7 +14,7 @@ class PluginTypeConverterTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['plugin', 'plugin_test_helper', 'system'];
+  protected static $modules = ['plugin', 'plugin_test_helper', 'system'];
 
   /**
    * {@inheritdoc}

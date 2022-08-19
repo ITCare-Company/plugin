@@ -18,14 +18,14 @@ class TypedDefinitionEnsuringPluginDiscoveryDecoratorTest extends UnitTestCase {
   /**
    * The original plugin manager.
    *
-   * @var \Drupal\Component\Plugin\PluginManagerInterface|\PHPUnit_Framework_MockObject_MockObject
+   * @var \Drupal\Component\Plugin\PluginManagerInterface|\PHPUnit\Framework\MockObject\MockObject
    */
   protected $pluginManager;
 
   /**
    * The type of the plugin definitions to decorate.
    *
-   * @var \Drupal\plugin\PluginType\PluginTypeInterface|\PHPUnit_Framework_MockObject_MockObject
+   * @var \Drupal\plugin\PluginType\PluginTypeInterface|\PHPUnit\Framework\MockObject\MockObject
    */
   protected $pluginType;
 

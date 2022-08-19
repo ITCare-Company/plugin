@@ -22,14 +22,14 @@ class PluginTypeTest extends UnitTestCase {
   /**
    * The service container.
    *
-   * @var \Symfony\Component\DependencyInjection\ContainerInterface|\PHPUnit_Framework_MockObject_MockObject
+   * @var \Symfony\Component\DependencyInjection\ContainerInterface|\PHPUnit\Framework\MockObject\MockObject
    */
   protected $container;
 
   /**
    * The plugin manager.
    *
-   * @var \Drupal\Component\Plugin\PluginManagerInterface|\PHPUnit_Framework_MockObject_MockObject
+   * @var \Drupal\Component\Plugin\PluginManagerInterface|\PHPUnit\Framework\MockObject\MockObject
    */
   protected $pluginManager;
 

@@ -14,7 +14,7 @@ class RadiosTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['filter', 'plugin_test_helper'];
+  protected static $modules = ['filter', 'plugin_test_helper'];
 
   /**
    * {@inheritdoc}
@@ -46,9 +46,9 @@ class RadiosTest extends BrowserTestBase {
     // Test the presence of default elements without available plugins.
     $path = $this->buildFormPath(['none'], $tree);
     $this->drupalGet($path);
-    $this->assertNoFieldByName($name_prefix . '[select][container][container][plugin_id]');
+    $this->assertSession()->fieldNotExists($name_prefix . '[select][container][container][plugin_id]');
     $this->assertEmpty($this->getSession()->getDriver()->find(sprintf('//input[@name="%s"]', $change_button_name)));
-    $this->assertText(t('There are no available options.'));
+    $this->assertSession()->pageTextContains(t('There are no available options.'));
 
     // Test that the selector can be configured to show even if there is but a
     // single plugin available to choose from.
@@ -58,45 +58,43 @@ class RadiosTest extends BrowserTestBase {
     // Test the presence of default elements with one available plugin.
     $path = $this->buildFormPath(['plugin_test_helper_configurable_plugin'], $tree);
     $this->drupalGet($path);
-    $this->assertNoFieldByName($name_prefix . '[select][container][plugin_id]');
+    $this->assertSession()->fieldNotExists($name_prefix . '[select][container][plugin_id]');
     $this->assertEmpty($this->getSession()->getDriver()->find(sprintf('//input[@name="%s"]', $change_button_name)));
-    $this->assertNoText(t('There are no available options.'));
+    $this->assertSession()->pageTextNotContains(t('There are no available options.'));
 
     // Test the presence of default elements with multiple available plugins.
     $path = $this->buildFormPath(['plugin_test_helper_plugin', 'plugin_test_helper_configurable_plugin'], $tree);
     $this->drupalGet($path);
-    $this->assertFieldByName($name_prefix . '[select][container][plugin_id]');
+    $this->assertSession()->fieldExists($name_prefix . '[select][container][plugin_id]');
     $this->assertNotEmpty($this->getSession()->getDriver()->find(sprintf('//input[@name="%s"]', $change_button_name)));
-    $this->assertNoText(t('There are no available options.'));
+    $this->assertSession()->pageTextNotContains(t('There are no available options.'));
 
     // Choose a plugin.
-    $this->drupalPostForm(NULL, [
+    $this->submitForm([
       $name_prefix . '[select][container][plugin_id]' => 'plugin_test_helper_plugin',
     ], t('Choose'));
-    $this->assertFieldByName($name_prefix . '[select][container][plugin_id]');
+    $this->assertSession()->fieldExists($name_prefix . '[select][container][plugin_id]');
     $this->assertNotEmpty($this->getSession()->getDriver()->find(sprintf('//input[@name="%s"]', $change_button_name)));
 
     // Change the plugin.
-    $this->drupalPostForm(NULL, [
+    $this->submitForm([
       $name_prefix . '[select][container][plugin_id]' => 'plugin_test_helper_configurable_plugin',
     ], t('Choose'));
-    $this->assertFieldByName($name_prefix . '[select][container][plugin_id]');
+    $this->assertSession()->fieldExists($name_prefix . '[select][container][plugin_id]');
     $this->assertNotEmpty($this->getSession()->getDriver()->find(sprintf('//input[@name="%s"]', $change_button_name)));
 
     // Submit the form.
     $foo = $this->randomString();
-    $this->drupalPostForm(NULL, [
+    $this->submitForm([
       $name_prefix . '[select][container][plugin_id]' => 'plugin_test_helper_configurable_plugin',
       $name_prefix . '[plugin_form][foo]' => $foo,
 
     ], t('Submit'));
 
     $state = \Drupal::state();
-    /** @var \Drupal\Component\Plugin\PluginInspectionInterface|\Drupal\Component\Plugin\ConfigurablePluginInterface $selected_plugin */
+    /** @var \Drupal\Component\Plugin\PluginInspectionInterface|\Drupal\Component\Plugin\ConfigurableInterface $selected_plugin */
     $selected_plugin = $state->get('plugin_test_helper_advanced_plugin_selector_base');
-    $this->assertEqual($selected_plugin->getPluginId(), 'plugin_test_helper_configurable_plugin');
-    $this->assertEqual($selected_plugin->getConfiguration(), [
-      'foo' => $foo,
-    ]);
+    $this->assertEquals('plugin_test_helper_configurable_plugin', $selected_plugin->getPluginId());
+    $this->assertEquals(['foo' => $foo], $selected_plugin->getConfiguration());
   }
 }

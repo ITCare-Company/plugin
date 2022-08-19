@@ -27,14 +27,14 @@ class PluginTypeManagerTest extends UnitTestCase {
   /**
    * The service container.
    *
-   * @var \Symfony\Component\DependencyInjection\ContainerInterface|\PHPUnit_Framework_MockObject_MockObject
+   * @var \Symfony\Component\DependencyInjection\ContainerInterface|\PHPUnit\Framework\MockObject\MockObject
    */
   protected $container;
 
   /**
    * The module handler.
    *
-   * @var \Drupal\Core\Extension\ModuleHandlerInterface|\PHPUnit_Framework_MockObject_MockObject
+   * @var \Drupal\Core\Extension\ModuleHandlerInterface|\PHPUnit\Framework\MockObject\MockObject
    */
   protected $moduleHandler;
 
@@ -63,7 +63,7 @@ class PluginTypeManagerTest extends UnitTestCase {
   /**
    * The typed configuration manager.
    *
-   * @var \Drupal\Core\Config\TypedConfigManagerInterface|\PHPUnit_Framework_MockObject_MockObject
+   * @var \Drupal\Core\Config\TypedConfigManagerInterface|\PHPUnit\Framework\MockObject\MockObject
    */
   protected $typedConfigurationManager;
 
@@ -161,7 +161,7 @@ EOT;
   public function testHasPluginType($expected, $plugin_type_id, $module_name, $module_exists) {
     $modules = [];
     if ($module_exists) {
-      $extension = $this->getMockBuilder(Extension::class)->disableOriginalConstructor()->getMock();
+      $extension = $this->createMock(Extension::class);
       $extension->expects($this->atLeastOnce())
         ->method('getName')
         ->willReturn($module_name);
@@ -204,7 +204,7 @@ EOT;
   public function testGetPluginType($expected_success, $plugin_type_id, $module_name, $module_exists) {
     $modules = [];
     if ($module_exists) {
-      $extension = $this->getMockBuilder(Extension::class)->disableOriginalConstructor()->getMock();
+      $extension = $this->createMock(Extension::class);
       $extension->expects($this->atLeastOnce())
         ->method('getName')
         ->willReturn($module_name);
@@ -263,7 +263,7 @@ EOT;
    */
   public function testGetPluginTypes() {
     $modules = array_map(function(array $plugin_type_definition) {
-      $extension = $this->getMockBuilder(Extension::class)->disableOriginalConstructor()->getMock();
+      $extension = $this->createMock(Extension::class);
       $extension->expects($this->atLeastOnce())
         ->method('getName')
         ->willReturn($plugin_type_definition['provider']);

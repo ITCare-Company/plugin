@@ -16,7 +16,7 @@ class PluginOperationsProviderPluginManagerTraitTest extends UnitTestCase {
   /**
    * The class resolver.
    *
-   * @var \Drupal\Core\DependencyInjection\ClassResolverInterface|\PHPUnit_Framework_MockObject_MockObject
+   * @var \Drupal\Core\DependencyInjection\ClassResolverInterface|\PHPUnit\Framework\MockObject\MockObject
    */
   protected $classResolver;
 

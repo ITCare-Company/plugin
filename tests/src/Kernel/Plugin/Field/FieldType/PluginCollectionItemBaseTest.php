@@ -17,7 +17,7 @@ class PluginCollectionItemBaseTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['plugin', 'plugin_test_helper', 'plugin_test'];
+  protected static $modules = ['plugin', 'plugin_test_helper', 'plugin_test'];
 
   /**
    * The system under test.

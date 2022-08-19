@@ -37,21 +37,21 @@ class ListPluginTypesTest extends UnitTestCase {
   /**
    * The current user.
    *
-   * @var \Drupal\Core\Session\AccountInterface|\PHPUnit_Framework_MockObject_MockObject
+   * @var \Drupal\Core\Session\AccountInterface|\PHPUnit\Framework\MockObject\MockObject
    */
   protected $currentUser;
 
   /**
    * The module handler.
    *
-   * @var \Drupal\Core\Extension\ModuleHandlerInterface|\PHPUnit_Framework_MockObject_MockObject
+   * @var \Drupal\Core\Extension\ModuleHandlerInterface|\PHPUnit\Framework\MockObject\MockObject
    */
   protected $moduleHandler;
 
   /**
    * The plugin type manager.
    *
-   * @var \Drupal\plugin\PluginType\PluginTypeManagerInterface|\PHPUnit_Framework_MockObject_MockObject
+   * @var \Drupal\plugin\PluginType\PluginTypeManagerInterface|\PHPUnit\Framework\MockObject\MockObject
    */
   protected $pluginTypeManager;
 

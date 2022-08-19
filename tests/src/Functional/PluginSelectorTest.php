@@ -16,7 +16,7 @@ class PluginSelectorTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['block', 'field_ui', 'plugin'];
+  protected static $modules = ['block', 'field_ui', 'plugin'];
 
   /**
    * {@inheritdoc}
@@ -36,16 +36,17 @@ class PluginSelectorTest extends BrowserTestBase {
     $selectable_plugin_type_id = 'block';
     $field_type = 'plugin:' . $selectable_plugin_type_id;
     $default_selected_plugin_id = 'user_login_block';
-    $this->drupalPostForm('admin/config/people/accounts/fields/add-field', [
+    $this->drupalGet('admin/config/people/accounts/fields/add-field');
+    $this->submitForm([
       'label' => $this->randomString(),
       'field_name' => $field_name,
       'new_storage_type' => $field_type,
     ], t('Save and continue'));
-    $this->drupalPostForm(NULL, [], t('Save field settings'));
-    $this->drupalPostForm(NULL, [
+    $this->submitForm([], t('Save field settings'));
+    $this->submitForm([
       sprintf('default_value_input[field_%s][0][plugin_selector][container][select][container][plugin_id]', $field_name) => $default_selected_plugin_id,
     ], t('Choose'));
-    $this->drupalPostForm(NULL, [], t('Save settings'));
+    $this->submitForm([], t('Save settings'));
     \Drupal::service('entity_field.manager')->clearCachedFieldDefinitions();
     // Get all plugin fields.
     $field_storage_id = 'user.field_' . $field_name;
@@ -55,15 +56,16 @@ class PluginSelectorTest extends BrowserTestBase {
     /** @var \Drupal\field\FieldConfigInterface $field */
     $field = FieldConfig::load($field_id);
     $this->assertNotNull($field);
-    $this->assertEqual($field->getDefaultValueLiteral()[0]['plugin_id'], $default_selected_plugin_id);
+    $this->assertEquals($field->getDefaultValueLiteral()[0]['plugin_id'], $default_selected_plugin_id);
     $this->assertTrue(is_array($field->getDefaultValueLiteral()[0]['plugin_configuration']));
 
     // Test the widget when creating an entity.
     $entity_selected_plugin_id = 'system_breadcrumb_block';
-    $this->drupalPostForm('user/' . $user->id() . '/edit', [
+    $this->drupalGet('user/' . $user->id() . '/edit');
+    $this->submitForm([
       sprintf('field_%s[0][plugin_selector][container][select][container][plugin_id]', $field_name) => $entity_selected_plugin_id,
     ], t('Choose'));
-    $this->drupalPostForm(NULL, [], t('Save'));
+    $this->submitForm([], t('Save'));
 
     // Test whether the widget displays field values.
     /** @var \Drupal\Core\Entity\ContentEntityInterface $user */

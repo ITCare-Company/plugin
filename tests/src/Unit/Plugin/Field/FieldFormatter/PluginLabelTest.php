@@ -22,7 +22,7 @@ class PluginLabelTest extends UnitTestCase {
   /**
    * The field definition.
    *
-   * @var \Drupal\Core\Field\FieldDefinitionInterface|\PHPUnit_Framework_MockObject_MockObject
+   * @var \Drupal\Core\Field\FieldDefinitionInterface|\PHPUnit\Framework\MockObject\MockObject
    */
   protected $fieldDefinition;
 
@@ -78,7 +78,7 @@ class PluginLabelTest extends UnitTestCase {
       ->method('getContainedPluginInstance')
       ->willReturn($plugin_instance_b);
 
-    /** @var \Drupal\plugin\Plugin\Field\FieldType\PluginCollectionItemInterface[]|\PHPUnit_Framework_MockObject_MockObject[] $items */
+    /** @var \Drupal\plugin\Plugin\Field\FieldType\PluginCollectionItemInterface[]|\PHPUnit\Framework\MockObject\MockObject[] $items */
     $items = [$item_a, $item_b];
 
     $plugin_type = $this->createMock(PluginTypeInterface::class);
@@ -93,10 +93,7 @@ class PluginLabelTest extends UnitTestCase {
     }
 
     $iterator = new \ArrayIterator($items);
-    $item_list = $this->getMockBuilder(PluginCollectionItemList::class)
-      ->disableOriginalConstructor()
-      ->setMethods(['getEntity', 'getIterator'])
-      ->getMock();
+    $item_list = $this->createMock(PluginCollectionItemList::class);
     $item_list->expects($this->atLeastOnce())
       ->method('getIterator')
       ->willReturn($iterator);

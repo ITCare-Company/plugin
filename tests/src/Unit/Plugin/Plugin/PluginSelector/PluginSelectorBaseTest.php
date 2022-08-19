@@ -19,7 +19,7 @@ class PluginSelectorBaseTest extends PluginSelectorBaseTestBase {
   /**
    * The class under test.
    *
-   * @var \Drupal\plugin\Plugin\Plugin\PluginSelector\PluginSelectorBase|\PHPUnit_Framework_MockObject_MockObject
+   * @var \Drupal\plugin\Plugin\Plugin\PluginSelector\PluginSelectorBase|\PHPUnit\Framework\MockObject\MockObject
    */
   protected $sut;
 

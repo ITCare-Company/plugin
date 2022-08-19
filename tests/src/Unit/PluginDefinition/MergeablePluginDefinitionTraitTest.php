@@ -16,7 +16,7 @@ class MergeablePluginDefinitionTraitTest extends UnitTestCase {
   /**
    * The class under test.
    *
-   * @var \Drupal\plugin\PluginDefinition\MergeablePluginDefinitionTrait|\PHPUnit_Framework_MockObject_MockObject
+   * @var \Drupal\plugin\PluginDefinition\MergeablePluginDefinitionTrait|\PHPUnit\Framework\MockObject\MockObject
    */
   protected $sut;
 

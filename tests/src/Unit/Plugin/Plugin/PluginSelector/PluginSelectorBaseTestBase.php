@@ -17,7 +17,7 @@ abstract class PluginSelectorBaseTestBase extends UnitTestCase {
   /**
    * The default plugin resolver.
    *
-   * @var \Drupal\plugin\DefaultPluginResolver\DefaultPluginResolverInterface|\PHPUnit_Framework_MockObject_MockObject
+   * @var \Drupal\plugin\DefaultPluginResolver\DefaultPluginResolverInterface|\PHPUnit\Framework\MockObject\MockObject
    */
   protected $defaultPluginResolver;
 
@@ -38,28 +38,28 @@ abstract class PluginSelectorBaseTestBase extends UnitTestCase {
   /**
    * The plugin manager through which to select plugins.
    *
-   * @var \Drupal\Component\Plugin\PluginManagerInterface|\PHPUnit_Framework_MockObject_MockObject
+   * @var \Drupal\Component\Plugin\PluginManagerInterface|\PHPUnit\Framework\MockObject\MockObject
    */
   protected $selectablePluginManager;
 
   /**
    * The plugin type of which to select plugins.
    *
-   * @var \Drupal\plugin\PluginType\PluginTypeInterface|\PHPUnit_Framework_MockObject_MockObject
+   * @var \Drupal\plugin\PluginType\PluginTypeInterface|\PHPUnit\Framework\MockObject\MockObject
    */
   protected $selectablePluginType;
 
   /**
    * The selected plugin.
    *
-   * @var \Drupal\Component\Plugin\PluginInspectionInterface|\PHPUnit_Framework_MockObject_MockObject
+   * @var \Drupal\Component\Plugin\PluginInspectionInterface|\PHPUnit\Framework\MockObject\MockObject
    */
   protected $selectedPlugin;
 
   /**
    * The class under test.
    *
-   * @var \Drupal\plugin\Plugin\Plugin\PluginSelector\PluginSelectorBase|\PHPUnit_Framework_MockObject_MockObject
+   * @var \Drupal\plugin\Plugin\Plugin\PluginSelector\PluginSelectorBase|\PHPUnit\Framework\MockObject\MockObject
    */
   protected $sut;
 

@@ -14,7 +14,7 @@ class ViewsFilterPluginIdConfigurableFieldTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['field', 'node', 'plugin', 'plugin_test_helper', 'plugin_test_pcf', 'system', 'user', 'views'];
+  protected static $modules = ['field', 'node', 'plugin', 'plugin_test_helper', 'plugin_test_pcf', 'system', 'user', 'views'];
 
   /**
    * {@inheritdoc}

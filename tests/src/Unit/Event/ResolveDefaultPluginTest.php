@@ -17,7 +17,7 @@ class ResolveDefaultPluginTest extends UnitTestCase {
   /**
    * The plugin type.
    *
-   * @var \Drupal\plugin\PluginType\PluginTypeInterface|\PHPUnit_Framework_MockObject_MockObject
+   * @var \Drupal\plugin\PluginType\PluginTypeInterface|\PHPUnit\Framework\MockObject\MockObject
    */
   protected $pluginType;
 

@@ -17,7 +17,7 @@ class PluginDiscoveryDecoratorTest extends UnitTestCase {
   /**
    * The decorated discovery.
    *
-   * @var \Drupal\Component\Plugin\Discovery\DiscoveryInterface|\PHPUnit_Framework_MockObject_MockObject
+   * @var \Drupal\Component\Plugin\Discovery\DiscoveryInterface|\PHPUnit\Framework\MockObject\MockObject
    */
   protected $decoratedDiscovery;
 

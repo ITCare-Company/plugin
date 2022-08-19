@@ -33,7 +33,7 @@ class EventBasedDefaultPluginResolver implements DefaultPluginResolverInterface 
    */
   public function createDefaultPluginInstance(PluginTypeInterface $plugin_type) {
     $event = new ResolveDefaultPlugin($plugin_type);
-    $this->eventDispatcher->dispatch(PluginEvents::RESOLVE_DEFAULT_PLUGIN, $event);
+    $this->eventDispatcher->dispatch($event, PluginEvents::RESOLVE_DEFAULT_PLUGIN);
 
     return $event->getDefaultPluginInstance();
   }

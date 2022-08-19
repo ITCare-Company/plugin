@@ -2,7 +2,6 @@
 
 namespace Drupal\Tests\plugin\Unit\Plugin\Field\FieldType;
 
-use Drupal\Component\Plugin\PluginManagerInterface;
 use Drupal\Core\Config\TypedConfigManagerInterface;
 use Drupal\Core\DependencyInjection\ClassResolverInterface;
 use Drupal\plugin\Plugin\Field\FieldType\PluginCollectionItemDeriver;
@@ -28,7 +27,7 @@ class PluginCollectionItemDeriverTest extends UnitTestCase {
   /**
    * The plugin type manager.
    *
-   * @var \Drupal\plugin\PluginType\PluginTypeManagerInterface|\PHPUnit_Framework_MockObject_MockObject
+   * @var \Drupal\plugin\PluginType\PluginTypeManagerInterface|\PHPUnit\Framework\MockObject\MockObject
    */
   protected $pluginTypeManager;
 

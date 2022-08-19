@@ -1,6 +1,7 @@
 <?php
 
 namespace Drupal\Tests\plugin\Unit;
+use PHPUnit\Framework\Assert;
 use Drupal\Core\Url;
 
 /**
@@ -15,11 +16,11 @@ trait OperationsProviderTestTrait {
    */
   protected function assertOperationsLinks(array $operations_links) {
     foreach ($operations_links as $link) {
-      \PHPUnit\Framework\Assert::assertArrayHasKey('title', $link);
-      \PHPUnit\Framework\Assert::assertNotEmpty($link['title']);
+      Assert::assertArrayHasKey('title', $link);
+      Assert::assertNotEmpty($link['title']);
 
-      \PHPUnit\Framework\Assert::assertArrayHasKey('url', $link);
-      \PHPUnit\Framework\Assert::assertInstanceOf(Url::class, $link['url']);
+      Assert::assertArrayHasKey('url', $link);
+      Assert::assertInstanceOf(Url::class, $link['url']);
     }
   }
 

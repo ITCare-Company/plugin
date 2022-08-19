@@ -24,14 +24,14 @@ class AdvancedPluginSelectorBaseTest extends PluginSelectorBaseTestBase {
   /**
    * The class under test.
    *
-   * @var \Drupal\plugin\Plugin\Plugin\PluginSelector\AdvancedPluginSelectorBase|\PHPUnit_Framework_MockObject_MockObject
+   * @var \Drupal\plugin\Plugin\Plugin\PluginSelector\AdvancedPluginSelectorBase|\PHPUnit\Framework\MockObject\MockObject
    */
   protected $sut;
 
   /**
    * The string translator.
    *
-   * @var \Drupal\Core\StringTranslation\TranslationInterface|\PHPUnit_Framework_MockObject_MockObject
+   * @var \Drupal\Core\StringTranslation\TranslationInterface|\PHPUnit\Framework\MockObject\MockObject
    */
   protected $stringTranslation;
 
@@ -572,7 +572,7 @@ class AdvancedPluginSelectorBaseTest extends PluginSelectorBaseTestBase {
       '#type' => $this->randomMachineName(),
     ];
 
-    /** @var \Drupal\plugin\Plugin\Plugin\PluginSelector\AdvancedPluginSelectorBase|\PHPUnit_Framework_MockObject_MockObject $plugin_selector */
+    /** @var \Drupal\plugin\Plugin\Plugin\PluginSelector\AdvancedPluginSelectorBase|\PHPUnit\Framework\MockObject\MockObject $plugin_selector */
     $plugin_selector = $this->getMockBuilder(AdvancedPluginSelectorBase::class)
       ->setMethods(['buildPluginForm', 'buildSelector'])
       ->setConstructorArgs([
