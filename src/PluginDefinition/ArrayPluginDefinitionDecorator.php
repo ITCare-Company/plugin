@@ -287,6 +287,7 @@ class ArrayPluginDefinitionDecorator implements ArrayPluginDefinitionInterface, 
   /**
    * {@inheritdoc}
    */
+  #[\ReturnTypeWillChange]
   public function offsetExists($offset) {
     return isset($this->arrayDefinition[$offset]);
   }
@@ -294,6 +295,7 @@ class ArrayPluginDefinitionDecorator implements ArrayPluginDefinitionInterface, 
   /**
    * {@inheritdoc}
    */
+  #[\ReturnTypeWillChange]
   public function &offsetGet($offset) {
     return $this->arrayDefinition[$offset];
   }
@@ -301,6 +303,7 @@ class ArrayPluginDefinitionDecorator implements ArrayPluginDefinitionInterface, 
   /**
    * {@inheritdoc}
    */
+  #[\ReturnTypeWillChange]
   public function offsetSet($offset, $value) {
     switch ($offset) {
       case 'class':
@@ -321,6 +324,7 @@ class ArrayPluginDefinitionDecorator implements ArrayPluginDefinitionInterface, 
   /**
    * {@inheritdoc}
    */
+  #[\ReturnTypeWillChange]
   public function offsetUnset($offset) {
     unset($this->arrayDefinition[$offset]);
   }
@@ -328,6 +332,7 @@ class ArrayPluginDefinitionDecorator implements ArrayPluginDefinitionInterface, 
   /**
    * {@inheritdoc}
    */
+  #[\ReturnTypeWillChange]
   public function count() {
     return count($this->arrayDefinition);
   }
@@ -335,6 +340,7 @@ class ArrayPluginDefinitionDecorator implements ArrayPluginDefinitionInterface, 
   /**
    * {@inheritdoc}
    */
+  #[\ReturnTypeWillChange]
   public function getIterator() {
     return new \ArrayIterator($this->arrayDefinition);
   }
