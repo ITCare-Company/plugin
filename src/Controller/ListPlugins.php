@@ -80,22 +80,22 @@ class ListPlugins extends ListBase {
     /** @var \Drupal\plugin\PluginDefinition\PluginDefinitionInterface[] $plugin_definitions */
     $plugin_definitions = $plugin_discovery->getDefinitions();
     ksort($plugin_definitions);
-    foreach ($plugin_definitions as $plugin_definition) {
+    foreach ($plugin_definitions as $plugin_id => $plugin_definition) {
       $operations = [];
       if ($plugin_definition instanceof PluginOperationsProviderDefinitionInterface) {
         $operations_provider_class = $plugin_definition->getOperationsProviderClass();
         if ($operations_provider_class) {
           /** @var \Drupal\plugin\PluginOperationsProviderInterface $operations_provider */
           $operations_provider = $this->classResolver->getInstanceFromDefinition($operations_provider_class);
-          $operations = $operations_provider->getOperations($plugin_definition->getId());
+          $operations = $operations_provider->getOperations($plugin_id);
         }
       }
-      $build[$plugin_definition->getId()] = [
+      $build[$plugin_id] = [
         'label' => [
           '#markup' => $plugin_definition instanceof PluginLabelDefinitionInterface ? (string) $plugin_definition->getLabel() : NULL,
         ],
         'id' => [
-          '#markup' => $plugin_definition->getId(),
+          '#markup' => $plugin_id,
           '#prefix' => '<code>',
           '#suffix' => '</code>',
         ],
