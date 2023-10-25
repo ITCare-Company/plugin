@@ -9,6 +9,7 @@ use Drupal\plugin\PluginDefinition\PluginDescriptionDefinitionInterface;
 use Drupal\plugin\PluginDefinition\PluginLabelDefinitionInterface;
 use Drupal\plugin\PluginDefinition\PluginOperationsProviderDefinitionInterface;
 use Drupal\plugin\PluginDiscovery\TypedDefinitionEnsuringPluginDiscoveryDecorator;
+use Drupal\plugin\PluginOperationsProvider\PluginTypeAwarePluginOperationsProviderInterface;
 use Drupal\plugin\PluginType\PluginTypeInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -87,6 +88,10 @@ class ListPlugins extends ListBase {
         if ($operations_provider_class) {
           /** @var \Drupal\plugin\PluginOperationsProviderInterface $operations_provider */
           $operations_provider = $this->classResolver->getInstanceFromDefinition($operations_provider_class);
+          if ($operations_provider instanceof PluginTypeAwarePluginOperationsProviderInterface) {
+            $operations_provider->setPluginType($plugin_type);
+          }
+
           $operations = $operations_provider->getOperations($plugin_id);
         }
       }

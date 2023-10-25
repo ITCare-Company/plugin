@@ -16,3 +16,14 @@ plugin.plugin.list:
     parameters:
       plugin_type:
         plugin.plugin_type: {}
+plugin.plugin.detail:
+  path: '/admin/structure/plugin/{plugin_type}/{plugin_id}'
+  defaults:
+    _controller: '\Drupal\plugin\Controller\PluginDetail::execute'
+    _title_callback: '\Drupal\plugin\Controller\PluginDetail::title'
+  requirements:
+    _permission: 'plugin.overview.view'
+  options:
+    parameters:
+      plugin_type:
+        plugin.plugin_type: {}

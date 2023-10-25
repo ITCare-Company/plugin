@@ -4,6 +4,7 @@ namespace Drupal\plugin\PluginDefinition;
 
 use Drupal\Component\Plugin\Context\ContextDefinitionInterface;
 use Drupal\Component\Utility\NestedArray;
+use Drupal\plugin\PluginOperationsProvider\DefaultArrayPluginOperationsProvider;
 
 /**
  * Provides a plugin definition based on an array.
@@ -374,7 +375,7 @@ class ArrayPluginDefinitionDecorator implements ArrayPluginDefinitionInterface, 
    * {@inheritdoc}
    */
   public function getOperationsProviderClass() {
-    return isset($this->arrayDefinition['operations_provider']) ? $this->arrayDefinition['operations_provider'] : NULL;
+    return isset($this->arrayDefinition['operations_provider']) ? $this->arrayDefinition['operations_provider'] : DefaultArrayPluginOperationsProvider::class;
   }
 
 }
