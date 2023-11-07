@@ -17,7 +17,7 @@ plugin.plugin.list:
       plugin_type:
         plugin.plugin_type: {}
 plugin.plugin.detail:
-  path: '/admin/structure/plugin/{plugin_type}/{plugin_id}'
+  path: '/admin/structure/plugin/{plugin_type}/plugin/{plugin_id}'
   defaults:
     _controller: '\Drupal\plugin\Controller\PluginDetail::execute'
     _title_callback: '\Drupal\plugin\Controller\PluginDetail::title'
