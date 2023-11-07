@@ -2,6 +2,7 @@
 
 namespace Drupal\plugin\PluginType;
 
+use Drupal\Component\Serialization\Json;
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\DependencyInjection\DependencySerializationTrait;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
@@ -43,6 +44,20 @@ class DefaultPluginTypeOperationsProvider implements PluginTypeOperationsProvide
       'url' => new Url('plugin.plugin.list', [
         'plugin_type' => $plugin_type_id,
       ]),
+    ];
+    $operations['view'] = [
+      'title' => $this->t('View definition'),
+      'url' => Url::fromRoute('plugin.plugin_type.detail', [
+        'plugin_type' => $plugin_type_id,
+      ]),
+      'attributes' => [
+        'class' => ['use-ajax'],
+        'data-dialog-type' => 'modal',
+        'data-dialog-options' => Json::encode([
+          'width' => 700,
+          'minHeight' => 500,
+        ]),
+      ]
     ];
 
     return $operations;
