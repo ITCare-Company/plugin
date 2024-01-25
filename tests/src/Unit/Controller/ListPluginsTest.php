@@ -138,18 +138,12 @@ class ListPluginsTest extends UnitTestCase {
     $plugin_definition_label_a = $this->randomMachineName();
     $plugin_definition_a = $this->createMock(PluginLabelDefinitionInterface::class);
     $plugin_definition_a->expects($this->atLeastOnce())
-      ->method('getId')
-      ->willReturn($plugin_definition_id_a);
-    $plugin_definition_a->expects($this->atLeastOnce())
       ->method('getLabel')
       ->willReturn($plugin_definition_label_a);
 
     $plugin_definition_id_b = $this->randomMachineName();
     $plugin_definition_description_b = $this->randomMachineName();
     $plugin_definition_b = $this->createMock(PluginDescriptionDefinitionInterface::class);
-    $plugin_definition_b->expects($this->atLeastOnce())
-      ->method('getId')
-      ->willReturn($plugin_definition_id_b);
     $plugin_definition_b->expects($this->atLeastOnce())
       ->method('getDescription')
       ->willReturn($plugin_definition_description_b);
@@ -167,9 +161,6 @@ class ListPluginsTest extends UnitTestCase {
       ->with($plugin_definition_id_c)
       ->willReturn($plugin_definition_operations_c);
     $plugin_definition_c = $this->createMock(PluginOperationsProviderDefinitionInterface::class);
-    $plugin_definition_c->expects($this->atLeastOnce())
-      ->method('getId')
-      ->willReturn($plugin_definition_id_c);
     $plugin_definition_c->expects($this->atLeastOnce())
       ->method('getOperationsProviderClass')
       ->willReturn(get_class($plugin_definition_operations_provider_c));

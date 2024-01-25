@@ -2,14 +2,14 @@
 
 .plugin-plugin-selector-plugin-radios-selector {
     float: left;
-    min-width: 200px;
     width: 25%;
+    min-width: 200px;
 }
 
 .plugin-plugin-selector-plugin-radios-plugin-method-form {
     float: left;
-    min-width: 400px;
     width: 75%;
+    min-width: 400px;
 }
 
 [dir="rtl"] .plugin-plugin-selector-plugin-radios-selector {

@@ -37,16 +37,19 @@ class PluginSelectorTest extends BrowserTestBase {
     $field_type = 'plugin:' . $selectable_plugin_type_id;
     $default_selected_plugin_id = 'user_login_block';
     $this->drupalGet('admin/config/people/accounts/fields/add-field');
+    $label = $this->randomString();
     $this->submitForm([
-      'label' => $this->randomString(),
+      'label' => $label,
       'field_name' => $field_name,
       'new_storage_type' => $field_type,
-    ], t('Save and continue'));
-    $this->submitForm([], t('Save field settings'));
+    ], t('Continue'));
     $this->submitForm([
+      'set_default_value' => 1,
       sprintf('default_value_input[field_%s][0][plugin_selector][container][select][container][plugin_id]', $field_name) => $default_selected_plugin_id,
     ], t('Choose'));
     $this->submitForm([], t('Save settings'));
+    $this->assertSession()->pageTextContains("Saved $label configuration.");
+
     \Drupal::service('entity_field.manager')->clearCachedFieldDefinitions();
     // Get all plugin fields.
     $field_storage_id = 'user.field_' . $field_name;

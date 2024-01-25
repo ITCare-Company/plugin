@@ -6,6 +6,7 @@ use Drupal\Component\Plugin\Derivative\DeriverInterface;
 use Drupal\Core\Plugin\Context\ContextDefinitionInterface;
 use Drupal\plugin\PluginDefinition\ArrayPluginDefinitionDecorator;
 use Drupal\plugin\PluginDefinition\PluginDefinitionInterface;
+use Drupal\plugin\PluginOperationsProvider\DefaultArrayPluginOperationsProvider;
 use Drupal\plugin\PluginOperationsProviderInterface;
 use Drupal\Tests\UnitTestCase;
 use InvalidArgumentException;
@@ -41,11 +42,11 @@ class ArrayPluginDefinitionDecoratorTest extends UnitTestCase {
       'id' => $this->randomMachineName(),
       'label' => $this->randomMachineName(),
       'description' => $this->randomMachineName(),
-      'class' => $this->getMockClass(DeriverInterface::class),
+      'class' => get_class($this->createMock(DeriverInterface::class)),
       'category' => $this->randomMachineName(),
       'provider' => $this->randomMachineName(),
-      'deriver' => $this->getMockClass(DeriverInterface::class),
-      'operations_provider' => $this->getMockClass(PluginOperationsProviderInterface::class),
+      'deriver' => get_class($this->createMock(DeriverInterface::class)),
+      'operations_provider' => get_class($this->createMock(PluginOperationsProviderInterface::class)),
       'context' => [
         $this->randomMachineName() => $this->createMock(ContextDefinitionInterface::class),
       ],
@@ -228,14 +229,14 @@ class ArrayPluginDefinitionDecoratorTest extends UnitTestCase {
     $this->assertSame($this->arrayDefinition['deriver'], $this->sut['deriver']);
 
     // Test changing the value through the setter.
-    $value = $this->getMockClass(DeriverInterface::class);
+    $value = get_class($this->createMock(DeriverInterface::class));
     $this->assertSame($this->sut, $this->sut->setDeriverClass($value));
     $this->assertSame($value, $this->sut->getDeriverClass());
     $this->assertSame($value, $this->sut->getArrayDefinition()['deriver']);
     $this->assertSame($value, $this->sut['deriver']);
 
     // Test changing the value through array access.
-    $value = $this->getMockClass(DeriverInterface::class);
+    $value = get_class($this->createMock(DeriverInterface::class));
     $this->sut['deriver'] = $value;
     $this->assertSame($value, $this->sut->getDeriverClass());
     $this->assertSame($value, $this->sut->getArrayDefinition()['deriver']);
@@ -635,14 +636,14 @@ class ArrayPluginDefinitionDecoratorTest extends UnitTestCase {
     $this->assertSame($this->arrayDefinition['operations_provider'], $this->sut['operations_provider']);
 
     // Test changing the value through the setter.
-    $value = $this->getMockClass(PluginOperationsProviderInterface::class);
+    $value = get_class($this->createMock(PluginOperationsProviderInterface::class));
     $this->assertSame($this->sut, $this->sut->setOperationsProviderClass($value));
     $this->assertSame($value, $this->sut->getOperationsProviderClass());
     $this->assertSame($value, $this->sut->getArrayDefinition()['operations_provider']);
     $this->assertSame($value, $this->sut['operations_provider']);
 
     // Test changing the value through array access.
-    $value = $this->getMockClass(PluginOperationsProviderInterface::class);
+    $value = get_class($this->createMock(PluginOperationsProviderInterface::class));
     $this->sut['operations_provider'] = $value;
     $this->assertSame($value, $this->sut->getOperationsProviderClass());
     $this->assertSame($value, $this->sut->getArrayDefinition()['operations_provider']);
@@ -651,7 +652,7 @@ class ArrayPluginDefinitionDecoratorTest extends UnitTestCase {
     // Test unsetting the value.
     unset($this->sut['operations_provider']);
     $this->assertFalse(isset($this->sut['operations_provider']));
-    $this->assertNull($this->sut->getOperationsProviderClass());
+    $this->assertSame(DefaultArrayPluginOperationsProvider::class, $this->sut->getOperationsProviderClass());
     $this->assertFalse(isset($this->sut->getArrayDefinition()['operations_provider']));
   }
 
