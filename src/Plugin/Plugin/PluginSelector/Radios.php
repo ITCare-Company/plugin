@@ -41,7 +41,7 @@ class Radios extends AdvancedPluginSelectorBase {
     natcasesort($plugin_options);
     $element['container']['plugin_id'] = [
       '#ajax' => [
-        'callback' => [get_class(), 'ajaxRebuildForm'],
+        'callback' => [get_called_class(), 'ajaxRebuildForm'],
         'effect' => 'fade',
         'event' => 'change',
         'progress' => 'none',

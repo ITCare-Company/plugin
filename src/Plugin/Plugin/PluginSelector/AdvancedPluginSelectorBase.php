@@ -79,7 +79,7 @@ abstract class AdvancedPluginSelectorBase extends PluginSelectorBase implements 
       ],
       '#available_plugins' => $available_plugins,
       '#plugin_selector_form_state_key' => $plugin_selector_form_state_key,
-      '#process' => [[get_class(), 'processBuildSelectorForm']],
+      '#process' => [[get_parent_class($this), 'processBuildSelectorForm']],
       '#tree' => TRUE,
       '#type' => 'container',
     ];
@@ -100,7 +100,7 @@ abstract class AdvancedPluginSelectorBase extends PluginSelectorBase implements 
    */
   protected static function setPluginSelector(FormStateInterface $form_state, PluginSelectorInterface $plugin_selector) {
     do {
-      $key = [get_class(), mt_rand()];
+      $key = [get_called_class(), mt_rand()];
     } while ($form_state->has($key));
 
     $form_state->set($key, $plugin_selector);
@@ -317,14 +317,14 @@ abstract class AdvancedPluginSelectorBase extends PluginSelectorBase implements 
     $change_button_name = implode('__', $change_button_name_parts);
     $build['container']['change'] = [
       '#ajax' => [
-        'callback' => [get_class(), 'ajaxRebuildForm'],
+        'callback' => [get_parent_class($this), 'ajaxRebuildForm'],
       ],
       '#attributes' => [
         'class' => ['js-hide']
       ],
       '#limit_validation_errors' => [array_merge($root_element['#parents'], ['select', 'plugin_id'])],
       '#name' => $change_button_name,
-      '#submit' => array(array(get_class(), 'rebuildForm')),
+      '#submit' => array(array(get_parent_class($this), 'rebuildForm')),
       '#type' => 'submit',
       '#value' => $this->t('Choose'),
     ];

@@ -27,7 +27,7 @@ class SelectList extends AdvancedPluginSelectorBase {
 
     $element['container']['plugin_id'] = [
       '#ajax' => [
-        'callback' => [get_class(), 'ajaxRebuildForm'],
+        'callback' => [get_called_class(), 'ajaxRebuildForm'],
         'effect' => 'fade',
         'event' => 'change',
         'trigger_as' => [

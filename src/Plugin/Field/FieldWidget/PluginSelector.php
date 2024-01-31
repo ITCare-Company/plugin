@@ -32,10 +32,10 @@ class PluginSelector extends WidgetBase {
     $element = [
       '#delta' => $delta,
       '#field_definition' => $this->fieldDefinition,
-      '#element_validate' => [[get_class(), 'validateFormElement']],
+      '#element_validate' => [[get_called_class(), 'validateFormElement']],
       '#plugin_type_id' => $plugin_type->getId(),
       '#plugin_selector_id' => $this->pluginDefinition['plugin_selector_id'],
-      '#process' => [[get_class(), 'processFormElement']],
+      '#process' => [[get_called_class(), 'processFormElement']],
       '#selected_plugin' => $items->isEmpty() ? NULL : $items->get($delta)->getContainedPluginInstance(),
     ];
     $element['plugin_selector'] = static::getPluginSelector($form_state, $element)->buildSelectorForm([], $form_state);
