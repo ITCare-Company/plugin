@@ -10,7 +10,7 @@ namespace Drupal\plugin\Plugin\Field\FieldType;
  *   default_formatter = "plugin_label",
  *   id = "plugin",
  *   label = @Translation("Plugin collection"),
- *   category = @Translation("Plugin"),
+ *   category = "plugin_reference",
  *   deriver = "\Drupal\plugin\Plugin\Field\FieldType\PluginCollectionItemDeriver",
  *   list_class = "\Drupal\plugin\Plugin\Field\FieldType\PluginCollectionItemList"
  * )
