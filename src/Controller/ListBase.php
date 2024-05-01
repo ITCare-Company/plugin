@@ -50,7 +50,10 @@ abstract class ListBase implements ContainerInjectionInterface {
    * @return string
    */
   protected function getProviderLabel($provider) {
-    if ($provider == 'core') {
+    if (empty($provider)) {
+      return $this->t('- None - ');
+    }
+    elseif ($provider == 'core') {
       return $this->t('Core');
     }
     else {
