@@ -53,6 +53,9 @@ abstract class ListBase implements ContainerInjectionInterface {
     if (empty($provider)) {
       return $this->t('- None - ');
     }
+    elseif (!is_string($provider)) {
+      return $this->t('- Error -');
+    }
     elseif ($provider == 'core') {
       return $this->t('Core');
     }
