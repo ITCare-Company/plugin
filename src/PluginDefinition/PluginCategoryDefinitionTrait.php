@@ -12,7 +12,7 @@ trait PluginCategoryDefinitionTrait {
   /**
    * The plugin category.
    *
-   * @var \Drupal\Core\StringTranslation\TranslatableString|string|null
+   * @var \Drupal\Core\StringTranslation\TranslatableMarkup|string|null
    */
   protected $category;
 
