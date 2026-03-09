@@ -28,7 +28,7 @@ class PluginManagerDecorator extends PluginDiscoveryDecorator implements PluginM
    *   A plugin discovery to use instead of the decorated plugin manager, or
    *   NULL to use the decorated plugin manager.
    */
-  public function __construct(PluginManagerInterface $plugin_manager, DiscoveryInterface $discovery = NULL) {
+  public function __construct(PluginManagerInterface $plugin_manager, DiscoveryInterface|null $discovery = NULL) {
     $this->decoratedDiscovery = $discovery ? $discovery : $plugin_manager;
     $this->decoratedFactory = $plugin_manager;
   }

@@ -27,7 +27,7 @@ class TypedDefinitionEnsuringPluginDiscoveryDecorator extends PluginDiscoveryDec
    *   The decorated discovery, or NULL to use the plugin type's default
    *   discovery.
    */
-  public function __construct(PluginTypeInterface $plugin_type, DiscoveryInterface $decorated_discovery = NULL) {
+  public function __construct(PluginTypeInterface $plugin_type, DiscoveryInterface|null $decorated_discovery = NULL) {
     parent::__construct($decorated_discovery ?: $plugin_type->getPluginManager());
     $this->pluginType = $plugin_type;
   }
