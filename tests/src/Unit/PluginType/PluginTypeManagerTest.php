@@ -182,7 +182,7 @@ EOT;
   /**
    * Provides data to self::testHasPluginType().
    */
-  public function providerHasPluginType() {
+  public static function providerHasPluginType() {
     $data = [];
 
     // This hardcoded the IDs in $this->pluginTypeDefinitions.
@@ -190,8 +190,8 @@ EOT;
       $data[] = [TRUE, $key, $key, TRUE];
       $data[] = [FALSE, $key, $key, FALSE];
     }
-    $data[] = [FALSE, $this->randomMachineName(), $this->randomMachineName(), TRUE];
-    $data[] = [FALSE, $this->randomMachineName(), $this->randomMachineName(), FALSE];
+    $data[] = [FALSE, 'one_plugin', 'module', TRUE];
+    $data[] = [FALSE, 'two_plugin', 'module', FALSE];
 
     return $data;
   }
@@ -231,7 +231,7 @@ EOT;
   /**
    * Provides data to self::testGetPluginType().
    */
-  public function providerGetPluginType () {
+  public static function providerGetPluginType () {
     $data = [];
 
     // This hardcoded the IDs in $this->pluginTypeDefinitions.
@@ -239,8 +239,8 @@ EOT;
       $data[] = [TRUE, $key, $key, TRUE];
       $data[] = [FALSE, $key, $key, FALSE];
     }
-    $data[] = [FALSE, $this->randomMachineName(), $this->randomMachineName(), TRUE];
-    $data[] = [FALSE, $this->randomMachineName(), $this->randomMachineName(), FALSE];
+    $data[] = [FALSE, 'one_plugin', 'module', TRUE];
+    $data[] = [FALSE, 'two_plugin', 'module', FALSE];
 
     return $data;
   }

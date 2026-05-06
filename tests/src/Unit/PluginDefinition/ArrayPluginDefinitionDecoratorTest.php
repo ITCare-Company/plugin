@@ -613,9 +613,9 @@ class ArrayPluginDefinitionDecoratorTest extends UnitTestCase {
   /**
    * Provides data to self::testCreateFromDecoratedDefinitionWithInvalidDecoratedDefinition().
    */
-  public function providerCreateFromDecoratedDefinitionWithInvalidDecoratedDefinition() {
+  public static function providerCreateFromDecoratedDefinitionWithInvalidDecoratedDefinition() {
     return [
-      [$this->randomMachineName()],
+      ['a_random_name'],
       [new \stdClass()],
       [new ArrayPluginDefinitionDecorator()],
     ];

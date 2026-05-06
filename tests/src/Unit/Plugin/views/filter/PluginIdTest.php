@@ -147,7 +147,7 @@ class PluginIdTest extends UnitTestCase {
   /**
    * Provides data to self::testCacheMaxAge().
    */
-  public function provideCacheMaxAge() {
+  public static function provideCacheMaxAge() {
     $data = [];
 
     $data['plugin-manager-permanent'] = [Cache::PERMANENT, Cache::PERMANENT];

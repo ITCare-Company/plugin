@@ -1,7 +1,8 @@
 {
   "name": "drupal/plugin",
+  "description": "Adds features to Drupal core's plugin system, including plugin definition mappers, plugin selectors, plugin type discovery, and a plugin collection field type.",
   "type": "drupal-module",
-  "license": "GPL-2.0",
+  "license": "GPL-2.0-or-later",
   "autoload": {
     "psr-4": {
       "Drupal\\plugin\\": "src"

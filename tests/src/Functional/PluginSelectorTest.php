@@ -36,21 +36,42 @@ class PluginSelectorTest extends BrowserTestBase {
     $selectable_plugin_type_id = 'block';
     $field_type = 'plugin:' . $selectable_plugin_type_id;
     $default_selected_plugin_id = 'user_login_block';
-    $this->drupalGet('admin/config/people/accounts/fields/add-field');
     $label = $this->randomString();
-    $this->submitForm([
-      'label' => $label,
-      'field_name' => $field_name,
-      'new_storage_type' => $field_type,
-    ], t('Continue'));
-    $this->submitForm([
-      'set_default_value' => 1,
-      sprintf('default_value_input[field_%s][0][plugin_selector][container][select][container][plugin_id]', $field_name) => $default_selected_plugin_id,
-    ], t('Choose'));
-    $this->submitForm([], t('Save settings'));
+    $this->drupalGet('admin/config/people/accounts/fields/add-field');
+
+    // The Field UI changed in Drupal 11.
+    if ((float) \Drupal::VERSION >= 11) {
+      $this->clickLink('Plugin reference');
+      $label = $this->randomString();
+      $this->submitForm([
+        'label' => $label,
+        'field_name' => $field_name,
+        'pluginblock' => $field_type,
+      ], t('Continue'));
+      $this->submitForm([
+        'set_default_value' => 1,
+        sprintf('default_value_input[field_%s][0][plugin_selector][container][select][container][plugin_id]', $field_name) => $default_selected_plugin_id,
+      ], t('Choose'));
+      $this->submitForm([], t('Save'));
+    }
+    else {
+      $this->submitForm([
+        'new_storage_type' => 'plugin_reference',
+      ], t('Continue'));
+      $this->submitForm([
+        'label' => $label,
+        'field_name' => $field_name,
+        'plugin:block' => $field_type,
+      ], t('Continue'));
+      $this->submitForm([
+        'set_default_value' => 1,
+        sprintf('default_value_input[field_%s][0][plugin_selector][container][select][container][plugin_id]', $field_name) => $default_selected_plugin_id,
+      ], t('Choose'));
+      $this->submitForm([], t('Save settings'));
+    }
     $this->assertSession()->pageTextContains("Saved $label configuration.");
 
-    \Drupal::service('entity_field.manager')->clearCachedFieldDefinitions();
+    $this->rebuildAll();
     // Get all plugin fields.
     $field_storage_id = 'user.field_' . $field_name;
     $field_storage = FieldStorageConfig::load($field_storage_id);

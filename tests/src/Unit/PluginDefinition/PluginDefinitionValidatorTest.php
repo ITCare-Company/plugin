@@ -34,12 +34,12 @@ class PluginDefinitionValidatorTest extends UnitTestCase {
   /**
    * Provides data to self::testValidateClass().
    */
-  public function providerValidateClass() {
+  public static function providerValidateClass() {
     return [
       [TRUE, '\stdClass'],
       [TRUE, __CLASS__],
       [FALSE, NULL],
-      [FALSE, $this->randomMachineName()],
+      [FALSE, 'a_random_name'],
       [FALSE, '\Foo\Bar\Baz\Qux'],
     ];
   }
@@ -55,7 +55,10 @@ class PluginDefinitionValidatorTest extends UnitTestCase {
    * @param string $class
    *   The class to validate.
    */
-  public function testValidateDeriverClass($valid, $class) {
+  public function testValidateDeriverClass($valid, $class, $method = NULL) {
+    if ($method !== NULL) {
+      $class = $this->$method($class);
+    }
     if (!$valid) {
       $this->expectException('\InvalidArgumentException');
     }
@@ -65,14 +68,28 @@ class PluginDefinitionValidatorTest extends UnitTestCase {
   /**
    * Provides data to self::testValidateDeriverClass().
    */
-  public function providerValidateDeriverClass() {
+  public static function providerValidateDeriverClass() {
     return [
-      [TRUE, $this->getMockClass(DeriverInterface::class)],
+      [TRUE, DeriverInterface::class, 'getMockClassName'],
       [FALSE, NULL],
       [FALSE, '\stdClass'],
-      [FALSE, $this->randomMachineName()],
+      [FALSE, "a_random_name"],
       [FALSE, '\Foo\Bar\Baz\Qux'],
     ];
+  }
+
+  /**
+   * Gets a mock class name.
+   *
+   * @param string $class
+   *   The class to mock.
+   *
+   * @return string
+   *   The class of the mocked class.
+   */
+  protected function getMockClassName($class) {
+    $mock = $this->createMock($class);
+    return get_class($mock);
   }
 
   /**
@@ -85,7 +102,10 @@ class PluginDefinitionValidatorTest extends UnitTestCase {
    * @param mixed[] $definitions
    *   The context definitions to validate.
    */
-  public function testValidateContextDefinitions($valid, array $definitions) {
+  public function testValidateContextDefinitions($valid, array $definitions, $method = NULL) {
+    if ($method !== NULL) {
+      $definitions = array_map(fn($class) => $this->$method($class), $definitions);
+    }
     if (!$valid) {
       $this->expectException('\InvalidArgumentException');
     }
@@ -95,12 +115,12 @@ class PluginDefinitionValidatorTest extends UnitTestCase {
   /**
    * Provides data to self::testValidateContextDefinitions().
    */
-  public function providerValidateContextDefinitions() {
+  public static function providerValidateContextDefinitions() {
     return [
       [TRUE, []],
-      [TRUE, [$this->createMock(ContextDefinitionInterface::class)]],
-      [FALSE, [$this->getMockClass(ContextDefinitionInterface::class)]],
-      [FALSE, [$this->randomMachineName()]],
+      [TRUE, [ContextDefinitionInterface::class], 'createMock'],
+      [FALSE, [ContextDefinitionInterface::class], 'getMockClassName'],
+      [FALSE, ['a_random_name']],
       [FALSE, [ContextDefinitionInterface::class]],
     ];
   }

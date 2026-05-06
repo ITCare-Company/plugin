@@ -574,7 +574,7 @@ class AdvancedPluginSelectorBaseTest extends PluginSelectorBaseTestBase {
 
     /** @var \Drupal\plugin\Plugin\Plugin\PluginSelector\AdvancedPluginSelectorBase|\PHPUnit\Framework\MockObject\MockObject $plugin_selector */
     $plugin_selector = $this->getMockBuilder(AdvancedPluginSelectorBase::class)
-      ->setMethods(['buildPluginForm', 'buildSelector'])
+      ->onlyMethods(['buildPluginForm', 'buildSelector'])
       ->setConstructorArgs([
         [],
         $this->pluginId,

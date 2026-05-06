@@ -63,7 +63,7 @@ class PluginInstanceConverterTest extends UnitTestCase {
   /**
    * Provides data to self::testApplies().
    */
-  public function provideApplies() {
+  public static function provideApplies() {
     $data = [];
 
     $data['applies-because-implicitly-enabled'] = [TRUE, [
@@ -117,10 +117,16 @@ class PluginInstanceConverterTest extends UnitTestCase {
 
     $this->pluginTypeManager->getPluginType($plugin_type_id)->willReturn($plugin_type);
 
-    $original_error_reporting = error_reporting();
-    error_reporting($original_error_reporting & ~E_USER_WARNING);
-    $this->assertNull($this->sut->convert($plugin_id, $definition, $name, $defaults));
-    error_reporting($original_error_reporting);
+    // Suppress E_USER_WARNING.
+    set_error_handler(function() {
+      return true;
+    }, E_USER_WARNING);
+    try {
+      $this->assertNull($this->sut->convert($plugin_id, $definition, $name, $defaults));
+    }
+    finally {
+      restore_error_handler();
+    }
   }
 
   /**
@@ -185,10 +191,15 @@ class PluginInstanceConverterTest extends UnitTestCase {
 
     $this->pluginTypeManager->getPluginType($plugin_type_id)->willReturn($plugin_type);
 
-    $original_error_reporting = error_reporting();
-    error_reporting($original_error_reporting & ~E_USER_WARNING);
-    $this->assertNull($this->sut->convert($plugin_id, $definition, $name, $defaults));
-    error_reporting($original_error_reporting);
+    // Suppress E_USER_WARNING.
+    set_error_handler(function() {
+      return true;
+    }, E_USER_WARNING);
+    try {
+      $this->assertNull($this->sut->convert($plugin_id, $definition, $name, $defaults));
+    } finally {
+      restore_error_handler();
+    }
   }
 
   /**
