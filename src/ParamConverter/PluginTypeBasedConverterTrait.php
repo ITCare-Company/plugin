@@ -125,12 +125,19 @@ trait PluginTypeBasedConverterTrait {
    */
   protected function validateParameterDefinition($definition) {
     $validator = Validation::createValidator();
-    $constraint = new Collection([
-      'allowExtraFields' => TRUE,
-      'fields' => [
+    // Symfony 8 removed the base Constraint class's generic options-array
+    // evaluation (the single combined-array constructor call convention), so
+    // "fields" and "allowExtraFields" can no longer be passed as sibling keys
+    // of one array to Collection's constructor: the whole array would be
+    // taken as the (explicit, typed) $fields parameter, turning
+    // "allowExtraFields" into a bogus field whose constraint value is the
+    // boolean TRUE. Pass each as its own named constructor argument instead.
+    $constraint = new Collection(
+      fields: [
         $this->getConverterDefinitionKey() => new Optional($this->getConverterDefinitionConstraint()),
       ],
-    ]);
+      allowExtraFields: TRUE,
+    );
     $violations = $validator->validate($definition, $constraint);
     foreach ($violations as $violation) {
       trigger_error(sprintf("Error while validating the route parameter definition in item %s: %s\n\nOriginal data:\n%s", $violation->getPropertyPath(), $violation->getMessage(), var_export($violation->getRoot(), TRUE)), E_USER_WARNING);
